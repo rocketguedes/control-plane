@@ -29,6 +29,22 @@ spec:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
+      initContainers:
+        - name: headlamp-plugin-flux
+          image: ghcr.io/headlamp-k8s/headlamp-plugin-flux
+          command:
+            - /bin/sh
+            - -c
+            - cp -r /plugins/* /headlamp/plugins/
+          volumeMounts:
+            - name: headlamp-plugins
+              mountPath: /headlamp/plugins
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
       containers:
         - name: headlamp
           image: ghcr.io/headlamp-k8s/headlamp
@@ -42,6 +58,9 @@ spec:
               containerPort: 4466
               protocol: TCP
           volumeMounts:
+            - name: headlamp-plugins
+              mountPath: /headlamp/plugins
+              readOnly: true
             - name: headlamp-tmp
               mountPath: /tmp
           resources:
@@ -83,5 +102,7 @@ spec:
             timeoutSeconds: 3
             failureThreshold: 3
       volumes:
+        - name: headlamp-plugins
+          emptyDir: {}
         - name: headlamp-tmp
           emptyDir: {}
