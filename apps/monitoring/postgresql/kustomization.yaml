@@ -8,4 +8,4 @@ resources:
 labels:
   - pairs:
       app.kubernetes.io/part-of: monitoring
-      app.kubernetes.io/version: 18.4-standard-trixie
+      app.kubernetes.io/version: 18.6-standard-trixie
