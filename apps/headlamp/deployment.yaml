@@ -20,6 +20,7 @@ spec:
     spec:
       serviceAccountName: headlamp
       automountServiceAccountToken: true
+      enableServiceLinks: false
       hostUsers: true
       securityContext:
         runAsUser: 100
