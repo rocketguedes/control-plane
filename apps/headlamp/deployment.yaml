@@ -30,6 +30,21 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       initContainers:
+        - name: headlamp-plugin-ai-assistant
+          image: ghcr.io/headlamp-k8s/headlamp-plugin-ai-assistant
+          command:
+            - /bin/sh
+            - -c
+            - cp -r /plugins/* /headlamp/plugins/
+          volumeMounts:
+            - name: headlamp-plugins
+              mountPath: /headlamp/plugins
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
         - name: headlamp-plugin-flux
           image: ghcr.io/headlamp-k8s/headlamp-plugin-flux
           command:
