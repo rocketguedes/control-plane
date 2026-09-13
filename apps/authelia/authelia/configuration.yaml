@@ -136,15 +136,13 @@ identity_providers:
           - "profile"
           - "email"
           - "groups"
-          - "offline_access"
         claims_policy: "default"
         grant_types:
           - "authorization_code"
-          - "refresh_token"
         response_types:
           - "code"
         authorization_policy: "one_factor"
-        consent_mode: "auto"
+        consent_mode: "implicit"
         require_pkce: true
         token_endpoint_auth_method: "none"
       - client_id: "grafana"
