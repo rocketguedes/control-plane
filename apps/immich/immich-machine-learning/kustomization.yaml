@@ -13,4 +13,4 @@ images:
 labels:
   - pairs:
       app.kubernetes.io/part-of: immich
-      app.kubernetes.io/version: v3.1.0
+      app.kubernetes.io/version: v3.2.0-armnn
