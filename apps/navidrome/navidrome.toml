@@ -41,8 +41,9 @@ ArtistJoiner = ", "
 ArtistParticipations = true
 
 [Tags]
-"Composer.Split" = [ ]
 "cnid.Aliases" = [ "cnid" ]
+"Composer.Split" = [ ]
+"Genre.Split" = [ ";", "," ]
 "plid.Album" = true
 "plid.Aliases" = [ "plid" ]
 
