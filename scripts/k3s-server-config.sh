@@ -9,6 +9,7 @@ cluster-init: true
 disable-kube-proxy: true
 disable-network-policy: true
 disable:
+  - "gateway-api-crd"
   - "servicelb"
   - "traefik"
 flannel-backend: "none"
