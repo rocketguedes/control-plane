@@ -242,6 +242,7 @@ tasks:
         --path="{{.CLUSTER_PATH}}"
         --author-email="{{.GIT_AUTHOR_EMAIL}}"
         --author-name="{{.GIT_AUTHOR_NAME}}"
+        --components-extra=image-reflector-controller,image-automation-controller
         --personal=true
         --private=false
 
