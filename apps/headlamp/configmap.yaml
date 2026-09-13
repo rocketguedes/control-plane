@@ -6,8 +6,9 @@ metadata:
     app.kubernetes.io/name: headlamp
     app.kubernetes.io/instance: headlamp
 data:
-  HEADLAMP_CONFIG_IN_CLUSTER: "true"
   HEADLAMP_CONFIG_IN_CLUSTER_CONTEXT_NAME: main
+  HEADLAMP_CONFIG_IN_CLUSTER: "true"
   HEADLAMP_CONFIG_LOG_LEVEL: warn
+  HEADLAMP_CONFIG_OIDC_AUTO_LOGIN: "true"
   HEADLAMP_CONFIG_PLUGINS_DIR: /headlamp/plugins
   HEADLAMP_CONFIG_SESSION_TTL: "31536000"
