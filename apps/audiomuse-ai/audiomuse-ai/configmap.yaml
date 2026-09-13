@@ -16,6 +16,7 @@ data:
   MEDIASERVER_TYPE: navidrome
   NAVIDROME_URL: http://navidrome.navidrome.svc.cluster.local:4533
   NAVIDROME_USER: leandro
+  NEURAL_FINGERPRINT_ENABLED: "true"
   OLLAMA_MODEL_NAME: qwen3:1.7b
   OLLAMA_SERVER_URL: http://ollama.ollama.svc.cluster.local:11434/api/generate
   POSTGRES_DB: audiomusedb
