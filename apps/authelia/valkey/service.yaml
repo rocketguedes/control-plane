@@ -7,12 +7,13 @@ metadata:
     app.kubernetes.io/instance: valkey
     app.kubernetes.io/component: valkey
 spec:
+  ipFamilyPolicy: PreferDualStack
   selector:
     app.kubernetes.io/name: valkey
     app.kubernetes.io/instance: valkey
     app.kubernetes.io/component: valkey
   ports:
-    - name: tcp
+    - name: valkey
       protocol: TCP
       port: 6379
       targetPort: valkey
