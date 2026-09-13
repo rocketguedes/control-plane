@@ -19,6 +19,7 @@ ip link delete cilium_vxlan 2>/dev/null || true
 rm -rf /var/lib/rancher/k3s/*
 rm -f /usr/local/bin/k3s-install.sh
 rm -f /etc/rancher/k3s/config.yaml
+rm -f /etc/rancher/k3s/auth-config.yaml
 
 # Get real user (even if running via sudo)
 TARGET_USER=${SUDO_USER:-$USER}

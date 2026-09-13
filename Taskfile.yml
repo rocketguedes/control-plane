@@ -46,7 +46,8 @@ tasks:
       - sh: 'command -v ssh'
         msg: 'ssh is required (pacman -S openssh)'
     cmds:
-      - bash scripts/k3s-server-config.sh | ssh {{.SSH_TARGET}} "sudo mkdir -p /etc/rancher/k3s && sudo tee /etc/rancher/k3s/config.yaml > /dev/null"
+      - cat scripts/k3s-auth-config.yaml | ssh {{.SSH_TARGET}} "sudo mkdir -p /etc/rancher/k3s && sudo tee /etc/rancher/k3s/auth-config.yaml > /dev/null"
+      - bash scripts/k3s-server-config.sh | ssh {{.SSH_TARGET}} "sudo tee /etc/rancher/k3s/config.yaml > /dev/null"
 
   k3s:prereq:
     internal: true

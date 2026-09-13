@@ -24,10 +24,5 @@ tls-san:
   - "fd7a:115c:a1e0::3"
   - "${API_ENDPOINT}"
 kube-apiserver-arg:
-  - "oidc-issuer-url=https://accounts.guedescloud.com.br"
-  - "oidc-client-id=headlamp"
-  - "oidc-username-claim=sub"
-  - "oidc-username-prefix=-"
-  - "oidc-groups-claim=groups"
-  - "oidc-groups-prefix="
+  - "authentication-config=/etc/rancher/k3s/auth-config.yaml"
 EOF
