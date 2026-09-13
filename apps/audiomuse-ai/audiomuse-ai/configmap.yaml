@@ -6,7 +6,6 @@ metadata:
     app.kubernetes.io/name: audiomuse-ai
     app.kubernetes.io/instance: audiomuse-ai
 data:
-  AI_CHAT_DB_USER_NAME: ""
   AI_MODEL_PROVIDER: OLLAMA
   BACKUP_DIR: /tmp/backup
   CLAP_OTHER_FEATURES_CACHE_DIR: /tmp
