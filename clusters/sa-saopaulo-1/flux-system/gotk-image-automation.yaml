@@ -1,0 +1,38 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageUpdateAutomation
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  interval: 30m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    checkout:
+      ref:
+        branch: master
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        {{- $app := "" -}}
+        {{- $version := "" -}}
+        {{- range .Changed.Changes -}}
+          {{- if hasSuffix ":tag" .Setter -}}
+            {{- $app = regexReplaceAll ".*:([^:]+):tag" .Setter "$1" -}}
+            {{- $version = .NewValue -}}
+          {{- end -}}
+        {{- end -}}
+        {{- if and $app $version -}}
+        chore({{ $app }}): update version to {{ $version }}
+        {{- else -}}
+        chore: update container images
+        {{- end -}}
+    push:
+      branch: master
+  update:
+    path: ./apps
+    strategy: Setters
