@@ -15,9 +15,9 @@ resources:
   - triggerauthentication.yaml
 images:
   - name: ghcr.io/neptunehub/audiomuse-ai
-    newTag: 3.6.0
-    digest: sha256:58d7517724a9ea3eb63fb6c2df76e0f223d2e6092cd60714d4e0bad8d4418ca4
+    newTag: 3.6.0 # {"$imagepolicy": "flux-system:audiomuse-ai:tag"}
+    digest: sha256:58d7517724a9ea3eb63fb6c2df76e0f223d2e6092cd60714d4e0bad8d4418ca4 # {"$imagepolicy": "flux-system:audiomuse-ai:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: audiomuse-ai
-      app.kubernetes.io/version: 3.6.0
+      app.kubernetes.io/version: 3.6.0 # {"$imagepolicy": "flux-system:audiomuse-ai:tag"}

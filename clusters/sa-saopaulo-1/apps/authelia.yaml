@@ -22,3 +22,27 @@ spec:
     name: flux-system
   timeout: 2m0s
   wait: true
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: authelia
+  namespace: flux-system
+spec:
+  image: ghcr.io/authelia/authelia
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: authelia
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: authelia
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: "4.39.x"

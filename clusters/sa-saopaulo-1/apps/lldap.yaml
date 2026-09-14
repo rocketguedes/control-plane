@@ -20,3 +20,28 @@ spec:
     name: flux-system
   timeout: 2m0s
   wait: true
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: lldap
+  namespace: flux-system
+spec:
+  image: docker.io/lldap/lldap
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: lldap
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: lldap
+  filterTags:
+    pattern: '^v(?P<version>[0-9]+\.[0-9]+\.[0-9]+)-alpine-rootless$'
+    extract: "$version"
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: "0.6.x"

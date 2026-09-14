@@ -11,9 +11,9 @@ resources:
   - statefulset.yaml
 images:
   - name: docker.io/victoriametrics/victoria-metrics
-    newTag: v1.151.0
-    digest: sha256:6d164540a04f49ba4e696cbdb70f9fee78be1e94b8f2a1292743a0b1ab8275bd
+    newTag: v1.151.0 # {"$imagepolicy": "flux-system:victoria-metrics:tag"}
+    digest: sha256:6d164540a04f49ba4e696cbdb70f9fee78be1e94b8f2a1292743a0b1ab8275bd # {"$imagepolicy": "flux-system:victoria-metrics:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: monitoring
-      app.kubernetes.io/version: v1.151.0
+      app.kubernetes.io/version: v1.151.0 # {"$imagepolicy": "flux-system:victoria-metrics:tag"}

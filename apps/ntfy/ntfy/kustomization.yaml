@@ -11,9 +11,9 @@ resources:
   - serviceaccount.yaml
 images:
   - name: docker.io/binwiederhier/ntfy
-    newTag: v2.28.0
-    digest: sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da
+    newTag: v2.28.0 # {"$imagepolicy": "flux-system:ntfy:tag"}
+    digest: sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da # {"$imagepolicy": "flux-system:ntfy:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: ntfy
-      app.kubernetes.io/version: v2.28.0
+      app.kubernetes.io/version: v2.28.0 # {"$imagepolicy": "flux-system:ntfy:tag"}

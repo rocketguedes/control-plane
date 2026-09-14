@@ -11,12 +11,12 @@ resources:
   - serviceaccount.yaml
 images:
   - name: ghcr.io/headlamp-k8s/headlamp
-    newTag: v0.45.0
-    digest: sha256:db3f0e0fc58d358d41daa3fe7fc852437552c7ee873c3645470f7b86a8e0db49
+    newTag: v0.45.0 # {"$imagepolicy": "flux-system:headlamp:tag"}
+    digest: sha256:db3f0e0fc58d358d41daa3fe7fc852437552c7ee873c3645470f7b86a8e0db49 # {"$imagepolicy": "flux-system:headlamp:digest"}
   - name: ghcr.io/headlamp-k8s/headlamp-plugin-flux
-    newTag: v0.7.0
-    digest: sha256:636c7a5ae0d4eb196c192f8f1cde06f20f1f5ebdf1863f6e57d22444d8b8360c
+    newTag: v0.7.0 # {"$imagepolicy": "flux-system:headlamp-plugin-flux:tag"}
+    digest: sha256:636c7a5ae0d4eb196c192f8f1cde06f20f1f5ebdf1863f6e57d22444d8b8360c # {"$imagepolicy": "flux-system:headlamp-plugin-flux:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: headlamp
-      app.kubernetes.io/version: v0.45.0
+      app.kubernetes.io/version: v0.45.0 # {"$imagepolicy": "flux-system:headlamp:tag"}

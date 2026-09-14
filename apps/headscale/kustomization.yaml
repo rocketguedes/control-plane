@@ -15,9 +15,9 @@ configMapGenerator:
       - config.yaml
 images:
   - name: docker.io/headscale/headscale
-    newTag: v0.29.3
-    digest: sha256:0e7f1c6e4ce6c2a2a001103ecd3fa645a045adf30ac8a5234fe037b43000cd72
+    newTag: v0.29.3 # {"$imagepolicy": "flux-system:headscale:tag"}
+    digest: sha256:0e7f1c6e4ce6c2a2a001103ecd3fa645a045adf30ac8a5234fe037b43000cd72 # {"$imagepolicy": "flux-system:headscale:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: headscale
-      app.kubernetes.io/version: v0.29.3
+      app.kubernetes.io/version: v0.29.3 # {"$imagepolicy": "flux-system:headscale:tag"}
