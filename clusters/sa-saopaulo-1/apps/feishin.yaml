@@ -19,3 +19,27 @@ spec:
     name: flux-system
   timeout: 2m0s
   wait: true
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: feishin
+  namespace: flux-system
+spec:
+  image: ghcr.io/jeffvli/feishin
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: feishin
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: feishin
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: "1.x"
