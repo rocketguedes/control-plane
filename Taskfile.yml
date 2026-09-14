@@ -4,7 +4,7 @@ version: '3'
 
 vars:
   SSH_TARGET: '{{.SSH_USER | default "ubuntu"}}@{{.SSH_HOST | default "instance-20260203-1255"}}'
-  K3S_VERSION: '{{.K3S_VERSION | default "v1.36.3+k3s1"}}'
+  K3S_VERSION: '{{.K3S_VERSION | default "v1.37.0+k3s1"}}'
   CILIUM_VERSION: '{{.CILIUM_VERSION | default "1.20.1"}}'
   API_PORT: '{{.API_PORT | default "6443"}}'
 
