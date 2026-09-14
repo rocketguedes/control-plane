@@ -9,6 +9,10 @@ resources:
   - secret.yaml
   - service.yaml
   - serviceaccount.yaml
+configMapGenerator:
+  - name: templates
+    files:
+      - templates/flux.yml
 images:
   - name: docker.io/binwiederhier/ntfy
     newTag: v2.28.0 # {"$imagepolicy": "flux-system:ntfy:tag"}

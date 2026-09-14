@@ -1,0 +1,57 @@
+title: |
+  {{- if eq .involvedObject.kind "ImageUpdateAutomation" }}
+    {{- if eq .severity "error" }}
+    🚨 {{ .involvedObject.name }}: image update failed
+    {{- else }}
+    🚀 {{ .involvedObject.name }}: {{ regexReplaceAll "(?s)^([^\n]+).*" .message "$1" }}
+    {{- end }}
+  {{- else if eq .involvedObject.kind "ImagePolicy" }}
+    {{- if eq .reason "DependencyNotReady" }}
+    ⚠️ {{ .involvedObject.name }}: dependency not ready
+    {{- else if eq .severity "error" }}
+    🚨 {{ .involvedObject.name }}: policy error
+    {{- else }}
+    📦 {{ .involvedObject.name }}: resolved to {{ regexReplaceAll ".*resolved to ([^ ]+).*" .message "$1" }}
+    {{- end }}
+  {{- else if eq .severity "error" }}
+    {{- if or (eq .reason "ProgressingWithRetry") (contains "retrying" .message) }}
+    ⚠️ {{ .involvedObject.kind }}/{{ .involvedObject.name }} retrying
+    {{- else }}
+    🚨 {{ .involvedObject.kind }}/{{ .involvedObject.name }}: {{ .reason }}
+    {{- end }}
+  {{- else }}
+  ℹ️ {{ .involvedObject.kind }}/{{ .involvedObject.name }}
+  {{- end }}
+
+priority: |
+  {{- if and (eq .severity "error") (ne .reason "DependencyNotReady") (not (contains "retrying" .message)) }}
+  high
+  {{- else }}
+  default
+  {{- end }}
+
+message: |
+  {{- if and (eq .involvedObject.kind "ImagePolicy") (contains "resolved to" .message) }}
+  Image: {{ regexReplaceAll ".*Latest image tag for ([^ ]+) resolved.*" .message "$1" }}
+  Tag: {{ regexReplaceAll ".*resolved to ([^ ]+).*" .message "$1" }}
+  Digest: {{ regexReplaceAll ".*with digest (sha256:[a-f0-9]{12})[a-f0-9]+.*" .message "$1" }}...
+  Controller: {{ .reportingController }}
+  {{- else if eq .involvedObject.kind "ImageUpdateAutomation" }}
+  Resource: {{ .involvedObject.kind }}/{{ .involvedObject.name }}
+  {{- if .involvedObject.namespace }}
+  Namespace: {{ .involvedObject.namespace }}
+  {{- end }}
+  {{ .message }}
+  {{- else }}
+  Resource: {{ .involvedObject.kind }}/{{ .involvedObject.name }}
+  {{- if .involvedObject.namespace }}
+  Namespace: {{ .involvedObject.namespace }}
+  {{- end }}
+  Reason: {{ .reason }}
+  Message: {{ .message }}
+  {{- if .metadata }}
+  {{- range $key, $val := .metadata }}
+  {{ $key | title }}: {{ $val }}
+  {{- end }}
+  {{- end }}
+  {{- end }}

@@ -53,6 +53,9 @@ spec:
           volumeMounts:
             - name: cache-volume
               mountPath: /var/cache/ntfy
+            - name: templates
+              mountPath: /etc/ntfy/templates
+              readOnly: true
             - name: tmp
               mountPath: /tmp
           resources:
@@ -94,5 +97,8 @@ spec:
         - name: cache-volume
           persistentVolumeClaim:
             claimName: ntfy-pvc
+        - name: templates
+          configMap:
+            name: templates
         - name: tmp
           emptyDir: {}
