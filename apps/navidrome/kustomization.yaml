@@ -15,9 +15,9 @@ configMapGenerator:
       - navidrome.toml
 images:
   - name: docker.io/deluan/navidrome
-    newTag: 0.64.0
-    digest: sha256:a384948b81bd1529986c5960169e7fc4fa00f46bde6bd517971a4c36671db2af
+    newTag: 0.64.0 # {"$imagepolicy": "flux-system:navidrome:tag"}
+    digest: sha256:a384948b81bd1529986c5960169e7fc4fa00f46bde6bd517971a4c36671db2af # {"$imagepolicy": "flux-system:navidrome:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: navidrome
-      app.kubernetes.io/version: 0.64.0
+      app.kubernetes.io/version: 0.64.0 # {"$imagepolicy": "flux-system:navidrome:tag"}
