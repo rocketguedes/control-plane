@@ -18,16 +18,19 @@ spec:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
       messageTemplate: |
-        {{- $app := "" -}}
+        {{- $apps := list -}}
         {{- $version := "" -}}
         {{- range .Changed.Changes -}}
           {{- if hasSuffix ":tag" .Setter -}}
-            {{- $app = regexReplaceAll ".*:([^:]+):tag" .Setter "$1" -}}
-            {{- $version = .NewValue -}}
+            {{- $appName := regexReplaceAll ".*:([^:]+):tag" .Setter "$1" -}}
+            {{- if not (has $appName $apps) -}}
+              {{- $apps = append $apps $appName -}}
+              {{- $version = .NewValue -}}
+            {{- end -}}
           {{- end -}}
         {{- end -}}
-        {{- if and $app $version -}}
-        chore({{ $app }}): update version to {{ $version }}
+        {{- if eq (len $apps) 1 -}}
+        chore({{ first $apps }}): update version to {{ $version }}
         {{- else -}}
         chore: update container images
         {{- end -}}
