@@ -8,9 +8,9 @@ resources:
   - serviceaccount.yaml
 images:
   - name: ghcr.io/immich-app/immich-machine-learning
-    newTag: v3.2.1-armnn # {"$imagepolicy": "flux-system:immich-machine-learning:tag"}
-    digest: sha256:9fbbe7b904de6baa1b9b4b55d2ece0f6db88dbd0f1ef83707e5a1f1ea9febab1 # {"$imagepolicy": "flux-system:immich-machine-learning:digest"}
+    newTag: v3.2.2-armnn # {"$imagepolicy": "flux-system:immich-machine-learning:tag"}
+    digest: sha256:d43982f672e433f51f4f8172e8debe3c72edf22d4d6e2fbf171b33e96fa91b60 # {"$imagepolicy": "flux-system:immich-machine-learning:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: immich
-      app.kubernetes.io/version: v3.2.1-armnn # {"$imagepolicy": "flux-system:immich-machine-learning:tag"}
+      app.kubernetes.io/version: v3.2.2-armnn # {"$imagepolicy": "flux-system:immich-machine-learning:tag"}
