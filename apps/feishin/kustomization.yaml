@@ -9,9 +9,9 @@ resources:
   - serviceaccount.yaml
 images:
   - name: ghcr.io/jeffvli/feishin
-    newTag: 1.16.0 # {"$imagepolicy": "flux-system:feishin:tag"}
-    digest: sha256:84eb5a8e822845d7815126655438631bc2e7d9965423a4752f459fcfc1be9600 # {"$imagepolicy": "flux-system:feishin:digest"}
+    newTag: 1.17.0 # {"$imagepolicy": "flux-system:feishin:tag"}
+    digest: sha256:6c75a4d3b99065ac245e2eb2b693fde3e5f2a6fe41c9e255da4fcb8948071965 # {"$imagepolicy": "flux-system:feishin:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: feishin
-      app.kubernetes.io/version: 1.16.0 # {"$imagepolicy": "flux-system:feishin:tag"}
+      app.kubernetes.io/version: 1.17.0 # {"$imagepolicy": "flux-system:feishin:tag"}
