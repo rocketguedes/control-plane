@@ -8,7 +8,7 @@ resources:
 images:
   - name: docker.io/valkey/valkey
     newTag: 9.1.2-alpine3.24 # {"$imagepolicy": "flux-system:valkey:tag"}
-    digest: sha256:a174b894902bd3367e330d47cc2054367dc4917701776aaf336f41d83b65ec7a # {"$imagepolicy": "flux-system:valkey:digest"}
+    digest: sha256:a0dbf4c1d5708782907c10e2c72deff317518518b5288a58416981d9db95d30b # {"$imagepolicy": "flux-system:valkey:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: immich
