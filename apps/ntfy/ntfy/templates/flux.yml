@@ -13,6 +13,18 @@ title: |
     {{- else }}
     📦 {{ .involvedObject.name }}: resolved to {{ regexReplaceAll ".*resolved to ([^ ]+).*" .message "$1" }}
     {{- end }}
+  {{- else if eq .involvedObject.kind "HelmRelease" }}
+    {{- if eq .severity "error" }}
+    🚨 {{ .involvedObject.name }}: upgrade failed
+    {{- else }}
+    🚢 {{ .involvedObject.name }}: {{ if eq .reason "InstallSucceeded" }}install{{ else }}upgrade{{ end }} succeeded
+    {{- end }}
+  {{- else if eq .involvedObject.kind "OCIRepository" }}
+    {{- if eq .severity "error" }}
+    🚨 {{ .involvedObject.name }}: reconciliation failed
+    {{- else }}
+    📥 {{ .involvedObject.name }}: new artifact stored
+    {{- end }}
   {{- else if eq .severity "error" }}
     {{- if or (eq .reason "ProgressingWithRetry") (contains "retrying" .message) }}
     ⚠️ {{ .involvedObject.kind }}/{{ .involvedObject.name }} retrying
@@ -36,6 +48,15 @@ message: |
   Tag: {{ regexReplaceAll ".*resolved to ([^ ]+).*" .message "$1" }}
   Digest: {{ regexReplaceAll ".*with digest (sha256:[a-f0-9]{12})[a-f0-9]+.*" .message "$1" }}...
   Controller: {{ .reportingController }}
+  {{- else if eq .involvedObject.kind "HelmRelease" }}
+  Resource: {{ .involvedObject.kind }}/{{ .involvedObject.name }}
+  Chart Version: {{ regexReplaceAll ".*with chart [^@]+@([^ ]+).*" .message "$1" }}
+  Reason: {{ .reason }}
+  Message: {{ .message }}
+  {{- else if eq .involvedObject.kind "OCIRepository" }}
+  Resource: {{ .involvedObject.kind }}/{{ .involvedObject.name }}
+  Version/Tag: {{ regexReplaceAll ".*stored artifact for (?:digest|revision) '([^@]+)@.*'.*" .message "$1" }}
+  Message: {{ .message }}
   {{- else if eq .involvedObject.kind "ImageUpdateAutomation" }}
   Resource: {{ .involvedObject.kind }}/{{ .involvedObject.name }}
   {{- if .involvedObject.namespace }}
