@@ -36,7 +36,7 @@ spec:
     name: postgresql
   filterTags:
     pattern: '^(?P<version>[0-9]+\.[0-9]+)-standard-trixie$'
-    extract: "$version"
+    extract: "${version}.0"
   digestReflectionPolicy: IfNotPresent
   policy:
     semver:
