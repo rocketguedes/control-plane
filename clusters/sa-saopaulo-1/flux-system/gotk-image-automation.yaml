@@ -21,16 +21,22 @@ spec:
         {{- $apps := list -}}
         {{- $version := "" -}}
         {{- range .Changed.Changes -}}
-          {{- if hasSuffix ":tag" .Setter -}}
-            {{- $appName := regexReplaceAll ".*:([^:]+):tag" .Setter "$1" -}}
+          {{- if or (hasSuffix ":tag" .Setter) (hasSuffix ":digest" .Setter) -}}
+            {{- $appName := regexReplaceAll ".*:([^:]+):(tag|digest)" .Setter "$1" -}}
             {{- if not (has $appName $apps) -}}
               {{- $apps = append $apps $appName -}}
+            {{- end -}}
+            {{- if hasSuffix ":tag" .Setter -}}
               {{- $version = .NewValue -}}
             {{- end -}}
           {{- end -}}
         {{- end -}}
         {{- if eq (len $apps) 1 -}}
+          {{- if eq $version "" -}}
+        chore({{ first $apps }}): update image digest
+          {{- else -}}
         chore({{ first $apps }}): update version to {{ $version }}
+          {{- end -}}
         {{- else -}}
         chore: update container images
         {{- end -}}
