@@ -5,7 +5,7 @@ metadata:
   namespace: system-upgrade
 spec:
   concurrency: 1
-  version: v1.36.4+k3s1 # {"$imagepolicy": "flux-system:k3s-upgrade:tag"}
+  version: v1.36.4-k3s1 # {"$imagepolicy": "flux-system:k3s-upgrade:tag"}
   cordon: false
   nodeSelector:
     matchExpressions:
