@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - audiomuse-ai.yaml
   - authelia.yaml
+  - cert-manager.yaml
   - feishin.yaml
   - headlamp.yaml
   - headscale.yaml
