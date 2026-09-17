@@ -12,6 +12,30 @@ spec:
         namespaces:
           from: All
 
+    # RATIONALE: Discrete HTTPS listeners on port 443 are used instead of a single wildcard (*.guedescloud.com.br).
+    # CONSTRAINT: End-to-end encryption for Headscale requires 'protocol: TLS' with 'mode: Passthrough' on port 443
+    #   (TLS terminated directly by the Headscale pod). In Cilium Gateway API, mixing a wildcard HTTPS listener
+    #   with a specific TLS passthrough listener on the same port causes a fatal ProtocolConflict because
+    #   SNIHostnamesIntersect evaluates to true. Disjoint hostnames are strictly required on port 443.
+    # REFERENCE: https://github.com/cilium/cilium/blob/main/operator/pkg/gateway-api/status_listener.go#L245-L254
+    #   > // HTTPS termination and TLS passthrough both consume the SNI of the same
+    #   > // port, so they conflict whenever their hostnames can match the same value.
+    #   >	if m.isHTTPSAndTLSPassthroughPair(first, second) {
+    #   >   if helpers.SNIHostnamesIntersect(
+    #   >     helpers.ListenerHostname(first), helpers.ListenerHostname(second),
+    #   >   ) {
+    #   >     return gatewayv1.ListenerReasonProtocolConflict, true
+    #   >   }
+    #   >   return "", false
+    #   > }
+    # REFERENCE: https://github.com/cilium/cilium/blob/main/operator/pkg/gateway-api/status_listener_conflict_test.go#L120-L125
+    #   > {
+    #   >  name:       "https and tls passthrough wildcard overlap conflict",
+    #   >  first:      muxedListener("a", gatewayv1.HTTPSProtocolType, 443, "*.example.com"),
+    #   >  second:     tlsPassthroughListener("b", 443, "foo.example.com"),
+    #   >  wantReason: gatewayv1.ListenerReasonProtocolConflict,
+    #   >  wantOK:     true,
+    #   > },
     - name: passthrough
       protocol: TLS
       port: 443
