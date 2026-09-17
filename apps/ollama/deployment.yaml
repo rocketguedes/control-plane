@@ -5,6 +5,8 @@ metadata:
   labels:
     app.kubernetes.io/name: ollama
     app.kubernetes.io/instance: ollama
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   revisionHistoryLimit: 0

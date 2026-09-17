@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/name: victoria-metrics-single
     app.kubernetes.io/instance: victoria-metrics-single
     app.kubernetes.io/component: server
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   revisionHistoryLimit: 0

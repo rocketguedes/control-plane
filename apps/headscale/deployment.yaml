@@ -5,6 +5,8 @@ metadata:
   labels:
     app.kubernetes.io/name: headscale
     app.kubernetes.io/instance: headscale
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   revisionHistoryLimit: 0

@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/name: audiomuse-ai
     app.kubernetes.io/instance: audiomuse-ai
     app.kubernetes.io/component: worker
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   revisionHistoryLimit: 0
   selector:

@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/name: immich
     app.kubernetes.io/instance: immich
     app.kubernetes.io/component: server
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   revisionHistoryLimit: 0

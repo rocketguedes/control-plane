@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/name: ntfy
     app.kubernetes.io/instance: ntfy
     app.kubernetes.io/component: ntfy-pod
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   revisionHistoryLimit: 0
