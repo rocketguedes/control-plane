@@ -19,7 +19,6 @@
 -A TCP -p tcp -m tcp --dport 443 -m comment --comment "http protocol over TLS/SSL" -j ACCEPT
 -A TCP -p tcp -m tcp --dport 80 -m comment --comment "World Wide Web HTTP" -j ACCEPT
 -A UDP -p udp -m udp --dport 443 -m comment --comment "http protocol over TLS/SSL" -j ACCEPT
--A UDP -p udp -m udp --dport 5520 -m comment --comment "Hytale Server" -j ACCEPT
 -A UDP -p udp -m udp --dport 51820 -j ACCEPT
 -A UDP -p udp -m udp --dport 3478 -m comment --comment "Session Traversal Utilities for NAT (STUN) port" -j ACCEPT
 COMMIT
