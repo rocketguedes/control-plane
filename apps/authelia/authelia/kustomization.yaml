@@ -11,6 +11,19 @@ configMapGenerator:
   - name: authelia-config
     files:
       - configuration.yaml
+# RATIONALE: Automated image updates (Flux ImagePolicy setter markers) are intentionally omitted.
+# CONSTRAINT: Authelia is the central IdP (maximum blast radius). Upstream explicitly recommends against
+#   automated upgrades and warns that deprecations and breaking changes can occur across minor/patch releases.
+#   All upgrades must be manually tested and audited. Flux ImagePolicy in clusters/ triggers alerts only.
+# REFERENCE: https://github.com/authelia/authelia/blob/master/docs/content/policies/versioning.md?plain=1#L29-L35
+#   > It is therefore recommended users do not automatically upgrade the `minor` version without reading the patch notes, and
+#   > it's critically important users do not upgrade the `major` version without reading the patch notes. You should pin your
+#   > version to `4.37` for example to prevent automatic upgrades of the `minor` version, or pin your version to `4` to
+#   > prevent automatic upgrade of the `major` version.
+#   > We generally do not recommend automated upgrades of critical systems but instead recommend ensuring you are notified an
+#   > upgrade exists.
+# REFERENCE: https://github.com/authelia/authelia/blob/master/docs/content/policies/versioning.md?plain=1#L50
+#   > 4. There may be deprecations in `minor` or `patch` releases.
 images:
   - name: ghcr.io/authelia/authelia
     newTag: 4.39.26
