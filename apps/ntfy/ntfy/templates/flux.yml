@@ -25,6 +25,22 @@ title: |
     {{- else }}
     📥 {{ .involvedObject.name }}: new artifact stored
     {{- end }}
+  {{- else if eq .involvedObject.kind "Kustomization" }}
+    {{- if or (eq .reason "ProgressingWithRetry") (contains "retrying" .message) }}
+    ⚠️ {{ .involvedObject.name }}: retrying reconciliation
+    {{- else if eq .reason "HealthCheckFailed" }}
+    🚨 {{ .involvedObject.name }}: health check failed
+    {{- else if eq .reason "BuildFailed" }}
+    🚨 {{ .involvedObject.name }}: kustomize build failed
+    {{- else }}
+    🚨 {{ .involvedObject.name }}: reconciliation failed
+    {{- end }}
+  {{- else if eq .involvedObject.kind "GitRepository" }}
+    {{- if or (eq .reason "ProgressingWithRetry") (contains "retrying" .message) }}
+    ⚠️ {{ .involvedObject.name }}: retrying git sync
+    {{- else }}
+    🚨 {{ .involvedObject.name }}: git sync failed
+    {{- end }}
   {{- else if eq .severity "error" }}
     {{- if or (eq .reason "ProgressingWithRetry") (contains "retrying" .message) }}
     ⚠️ {{ .involvedObject.kind }}/{{ .involvedObject.name }} retrying
@@ -36,7 +52,7 @@ title: |
   {{- end }}
 
 priority: |
-  {{- if and (eq .severity "error") (ne .reason "DependencyNotReady") (not (contains "retrying" .message)) }}
+  {{- if and (eq .severity "error") (ne .reason "DependencyNotReady") (ne .reason "ProgressingWithRetry") (not (contains "retrying" .message)) }}
   high
   {{- else }}
   default
@@ -72,7 +88,7 @@ message: |
   Message: {{ .message }}
   {{- if .metadata }}
   {{- range $key, $val := .metadata }}
-  {{ $key | title }}: {{ $val }}
+  {{ regexReplaceAll ".*/" $key "" | title }}: {{ $val }}
   {{- end }}
   {{- end }}
   {{- end }}
