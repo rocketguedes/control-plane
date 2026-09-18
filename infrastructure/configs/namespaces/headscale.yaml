@@ -2,7 +2,15 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: headscale
+  # RATIONALE: Namespace requires 'enforce: privileged' due to Headscale STUN UDP hostPort.
+  # CONSTRAINT: Headscale exposes port 3478 via hostPort for direct STUN NAT traversal.
+  #   Kubernetes Pod Security Standards (Baseline) disallows hostPorts and notes that the built-in
+  #   Pod Security Admission controller does not support a port allowlist, rejecting any non-zero
+  #   hostPort unless enforce level is set to privileged.
+  # REFERENCE: https://github.com/kubernetes/website/blob/main/content/en/docs/concepts/security/pod-security-standards.md?plain=1#L153-L168
+  #   > HostPorts should be disallowed entirely (recommended) or restricted to a known list
+  #   > Allowed Values: Undefined/nil, Known list (not supported by the built-in Pod Security Admission controller), 0
   labels:
-    pod-security.kubernetes.io/audit: restricted
     pod-security.kubernetes.io/enforce: privileged
     pod-security.kubernetes.io/warn: restricted
+    pod-security.kubernetes.io/audit: restricted
