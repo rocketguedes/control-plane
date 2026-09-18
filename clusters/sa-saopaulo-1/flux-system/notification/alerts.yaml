@@ -12,7 +12,7 @@ spec:
 apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Alert
 metadata:
-  name: ntfy
+  name: flux-info
   namespace: flux-system
 spec:
   providerRef:
@@ -22,23 +22,37 @@ spec:
     - kind: ImageUpdateAutomation
       name: flux-system
     - kind: ImagePolicy
-      name: '*'
+      name: "*"
     - kind: HelmRelease
-      name: '*'
+      name: "*"
       namespace: cert-manager
     - kind: OCIRepository
-      name: '*'
+      name: "*"
       namespace: cert-manager
     - kind: HelmRelease
-      name: '*'
+      name: "*"
       namespace: kube-system
     - kind: OCIRepository
-      name: '*'
+      name: "*"
       namespace: kube-system
     - kind: HelmRelease
-      name: '*'
+      name: "*"
       namespace: reloader
     - kind: OCIRepository
-      name: '*'
+      name: "*"
       namespace: reloader
-
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: flux-error
+  namespace: flux-system
+spec:
+  providerRef:
+    name: ntfy
+  eventSeverity: error
+  eventSources:
+    - kind: GitRepository
+      name: "*"
+    - kind: Kustomization
+      name: "*"
