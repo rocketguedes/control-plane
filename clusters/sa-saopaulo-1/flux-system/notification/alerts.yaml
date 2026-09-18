@@ -1,0 +1,44 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Provider
+metadata:
+  name: ntfy
+  namespace: flux-system
+spec:
+  type: generic
+  address: https://notify.guedescloud.com.br/flux-alerts
+  secretRef:
+    name: ntfy-headers
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: ntfy
+  namespace: flux-system
+spec:
+  providerRef:
+    name: ntfy
+  eventSeverity: info
+  eventSources:
+    - kind: ImageUpdateAutomation
+      name: flux-system
+    - kind: ImagePolicy
+      name: '*'
+    - kind: HelmRelease
+      name: '*'
+      namespace: cert-manager
+    - kind: OCIRepository
+      name: '*'
+      namespace: cert-manager
+    - kind: HelmRelease
+      name: '*'
+      namespace: kube-system
+    - kind: OCIRepository
+      name: '*'
+      namespace: kube-system
+    - kind: HelmRelease
+      name: '*'
+      namespace: reloader
+    - kind: OCIRepository
+      name: '*'
+      namespace: reloader
+
