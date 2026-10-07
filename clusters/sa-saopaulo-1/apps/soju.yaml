@@ -43,4 +43,4 @@ spec:
   digestReflectionPolicy: IfNotPresent
   policy:
     semver:
-      range: "0.10.x"
+      range: "0.11.x"
