@@ -15,6 +15,7 @@ spec:
       retryInterval: 5m0s
   upgrade:
     crds: CreateReplace
+    serverSideApply: enabled
     strategy:
       name: RetryOnFailure
       retryInterval: 5m0s
