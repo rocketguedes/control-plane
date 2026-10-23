@@ -9,6 +9,7 @@ metadata:
 data:
   HF_XET_CACHE: /cache/huggingface-xet
   MACHINE_LEARNING_HTTP_KEEPALIVE_TIMEOUT_S: "10"
+  MACHINE_LEARNING_MODEL_REVISION: v2
   MPLCONFIGDIR: /cache/matplotlib-config
   TRANSFORMERS_CACHE: /cache
   TZ: America/Bahia
