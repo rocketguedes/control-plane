@@ -15,9 +15,9 @@ secretGenerator:
       - immich-config.json
 images:
   - name: ghcr.io/immich-app/immich-server
-    newTag: v3.2.4 # {"$imagepolicy": "flux-system:immich-server:tag"}
-    digest: sha256:d317916b28090c33eb36b308464ea391f8b7df1d850fcfea227a39ec879718c2 # {"$imagepolicy": "flux-system:immich-server:digest"}
+    newTag: v3.3.5 # {"$imagepolicy": "flux-system:immich-server:tag"}
+    digest: sha256:485d546a2e31d6a8b4db8423fcba5c109de8c218d93410af115fd1ccfc4352a6 # {"$imagepolicy": "flux-system:immich-server:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: immich
-      app.kubernetes.io/version: v3.2.4 # {"$imagepolicy": "flux-system:immich-server:tag"}
+      app.kubernetes.io/version: v3.3.5 # {"$imagepolicy": "flux-system:immich-server:tag"}
