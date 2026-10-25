@@ -184,4 +184,23 @@ identity_providers:
         consent_mode: "implicit"
         require_pkce: true
         token_endpoint_auth_method: "client_secret_basic"
+      - client_id: "sharkord"
+        client_name: "sharkord"
+        client_secret: '{{ secret "/secrets/IDENTITY_PROVIDERS_OIDC_SHARKORD_CLIENT_SECRET" }}'
+        public: false
+        redirect_uris:
+          - "https://chat.guedescloud.com.br/oidc/callback"
+        scopes:
+          - "openid"
+          - "profile"
+          - "email"
+        claims_policy: "default"
+        grant_types:
+          - "authorization_code"
+        response_types:
+          - "code"
+        authorization_policy: "one_factor"
+        consent_mode: "implicit"
+        require_pkce: true
+        token_endpoint_auth_method: "client_secret_post"
 ...
