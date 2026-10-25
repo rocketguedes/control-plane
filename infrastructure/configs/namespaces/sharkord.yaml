@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sharkord
+  # RATIONALE: Namespace requires 'enforce: privileged' due to Sharkord WebRTC hostPorts.
+  # CONSTRAINT: Sharkord exposes port 40000 (TCP and UDP) via hostPort for direct Mediasoup WebRTC media.
+  #   Kubernetes Pod Security Standards (Baseline) disallows hostPorts and notes that the built-in
+  #   Pod Security Admission controller does not support a port allowlist, rejecting any non-zero
+  #   hostPort unless enforce level is set to privileged.
+  # REFERENCE: https://github.com/kubernetes/website/blob/main/content/en/docs/concepts/security/pod-security-standards.md?plain=1#L153-L168
+  #   > HostPorts should be disallowed entirely (recommended) or restricted to a known list
+  #   > Allowed Values: Undefined/nil, Known list (not supported by the built-in Pod Security Admission controller), 0
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/warn: restricted
+    pod-security.kubernetes.io/audit: restricted

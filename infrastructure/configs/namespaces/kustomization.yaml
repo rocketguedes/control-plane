@@ -16,5 +16,6 @@ resources:
   - ollama.yaml
   - postgresql.yaml
   - reloader.yaml
+  - sharkord.yaml
   - soju.yaml
   - vaultwarden.yaml
