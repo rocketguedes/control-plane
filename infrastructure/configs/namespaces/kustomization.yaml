@@ -8,6 +8,7 @@ resources:
   - headlamp.yaml
   - headscale.yaml
   - immich.yaml
+  - livekit.yaml
   - lldap.yaml
   - monitoring.yaml
   - navidrome.yaml
