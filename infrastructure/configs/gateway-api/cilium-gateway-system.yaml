@@ -105,6 +105,20 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
+    - name: https-livekit-server
+      protocol: HTTPS
+      port: 443
+      hostname: livekit.guedescloud.com.br
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: wildcard-guedescloud-com-br-tls
+            namespace: kube-system
+
     - name: https-monitoring
       protocol: HTTPS
       port: 443
