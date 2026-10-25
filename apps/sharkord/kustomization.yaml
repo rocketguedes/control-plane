@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: sharkord
+resources:
+  - configmap.yaml
+  - deployment.yaml
+  - httproute.yaml
+  - persistentvolumeclaim.yaml
+  - secret.yaml
+  - service.yaml
+  - serviceaccount.yaml
+images:
+  - name: docker.io/sharkord/sharkord
+    newTag: v0.0.28 # {"$imagepolicy": "flux-system:sharkord:tag"}
+    digest: sha256:c1e4e3b394e6ad133d9567f3821f6aa4efccd633f8db70a7688aad161fc06933 # {"$imagepolicy": "flux-system:sharkord:digest"}
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: sharkord
+      app.kubernetes.io/version: v0.0.28 # {"$imagepolicy": "flux-system:sharkord:tag"}

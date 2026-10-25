@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sharkord
+  labels:
+    app.kubernetes.io/name: sharkord
+    app.kubernetes.io/instance: sharkord
+data:
+  SHARKORD_ALLOWED_ORIGINS: https://chat.guedescloud.com.br
+  SHARKORD_DATA_PATH: /data
+  SHARKORD_OIDC_CLIENT_ID: sharkord
+  SHARKORD_OIDC_DISABLE_LOCAL_LOGIN: "true"
+  SHARKORD_OIDC_ENABLED: "true"
+  SHARKORD_OIDC_ISSUER: https://accounts.guedescloud.com.br
+  SHARKORD_OIDC_REDIRECT_URI: https://chat.guedescloud.com.br/oidc/callback
+  SHARKORD_PORT: "4991"
+  SHARKORD_TRUSTED_PROXIES: 10.42.0.0/16,10.43.0.0/16,fd42::/56,fd43::/112
+  SHARKORD_WEBRTC_ANNOUNCED_ADDRESS: chat.guedescloud.com.br
+  SHARKORD_WEBRTC_PORT: "40000"
