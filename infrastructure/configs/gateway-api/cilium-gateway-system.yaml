@@ -119,20 +119,6 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-meet
-      protocol: HTTPS
-      port: 443
-      hostname: meet.guedescloud.com.br
-      allowedRoutes:
-        namespaces:
-          from: All
-      tls:
-        mode: Terminate
-        certificateRefs:
-          - kind: Secret
-            name: wildcard-guedescloud-com-br-tls
-            namespace: kube-system
-
     - name: https-monitoring
       protocol: HTTPS
       port: 443
