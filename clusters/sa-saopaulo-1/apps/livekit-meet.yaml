@@ -1,0 +1,47 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: livekit-meet
+  namespace: flux-system
+spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  dependsOn:
+    - name: livekit-server
+    - name: namespaces
+  interval: 5m0s
+  path: ./apps/livekit/livekit-meet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  timeout: 5m0s
+  wait: true
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: node
+  namespace: flux-system
+spec:
+  image: docker.io/library/node
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: node
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: node
+  filterTags:
+    pattern: '^(?P<version>[0-9]+\.[0-9]+\.[0-9]+)-alpine$'
+    extract: "$version"
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: "24.x"

@@ -1,0 +1,143 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: livekit-meet
+  labels:
+    app.kubernetes.io/name: livekit
+    app.kubernetes.io/instance: livekit
+    app.kubernetes.io/component: meet
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: livekit
+      app.kubernetes.io/instance: livekit
+      app.kubernetes.io/component: meet
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: livekit
+        app.kubernetes.io/instance: livekit
+        app.kubernetes.io/component: meet
+    spec:
+      serviceAccountName: livekit-meet
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: livekit-meet-init
+          image: docker.io/library/node
+          command:
+            - /bin/sh
+          args:
+            - -c
+            - |
+              set -eu
+
+              tmp="/tmp/meet.tar.gz"
+              trap 'rm -f "$tmp"' EXIT
+
+              wget -qO "$tmp" "https://github.com/livekit-examples/meet/archive/${MEET_COMMIT}.tar.gz"
+              echo "${MEET_SHA256}  ${tmp}" | sha256sum -c -s
+              tar -xzf "$tmp" --strip-components=1 -C /app
+              rm -f "$tmp"
+              trap - EXIT
+
+              for img in /app/public/background-images/*.jpg; do
+                oid=$(awk '/^oid sha256:/ {sub("sha256:", "", $2); print $2}' "$img")
+                if [ -n "$oid" ]; then
+                  rel="${img#/app/}"
+                  wget -qO "${img}.tmp" "https://media.githubusercontent.com/media/livekit-examples/meet/${MEET_COMMIT}/${rel}"
+                  echo "${oid}  ${img}.tmp" | sha256sum -c -s
+                  mv "${img}.tmp" "$img"
+                fi
+              done
+
+              cd /app
+              corepack pnpm install --frozen-lockfile
+              corepack pnpm build
+          envFrom:
+            - configMapRef:
+                name: livekit-meet
+          volumeMounts:
+            - name: app
+              mountPath: /app
+            - name: tmp
+              mountPath: /tmp
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+      containers:
+        - name: livekit-meet
+          image: docker.io/library/node
+          workingDir: /app
+          command:
+            - ./node_modules/.bin/next
+            - start
+          envFrom:
+            - configMapRef:
+                name: livekit-meet
+            - secretRef:
+                name: livekit-meet
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          volumeMounts:
+            - name: app
+              mountPath: /app
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+      volumes:
+        - name: app
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
