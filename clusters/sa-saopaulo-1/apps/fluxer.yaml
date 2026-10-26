@@ -1,0 +1,288 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-admin
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-admin
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-admin
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-admin
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-api
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-api
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-api
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-api
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-app-proxy-self-hosted
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-app-proxy-self-hosted
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-app-proxy-self-hosted
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-gateway
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-gateway
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-gateway
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-gateway
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-gifs
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-gifs
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-gifs
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-gifs
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-media-proxy
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-media-proxy
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-media-proxy
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-media-proxy
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-messages
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-messages
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-messages
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-messages
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-push
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-push
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-push
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-push
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-snowflakes
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-snowflakes
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-snowflakes
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-snowflakes
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-static
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-static
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-static
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-static
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-unfurl
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-unfurl
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-unfurl
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-unfurl
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-users
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-users
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-users
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-users
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"
