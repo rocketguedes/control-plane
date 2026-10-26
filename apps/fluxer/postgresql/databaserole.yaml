@@ -11,6 +11,8 @@ spec:
     name: postgresql
   name: fluxer
   login: true
+  inRoles:
+    - pg_read_all_settings
   passwordSecret:
     name: fluxer
   databaseRoleReclaimPolicy: retain
