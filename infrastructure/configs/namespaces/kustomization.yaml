@@ -5,6 +5,7 @@ resources:
   - authelia.yaml
   - cert-manager.yaml
   - feishin.yaml
+  - fluxer.yaml
   - headlamp.yaml
   - headscale.yaml
   - immich.yaml
