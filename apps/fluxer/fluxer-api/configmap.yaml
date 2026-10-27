@@ -47,7 +47,6 @@ data:
   FLUXER_SEARCH_ENGINE: meilisearch
   FLUXER_SEARCH_URL: http://meilisearch:7700
   FLUXER_SELF_HOSTED: 'true'
-  FLUXER_SSO_ALLOW_PRIVATE_ADDRESSES: 'true'
   FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
   FLUXER_VAPID_EMAIL: admin@chat.guedescloud.com.br
   NODE_ENV: production
