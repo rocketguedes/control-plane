@@ -68,6 +68,8 @@ spec:
           volumeMounts:
             - name: tmp
               mountPath: /tmp
+            - name: run
+              mountPath: /run/fluxer
           resources:
             requests:
               cpu: 100m
@@ -104,4 +106,6 @@ spec:
             failureThreshold: 3
       volumes:
         - name: tmp
+          emptyDir: {}
+        - name: run
           emptyDir: {}
