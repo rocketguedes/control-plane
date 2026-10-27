@@ -4,6 +4,7 @@ namespace: lldap
 resources:
   - configmap.yaml
   - deployment.yaml
+  - httproute.yaml
   - persistentvolumeclaim.yaml
   - secret.yaml
   - service.yaml

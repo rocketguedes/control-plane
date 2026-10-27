@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/component: lldap
 data:
   LLDAP_HTTP_HOST: "::"
-  LLDAP_HTTP_URL: https://lldap.guedescloud.com.br
+  LLDAP_HTTP_URL: https://id.guedescloud.com.br
   LLDAP_KEY_FILE: ""
   LLDAP_LDAP_BASE_DN: dc=guedescloud,dc=com,dc=br
   LLDAP_LDAP_HOST: "::"
