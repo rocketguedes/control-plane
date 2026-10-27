@@ -20,6 +20,7 @@ data:
   FLUXER_DATABASE_BACKEND: postgres
   FLUXER_DISCOVERY_ENABLED: "false"
   FLUXER_EMAIL_FROM_EMAIL: noreply@localhost
+  FLUXER_GEOIP_DB_PATH: /usr/share/GeoIP/GeoLite2-City.mmdb
   FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
   FLUXER_LIVEKIT_DEFAULT_REGION: "{\"id\":\"default\",\"name\":\"Default\",\"emoji\":\"\U0001F30D\",\"latitude\":0,\"longitude\":0}"
   FLUXER_LIVEKIT_ENABLED: "true"
@@ -52,6 +53,7 @@ data:
   FLUXER_TRUST_CLIENT_IP_HEADER: "true"
   FLUXER_VAPID_EMAIL: admin@chat.guedescloud.com.br
   FLUXER_VOICE_P2P_STUN_URLS: "stun:global.stun.twilio.com:3478,stun:stun.l.google.com:19302"
+  GEOIPUPDATE_EDITION_IDS: GeoLite2-City
   NODE_ENV: production
   NODE_EXTRA_CA_CERTS: /etc/ssl/certs/ca-certificates.crt
   NODE_OPTIONS: --enable-source-maps

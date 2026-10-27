@@ -50,6 +50,31 @@ spec:
             capabilities:
               drop:
                 - ALL
+        - name: geoipupdate
+          image: ghcr.io/maxmind/geoipupdate
+          envFrom:
+            - configMapRef:
+                name: fluxer-api
+            - secretRef:
+                name: fluxer-api
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - name: geoipupdate-tmp
+              mountPath: /tmp
+            - name: geoip
+              mountPath: /usr/share/GeoIP
       containers:
         - name: api
           image: ghcr.io/fluxerapp/fluxer-api
@@ -68,6 +93,9 @@ spec:
           volumeMounts:
             - name: tmp
               mountPath: /tmp
+            - name: geoip
+              mountPath: /usr/share/GeoIP
+              readOnly: true
             - name: run
               mountPath: /run/fluxer
           resources:
@@ -106,6 +134,10 @@ spec:
             failureThreshold: 3
       volumes:
         - name: tmp
+          emptyDir: {}
+        - name: geoipupdate-tmp
+          emptyDir: {}
+        - name: geoip
           emptyDir: {}
         - name: run
           emptyDir: {}

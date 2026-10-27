@@ -14,6 +14,9 @@ images:
   - name: docker.io/library/busybox
     newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
     digest: sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e # {"$imagepolicy": "flux-system:busybox:digest"}
+  - name: ghcr.io/maxmind/geoipupdate
+    newTag: v8.0.0 # {"$imagepolicy": "flux-system:geoipupdate:tag"}
+    digest: sha256:51e70dd6f16cd3e4d845ac02d09940b10772a75b9d741427d235a78570923c1d # {"$imagepolicy": "flux-system:geoipupdate:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
