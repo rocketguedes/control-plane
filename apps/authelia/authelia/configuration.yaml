@@ -184,4 +184,27 @@ identity_providers:
         consent_mode: "implicit"
         require_pkce: true
         token_endpoint_auth_method: "client_secret_basic"
+      - client_id: "fluxer"
+        client_name: "Fluxer Chat"
+        client_secret: '{{ secret "/secrets/IDENTITY_PROVIDERS_OIDC_FLUXER_CLIENT_SECRET" }}'
+        public: false
+        redirect_uris:
+          - "https://chat.guedescloud.com.br/auth/sso/callback"
+          - "fluxer://auth/sso/callback"
+        scopes:
+          - "openid"
+          - "profile"
+          - "email"
+          - "groups"
+        claims_policy: "default"
+        grant_types:
+          - "authorization_code"
+          - "refresh_token"
+        response_types:
+          - "code"
+        authorization_policy: "one_factor"
+        consent_mode: "implicit"
+        require_pkce: true
+        token_endpoint_auth_method: "client_secret_post"
+
 ...
