@@ -1,0 +1,25 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: fluxer-edge
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: fluxer-admin
+    - name: fluxer-api
+    - name: fluxer-app-proxy-self-hosted
+    - name: fluxer-gateway
+    - name: fluxer-static
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  interval: 5m0s
+  timeout: 5m0s
+  path: ./apps/fluxer/edge
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  prune: true
+  wait: true

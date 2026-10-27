@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: fluxer
+resources:
+  - secret.yaml
+  - configmap.yaml
+  - service.yaml
+  - statefulset.yaml
+images:
+  - name: docker.io/chrislusf/seaweedfs
+    newTag: "4.47" # {"$imagepolicy": "flux-system:seaweedfs:tag"}
+    digest: sha256:ce9e796f1fe6f06968f4c04bdaf8f678dad9c8acdfef3d244133d71bfa6bf882 # {"$imagepolicy": "flux-system:seaweedfs:digest"}
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: fluxer
+      app.kubernetes.io/version: "4.47" # {"$imagepolicy": "flux-system:seaweedfs:tag"}

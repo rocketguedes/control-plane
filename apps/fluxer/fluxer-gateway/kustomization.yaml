@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: fluxer
+resources:
+  - secret.yaml
+  - configmap.yaml
+  - deployment.yaml
+  - service-headless.yaml
+  - service.yaml
+images:
+  - name: ghcr.io/fluxerapp/fluxer-gateway
+    newTag: 2026.1104.4704 # {"$imagepolicy": "flux-system:fluxer-gateway:tag"}
+    digest: sha256:2eef1b64f21b41292d74358af2bcd667ca107f8f2e14ed9b08958c5b2e392000 # {"$imagepolicy": "flux-system:fluxer-gateway:digest"}
+  - name: docker.io/library/busybox
+    newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
+    digest: sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e # {"$imagepolicy": "flux-system:busybox:digest"}
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: fluxer
+      app.kubernetes.io/version: 2026.1104.4704 # {"$imagepolicy": "flux-system:fluxer-gateway:tag"}

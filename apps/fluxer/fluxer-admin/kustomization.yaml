@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: fluxer
+resources:
+  - secret.yaml
+  - configmap.yaml
+  - deployment.yaml
+  - service.yaml
+images:
+  - name: ghcr.io/fluxerapp/fluxer-admin
+    newTag: 2026.1104.4716 # {"$imagepolicy": "flux-system:fluxer-admin:tag"}
+    digest: sha256:58df8b0c2d9f470497f2e0cce5ea2997aa19d8e558d6fcad99063a4434d19e58 # {"$imagepolicy": "flux-system:fluxer-admin:digest"}
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: fluxer
+      app.kubernetes.io/version: 2026.1104.4716 # {"$imagepolicy": "flux-system:fluxer-admin:tag"}

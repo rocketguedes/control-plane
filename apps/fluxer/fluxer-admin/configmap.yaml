@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluxer-admin
+  labels:
+    app.kubernetes.io/name: fluxer-admin
+    app.kubernetes.io/instance: fluxer
+    app.kubernetes.io/component: admin
+data:
+  FLUXER_ADMIN_BASE_PATH: /admin
+  FLUXER_ADMIN_ENDPOINT: https://chat.guedescloud.com.br/admin
+  FLUXER_ADMIN_PORT: '8080'
+  FLUXER_API_ENDPOINT: http://api:8080
+  FLUXER_API_PUBLIC_ENDPOINT: ''
+  FLUXER_APP_ENDPOINT: https://chat.guedescloud.com.br
+  FLUXER_MEDIA_ENDPOINT: https://chat.guedescloud.com.br/media
+  FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+  FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+  FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+  FLUXER_S3_FORCE_PATH_STYLE: 'true'
+  FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+  FLUXER_SELF_HOSTED: 'true'
+  FLUXER_STATIC_CDN_ENDPOINT: https://chat.guedescloud.com.br
+  FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
