@@ -51,6 +51,7 @@ data:
   FLUXER_SELF_HOSTED: "true"
   FLUXER_TRUST_CLIENT_IP_HEADER: "true"
   FLUXER_VAPID_EMAIL: admin@chat.guedescloud.com.br
+  FLUXER_VOICE_P2P_STUN_URLS: "stun:global.stun.twilio.com:3478,stun:stun.l.google.com:19302"
   NODE_ENV: production
   NODE_EXTRA_CA_CERTS: /etc/ssl/certs/ca-certificates.crt
   NODE_OPTIONS: --enable-source-maps
