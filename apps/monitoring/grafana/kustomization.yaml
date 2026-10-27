@@ -26,9 +26,9 @@ configMapGenerator:
       - datasources.yaml
 images:
   - name: docker.io/grafana/grafana
-    newTag: 13.2.4-slim # {"$imagepolicy": "flux-system:grafana:tag"}
-    digest: sha256:e1b9840daaea5ebbe9ac585257ed88cf7ea569d28d5058231b0778f8898ef736 # {"$imagepolicy": "flux-system:grafana:digest"}
+    newTag: 13.3.0-slim # {"$imagepolicy": "flux-system:grafana:tag"}
+    digest: sha256:a66f098dd9b2e1b5a19287ff176db02d895122488c6e39b3dfcd3fb897039225 # {"$imagepolicy": "flux-system:grafana:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: monitoring
-      app.kubernetes.io/version: 13.2.4-slim # {"$imagepolicy": "flux-system:grafana:tag"}
+      app.kubernetes.io/version: 13.3.0-slim # {"$imagepolicy": "flux-system:grafana:tag"}
