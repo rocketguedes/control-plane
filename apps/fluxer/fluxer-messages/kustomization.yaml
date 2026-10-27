@@ -10,12 +10,12 @@ resources:
   - statefulset.yaml
 images:
   - name: ghcr.io/fluxerapp/fluxer-messages
-    newTag: 2026.1026.202726 # {"$imagepolicy": "flux-system:fluxer-messages:tag"}
-    digest: sha256:545f41564a7f1bb77c8b95fb27ffa6030333130fe8044d69da715f502e121187 # {"$imagepolicy": "flux-system:fluxer-messages:digest"}
+    newTag: 2026.1027.190820 # {"$imagepolicy": "flux-system:fluxer-messages:tag"}
+    digest: sha256:377987ff361857e653c55571569ef0c4c66d4e66bc1a215032253c4fa9aa3df2 # {"$imagepolicy": "flux-system:fluxer-messages:digest"}
   - name: docker.io/library/busybox
     newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
     digest: sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2026.1026.202726 # {"$imagepolicy": "flux-system:fluxer-messages:tag"}
+      app.kubernetes.io/version: 2026.1027.190820 # {"$imagepolicy": "flux-system:fluxer-messages:tag"}
