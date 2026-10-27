@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: fluxer
+resources:
+  - secret.yaml
+  - configmap.yaml
+  - service-headless.yaml
+  - service.yaml
+  - statefulset.yaml
+images:
+  - name: docker.io/library/nats
+    newTag: 2.14.8-alpine # {"$imagepolicy": "flux-system:nats:tag"}
+    digest: sha256:fce5fbf8b29ee0baa790e67bcd4abafebdd97363aa025f7d46a17489df002e30 # {"$imagepolicy": "flux-system:nats:digest"}
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: fluxer
+      app.kubernetes.io/version: 2.14.8-alpine # {"$imagepolicy": "flux-system:nats:tag"}

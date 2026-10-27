@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: fluxer
+resources:
+  - secret.yaml
+  - configmap.yaml
+  - deployment.yaml
+  - service-shard.yaml
+  - service.yaml
+  - statefulset.yaml
+images:
+  - name: ghcr.io/fluxerapp/fluxer-unfurl
+    newTag: 2026.1026.150455 # {"$imagepolicy": "flux-system:fluxer-unfurl:tag"}
+    digest: sha256:2c49b8103df56d5b7096711887e44c3a1bb69f61b06763be0e73c3dee5bd20bc # {"$imagepolicy": "flux-system:fluxer-unfurl:digest"}
+  - name: docker.io/library/busybox
+    newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
+    digest: sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e # {"$imagepolicy": "flux-system:busybox:digest"}
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: fluxer
+      app.kubernetes.io/version: 2026.1026.150455 # {"$imagepolicy": "flux-system:fluxer-unfurl:tag"}

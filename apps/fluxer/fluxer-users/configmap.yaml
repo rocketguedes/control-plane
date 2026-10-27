@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluxer-users
+  labels:
+    app.kubernetes.io/name: fluxer-users
+    app.kubernetes.io/instance: fluxer
+    app.kubernetes.io/component: users
+data:
+  FLUXER_DATABASE_BACKEND: postgres
+  FLUXER_ENV: production
+  FLUXER_POSTGRES_DATABASE: fluxer
+  FLUXER_POSTGRES_HOST: postgresql-rw.postgresql.svc.cluster.local
+  FLUXER_POSTGRES_MAX_CONNECTIONS: '20'
+  FLUXER_POSTGRES_PORT: '5432'
+  FLUXER_POSTGRES_SSL: 'false'
+  FLUXER_POSTGRES_USERNAME: fluxer
+  FLUXER_SVC_NAME: users
+  FLUXER_SVC_NATS_URL: nats://nats:4222
+  FLUXER_SVC_PORT: '8090'
+  FLUXER_SVC_SHARD_COUNT: '1'

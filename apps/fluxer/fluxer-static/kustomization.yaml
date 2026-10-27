@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: fluxer
+resources:
+  - deployment.yaml
+  - service.yaml
+images:
+  - name: ghcr.io/fluxerapp/fluxer-static
+    newTag: 2026.1026.152021 # {"$imagepolicy": "flux-system:fluxer-static:tag"}
+    digest: sha256:11e90c883be30eb26f980aa90644f16ae1468f0f802491f260d7a995323a1775 # {"$imagepolicy": "flux-system:fluxer-static:digest"}
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: fluxer
+      app.kubernetes.io/version: 2026.1026.152021 # {"$imagepolicy": "flux-system:fluxer-static:tag"}

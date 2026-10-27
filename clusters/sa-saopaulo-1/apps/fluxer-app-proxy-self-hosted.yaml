@@ -1,0 +1,45 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: fluxer-app-proxy-self-hosted
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: fluxer-api
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  interval: 5m0s
+  timeout: 5m0s
+  path: ./apps/fluxer/fluxer-app-proxy-self-hosted
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  prune: true
+  wait: true
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-app-proxy-self-hosted
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-app-proxy-self-hosted
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-app-proxy-self-hosted
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"

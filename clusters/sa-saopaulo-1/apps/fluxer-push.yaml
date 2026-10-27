@@ -1,0 +1,45 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: fluxer-push
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: fluxer-nats
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  interval: 5m0s
+  timeout: 5m0s
+  path: ./apps/fluxer/fluxer-push
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  prune: true
+  wait: true
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: fluxer-push
+  namespace: flux-system
+spec:
+  image: ghcr.io/fluxerapp/fluxer-push
+  interval: 1h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: fluxer-push
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: fluxer-push
+  filterTags:
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=2026.0.0"

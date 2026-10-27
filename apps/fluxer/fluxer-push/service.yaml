@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: push
+  labels:
+    app.kubernetes.io/name: push
+    app.kubernetes.io/instance: fluxer
+    app.kubernetes.io/component: push
+spec:
+  selector:
+    app.kubernetes.io/name: push
+    app.kubernetes.io/instance: fluxer
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8126
+      targetPort: http

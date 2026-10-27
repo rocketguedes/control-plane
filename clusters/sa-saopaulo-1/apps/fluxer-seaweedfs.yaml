@@ -1,0 +1,21 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: fluxer-seaweedfs
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: namespaces
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  interval: 5m0s
+  timeout: 5m0s
+  path: ./apps/fluxer/seaweedfs
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  prune: true
+  wait: true

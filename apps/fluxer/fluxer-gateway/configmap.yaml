@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluxer-gateway
+  labels:
+    app.kubernetes.io/name: fluxer-gateway
+    app.kubernetes.io/instance: fluxer
+    app.kubernetes.io/component: gateway
+data:
+  FLUXER_BASE_DOMAIN: chat.guedescloud.com.br
+  FLUXER_ENV: production
+  FLUXER_ERLANG_DIST_PORT: '8081'
+  FLUXER_GATEWAY_CLUSTER_DISCOVERY_DNS_NAME: gateway-headless.fluxer.svc.cluster.local
+  FLUXER_GATEWAY_CLUSTER_DISCOVERY_NODE_BASENAME: fluxer_gateway
+  FLUXER_GATEWAY_CLUSTER_ENABLED: 'true'
+  FLUXER_GATEWAY_MEDIA_PROXY_ENDPOINT: https://chat.guedescloud.com.br/media
+  FLUXER_GATEWAY_PORT: '8080'
+  FLUXER_GATEWAY_ROLE: all
+  FLUXER_GATEWAY_STATIC_CDN_ENDPOINT: https://chat.guedescloud.com.br
+  FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+  FLUXER_NATS_URL: nats://nats:4222
+  FLUXER_PUBLIC_PORT: '443'
+  FLUXER_PUBLIC_SCHEME: https
+  FLUXER_SELF_HOSTED: 'true'
+  FLUXER_TRUST_CLIENT_IP_HEADER: 'true'

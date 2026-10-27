@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: meilisearch
+  labels:
+    app.kubernetes.io/name: meilisearch
+    app.kubernetes.io/instance: fluxer
+    app.kubernetes.io/component: search
+spec:
+  selector:
+    app.kubernetes.io/name: meilisearch
+    app.kubernetes.io/instance: fluxer
+  ports:
+    - name: http
+      protocol: TCP
+      port: 7700
+      targetPort: http

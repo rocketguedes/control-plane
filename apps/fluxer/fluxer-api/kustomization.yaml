@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: fluxer
+resources:
+  - secret.yaml
+  - configmap.yaml
+  - deployment-worker.yaml
+  - deployment.yaml
+  - service.yaml
+images:
+  - name: ghcr.io/fluxerapp/fluxer-api
+    newTag: 2026.1026.151750 # {"$imagepolicy": "flux-system:fluxer-api:tag"}
+    digest: sha256:57ab0af50711fd00a6b132b97863549c48db331a426b4e46aa8605b19eefa579 # {"$imagepolicy": "flux-system:fluxer-api:digest"}
+  - name: docker.io/library/busybox
+    newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
+    digest: sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e # {"$imagepolicy": "flux-system:busybox:digest"}
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: fluxer
+      app.kubernetes.io/version: 2026.1026.151750 # {"$imagepolicy": "flux-system:fluxer-api:tag"}

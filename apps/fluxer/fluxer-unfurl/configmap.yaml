@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluxer-unfurl
+  labels:
+    app.kubernetes.io/name: fluxer-unfurl
+    app.kubernetes.io/instance: fluxer
+    app.kubernetes.io/component: unfurl
+data:
+  FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+  FLUXER_MEDIA_PROXY_PUBLIC_ENDPOINT: https://chat.guedescloud.com.br/media
+  FLUXER_SELF_HOSTED: 'true'
+  FLUXER_SVC_NAME: unfurl
+  FLUXER_SVC_NATS_URL: nats://nats:4222
+  FLUXER_SVC_PORT: '8090'
+  FLUXER_SVC_SHARD_COUNT: '1'

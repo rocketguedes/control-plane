@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  labels:
+    app.kubernetes.io/name: worker
+    app.kubernetes.io/instance: fluxer
+    app.kubernetes.io/component: worker
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: worker
+      app.kubernetes.io/instance: fluxer
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: worker
+        app.kubernetes.io/instance: fluxer
+        app.kubernetes.io/component: worker
+    spec:
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      securityContext:
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        fsGroupChangePolicy: OnRootMismatch
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: wait-for-dependencies
+          image: docker.io/library/busybox
+          command:
+            - sh
+            - -c
+            - for t in nats:4222 seaweedfs:8333 valkey:6379 gifs:8090 gifs-shard:8090 messages:8090 messages-shard:8090 snowflakes:8090 snowflakes-shard:8090 unfurl:8090 unfurl-shard:8090 users:8090 users-shard:8090; do until nc -z -w 2 ${t%:*} ${t##*:}; do echo waiting for $t; sleep 2; done; done
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 50m
+              memory: 32Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+      containers:
+        - name: worker
+          image: ghcr.io/fluxerapp/fluxer-api
+          command:
+            - node
+            - dist/WorkerEntrypoint.js
+          envFrom:
+            - configMapRef:
+                name: fluxer-api
+            - secretRef:
+                name: fluxer-api
+          env:
+            - name: FLUXER_API_WORKER_MODE
+              value: all_lanes
+            - name: FLUXER_API_WORKER_ENABLE_CRON_SCHEDULER
+              value: 'true'
+            - name: FLUXER_KV_URL
+              value: redis://:$(FLUXER_VALKEY_PASSWORD)@valkey:6379/0
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            requests:
+              cpu: 100m
+              memory: 768Mi
+            limits:
+              cpu: 1000m
+              memory: 2560Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - const age=Date.now()-require('node:fs').statSync('/tmp/fluxer-worker-heartbeat').mtimeMs;if(age>30000){console.error('worker heartbeat is '+Math.round(age)+'ms old');process.exit(1)}
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+      volumes:
+        - name: tmp
+          emptyDir: {}
+  strategy:
+    type: Recreate
