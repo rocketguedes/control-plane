@@ -19,6 +19,8 @@ definitions:
     immich_quota:
       expression: '"admin" in groups ? 50 : 15'
 authentication_backend:
+  password_reset:
+    custom_url: "https://id.guedescloud.com.br"
   refresh_interval: "5 minutes"
   ldap:
     address: "ldap://lldap-service.lldap.svc.cluster.local:3890"
