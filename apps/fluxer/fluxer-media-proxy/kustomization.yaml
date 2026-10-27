@@ -8,12 +8,12 @@ resources:
   - service.yaml
 images:
   - name: ghcr.io/fluxerapp/fluxer-media-proxy
-    newTag: 2026.1026.150524 # {"$imagepolicy": "flux-system:fluxer-media-proxy:tag"}
-    digest: sha256:b6b8a253a7fe446013c3f0fb71794f41812aa1b74f8ac06e2e4d58ad09732c13 # {"$imagepolicy": "flux-system:fluxer-media-proxy:digest"}
+    newTag: 2026.1026.202726 # {"$imagepolicy": "flux-system:fluxer-media-proxy:tag"}
+    digest: sha256:94b3413febd3c9e93aa300bc42d6f306f2490ac675f29e0ef812d49f1cd59cfc # {"$imagepolicy": "flux-system:fluxer-media-proxy:digest"}
   - name: docker.io/library/busybox
     newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
     digest: sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2026.1026.150524 # {"$imagepolicy": "flux-system:fluxer-media-proxy:tag"}
+      app.kubernetes.io/version: 2026.1026.202726 # {"$imagepolicy": "flux-system:fluxer-media-proxy:tag"}
