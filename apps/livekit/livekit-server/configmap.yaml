@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/instance: livekit
     app.kubernetes.io/component: server
 data:
+  LIVEKIT_AUDIO_ACTIVE_RED_ENCODING: "true"
   LIVEKIT_CONFIG: |
     webhook:
       urls:
@@ -14,6 +15,8 @@ data:
   LIVEKIT_LOGGING_LEVEL: info
   LIVEKIT_PORT: "7880"
   LIVEKIT_PROMETHEUS_PORT: "6789"
+  LIVEKIT_RTC_PACKET_BUFFER_SIZE_AUDIO: "400"
+  LIVEKIT_RTC_PACKET_BUFFER_SIZE_VIDEO: "1500"
   LIVEKIT_RTC_TCP_PORT: "7881"
   LIVEKIT_RTC_UDP_PORT: "7882"
   LIVEKIT_RTC_USE_EXTERNAL_IP: "true"
