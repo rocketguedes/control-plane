@@ -7,6 +7,10 @@ metadata:
     app.kubernetes.io/instance: livekit
     app.kubernetes.io/component: server
 data:
+  LIVEKIT_CONFIG: |
+    webhook:
+      urls:
+        - http://api.fluxer.svc.cluster.local:8080/webhooks/livekit
   LIVEKIT_LOGGING_LEVEL: info
   LIVEKIT_PORT: "7880"
   LIVEKIT_PROMETHEUS_PORT: "6789"
