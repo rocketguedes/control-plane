@@ -9,9 +9,9 @@ resources:
   - serviceaccount.yaml
 images:
   - name: docker.io/ollama/ollama
-    newTag: 0.40.12 # {"$imagepolicy": "flux-system:ollama:tag"}
-    digest: sha256:20d1bbfbabe1c97ba4b16301f08a20d8484bcf77047742a3cb71c613d8e12d0b # {"$imagepolicy": "flux-system:ollama:digest"}
+    newTag: 0.40.13 # {"$imagepolicy": "flux-system:ollama:tag"}
+    digest: sha256:b2f0122c476bc9fe7ce679d8bb4bd555351e25e2554eefb156f61cb0a89cf429 # {"$imagepolicy": "flux-system:ollama:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: ollama
-      app.kubernetes.io/version: 0.40.12 # {"$imagepolicy": "flux-system:ollama:tag"}
+      app.kubernetes.io/version: 0.40.13 # {"$imagepolicy": "flux-system:ollama:tag"}
