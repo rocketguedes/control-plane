@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/component: nextcloud
 data:
   APACHE_BODY_LIMIT: "0"
-  APACHE_DISABLE_REWRITE_IP: "1"
   DEFAULT_PHONE_REGION: BR
   NEXTCLOUD_ADMIN_USER: admin
   NEXTCLOUD_INIT_HTACCESS: "true"
