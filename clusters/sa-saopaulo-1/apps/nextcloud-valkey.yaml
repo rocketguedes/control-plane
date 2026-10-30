@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: nextcloud-valkey
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: namespaces
+  interval: 5m0s
+  timeout: 2m0s
+  path: ./apps/nextcloud/valkey
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  prune: true
+  wait: true
+

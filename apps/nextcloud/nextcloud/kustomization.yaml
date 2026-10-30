@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: nextcloud
+resources:
+  - configmap.yaml
+  - deployment.yaml
+  - httproute.yaml
+  - persistentvolumeclaim.yaml
+  - secret.yaml
+  - service.yaml
+  - serviceaccount.yaml
+configMapGenerator:
+  - name: nextcloud-hooks
+    files:
+      - setup.sh
+images:
+  - name: docker.io/library/nextcloud
+    newTag: 35.0.2-apache # {"$imagepolicy": "flux-system:nextcloud:tag"}
+    digest: sha256:e0b1a2af52c82c07b7a0e8e59878bd8769e704447734d5d238a836982f51b9c8 # {"$imagepolicy": "flux-system:nextcloud:digest"}
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: nextcloud
+      app.kubernetes.io/version: 35.0.2-apache # {"$imagepolicy": "flux-system:nextcloud:tag"}
