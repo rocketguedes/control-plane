@@ -26,6 +26,7 @@ spec:
       serviceAccountName: collabora
       automountServiceAccountToken: false
       enableServiceLinks: false
+      terminationGracePeriodSeconds: 60
       containers:
         - name: collabora
           image: docker.io/collabora/code
@@ -43,11 +44,11 @@ spec:
               mountPath: /tmp
           resources:
             requests:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 30m
+              memory: 640Mi
             limits:
               cpu: 1000m
-              memory: 1Gi
+              memory: 2Gi
           securityContext:
             capabilities:
               add:
