@@ -80,8 +80,8 @@ spec:
               mountPath: /tmp
           resources:
             requests:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 40m
+              memory: 320Mi
             limits:
               cpu: 1000m
               memory: 1Gi
@@ -147,11 +147,11 @@ spec:
               mountPath: /tmp
           resources:
             requests:
-              cpu: 30m
+              cpu: 10m
               memory: 64Mi
             limits:
               cpu: 250m
-              memory: 256Mi
+              memory: 128Mi
       volumes:
         - name: nextcloud
           persistentVolumeClaim:
