@@ -76,6 +76,8 @@ spec:
               subPath: themes
             - name: hooks
               mountPath: /docker-entrypoint-hooks.d/before-starting
+            - name: tmp
+              mountPath: /tmp
           resources:
             requests:
               cpu: 100m
@@ -141,6 +143,8 @@ spec:
             - name: nextcloud
               mountPath: /var/www/html/themes
               subPath: themes
+            - name: tmp
+              mountPath: /tmp
           resources:
             requests:
               cpu: 30m
@@ -156,5 +160,7 @@ spec:
           configMap:
             defaultMode: 493
             name: nextcloud-hooks
+        - name: tmp
+          emptyDir: {}
   strategy:
     type: Recreate
