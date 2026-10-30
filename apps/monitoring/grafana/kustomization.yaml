@@ -14,6 +14,7 @@ configMapGenerator:
     files:
       - dashboards/10229_rev57.json
       - dashboards/14205_rev1.json
+      - dashboards/collabora-overview.json
       - dashboards/ntfy-grafana.json
   - name: provisioning-alerting
     files:
