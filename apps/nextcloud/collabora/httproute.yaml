@@ -17,6 +17,23 @@ spec:
     - matches:
         - path:
             type: PathPrefix
+            value: /cool/getMetrics
+        - path:
+            type: PathPrefix
+            value: /cool/adminws
+        - path:
+            type: PathPrefix
+            value: /browser/dist/admin
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /
+            statusCode: 302
+    - matches:
+        - path:
+            type: PathPrefix
             value: /
       backendRefs:
         - name: collabora
