@@ -119,6 +119,20 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
+    - name: https-drive
+      protocol: HTTPS
+      port: 443
+      hostname: drive.guedescloud.com.br
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: wildcard-guedescloud-com-br-tls
+            namespace: kube-system
+
     - name: https-id
       protocol: HTTPS
       port: 443
@@ -179,6 +193,20 @@ spec:
       protocol: HTTPS
       port: 443
       hostname: notify.guedescloud.com.br
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: wildcard-guedescloud-com-br-tls
+            namespace: kube-system
+
+    - name: https-office
+      protocol: HTTPS
+      port: 443
+      hostname: office.guedescloud.com.br
       allowedRoutes:
         namespaces:
           from: All
