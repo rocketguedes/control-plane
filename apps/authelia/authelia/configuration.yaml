@@ -210,5 +210,25 @@ identity_providers:
         consent_mode: "implicit"
         require_pkce: true
         token_endpoint_auth_method: "client_secret_post"
-
+      - client_id: "nextcloud"
+        client_name: "Nextcloud"
+        client_secret: '{{ secret "/secrets/IDENTITY_PROVIDERS_OIDC_NEXTCLOUD_CLIENT_SECRET" }}'
+        public: false
+        redirect_uris:
+          - "https://drive.guedescloud.com.br/apps/user_oidc/code"
+        scopes:
+          - "openid"
+          - "profile"
+          - "email"
+          - "groups"
+        claims_policy: "default"
+        grant_types:
+          - "authorization_code"
+          - "refresh_token"
+        response_types:
+          - "code"
+        authorization_policy: "one_factor"
+        consent_mode: "implicit"
+        require_pkce: true
+        token_endpoint_auth_method: "client_secret_post"
 ...
