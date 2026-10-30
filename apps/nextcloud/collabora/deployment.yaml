@@ -22,6 +22,10 @@ spec:
         app.kubernetes.io/name: collabora
         app.kubernetes.io/instance: collabora
         app.kubernetes.io/component: collabora
+      annotations:
+        prometheus.io/path: /cool/getMetrics
+        prometheus.io/port: "9980"
+        prometheus.io/scrape: "true"
     spec:
       serviceAccountName: collabora
       automountServiceAccountToken: false
@@ -32,8 +36,6 @@ spec:
           image: docker.io/collabora/code
           envFrom:
             - configMapRef:
-                name: collabora
-            - secretRef:
                 name: collabora
           ports:
             - name: http
