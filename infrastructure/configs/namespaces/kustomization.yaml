@@ -13,6 +13,7 @@ resources:
   - lldap.yaml
   - monitoring.yaml
   - navidrome.yaml
+  - nextcloud.yaml
   - ntfy.yaml
   - ollama.yaml
   - postgresql.yaml
