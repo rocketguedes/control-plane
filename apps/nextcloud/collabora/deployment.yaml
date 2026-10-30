@@ -79,5 +79,3 @@ spec:
       volumes:
         - name: tmp
           emptyDir: {}
-  strategy:
-    type: Recreate
