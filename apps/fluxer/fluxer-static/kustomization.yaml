@@ -6,9 +6,9 @@ resources:
   - service.yaml
 images:
   - name: ghcr.io/fluxerapp/fluxer-static
-    newTag: 2026.1031.164754 # {"$imagepolicy": "flux-system:fluxer-static:tag"}
-    digest: sha256:573fced360941900dfb03c63aa936fdf5dc37c687c2a82c4ea6e363c1f3ab928 # {"$imagepolicy": "flux-system:fluxer-static:digest"}
+    newTag: 2026.1031.201303 # {"$imagepolicy": "flux-system:fluxer-static:tag"}
+    digest: sha256:4197df76171abe764234f576c275c8bb6befd571abd721ccefd75cb37e52a389 # {"$imagepolicy": "flux-system:fluxer-static:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2026.1031.164754 # {"$imagepolicy": "flux-system:fluxer-static:tag"}
+      app.kubernetes.io/version: 2026.1031.201303 # {"$imagepolicy": "flux-system:fluxer-static:tag"}
