@@ -5,6 +5,7 @@ resources:
   - clusterrole.yaml
   - clusterrolebinding.yaml
   - configmap.yaml
+  - secret.yaml
   - service-prometheus.yaml
   - service-victoria-metrics.yaml
   - serviceaccount.yaml
