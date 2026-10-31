@@ -55,6 +55,9 @@ spec:
               mountPath: /storage
             - name: scrapeconfig
               mountPath: /scrapeconfig
+            - name: secrets
+              mountPath: /etc/vm/secrets
+              readOnly: true
           resources:
             requests:
               cpu: 50m
@@ -95,6 +98,9 @@ spec:
         - name: scrapeconfig
           configMap:
             name: victoria-metrics-single-server-scrapeconfig
+        - name: secrets
+          secret:
+            secretName: victoria-metrics-single-server
   updateStrategy: {}
   volumeClaimTemplates:
     - apiVersion: v1
