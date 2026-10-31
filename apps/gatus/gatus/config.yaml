@@ -82,3 +82,17 @@ endpoints:
       - "[BODY] == pong"
     alerts:
       - type: ntfy
+
+  - name: hytale-community
+    group: games
+    url: "https://gamesnolinux.com.br:5523/ApexHosting/PrometheusExporter/metrics"
+    interval: 1m
+    client:
+      insecure: true
+    headers:
+      Authorization: "${HYTALE_COMMUNITY_AUTH_HEADER}"
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY] == pat(*hytale_players_online*)"
+    alerts:
+      - type: ntfy
