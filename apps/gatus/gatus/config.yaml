@@ -22,6 +22,26 @@ alerting:
       failure-threshold: 3
       send-on-resolved: true
 
+  custom:
+    url: "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage"
+    method: "POST"
+    headers:
+      Content-Type: "application/json"
+    placeholders:
+      ALERT_TRIGGERED_OR_RESOLVED:
+        TRIGGERED: '🚨 *Servidor Hytale inacessível!*\n@CristianoFurtado @Luc4sM0ur4 @IarleMozaga @nwildner @leanguedes\nO servidor não está respondendo às checagens externas.\n\n*Motivo:* '
+        RESOLVED: '✅ *Comunicação com o servidor Hytale restabelecida!*\nO serviço voltou a responder e as métricas foram normalizadas.'
+    body: |
+      {
+        "chat_id": "${HYTALE_COMMUNITY_TELEGRAM_CHAT_ID}",
+        "text": "[ALERT_TRIGGERED_OR_RESOLVED][RESULT_ERRORS]",
+        "parse_mode": "MARKDOWN"
+      }
+    default-alert:
+      failure-threshold: 3
+      success-threshold: 3
+      send-on-resolved: true
+
 endpoints:
   - name: headscale
     group: core
@@ -95,7 +115,7 @@ endpoints:
   - name: hytale-community
     group: games
     url: "https://gamesnolinux.com.br:5523/ApexHosting/PrometheusExporter/metrics"
-    interval: 1m
+    interval: 10s
     client:
       insecure: true
     headers:
@@ -105,3 +125,4 @@ endpoints:
       - "[BODY] == pat(*hytale_players_online*)"
     alerts:
       - type: ntfy
+      - type: custom
