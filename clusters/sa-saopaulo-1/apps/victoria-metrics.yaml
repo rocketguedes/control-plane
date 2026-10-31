@@ -5,6 +5,10 @@ metadata:
   name: victoria-metrics
   namespace: flux-system
 spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   dependsOn:
     - name: cilium
     - name: namespaces
