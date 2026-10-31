@@ -6,6 +6,7 @@ resources:
   - cert-manager.yaml
   - feishin.yaml
   - fluxer.yaml
+  - gatus.yaml
   - headlamp.yaml
   - headscale.yaml
   - immich.yaml
