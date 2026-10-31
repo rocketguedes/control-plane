@@ -1,0 +1,84 @@
+storage:
+  type: postgres
+  path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql-rw.postgresql.svc.cluster.local:5432/${POSTGRES_DB}?sslmode=disable"
+
+metrics: true
+
+alerting:
+  ntfy:
+    url: "http://ntfy-svc.ntfy.svc.cluster.local:8093"
+    topic: "status-alerts"
+    token: "${NTFY_TOKEN}"
+    default-alert:
+      failure-threshold: 3
+      send-on-resolved: true
+
+endpoints:
+  - name: headscale
+    group: core
+    url: "https://headscale.headscale.svc.cluster.local:8080/health"
+    interval: 30s
+    client:
+      insecure: true
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY].status == pass"
+    alerts:
+      - type: ntfy
+
+  - name: authelia
+    group: core
+    url: "http://authelia.authelia.svc.cluster.local/api/health"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: ntfy
+
+  - name: vaultwarden
+    group: core
+    url: "http://vaultwarden.vaultwarden.svc.cluster.local:8080/alive"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: ntfy
+
+  - name: livekit
+    group: core
+    url: "http://livekit-server.livekit.svc.cluster.local/"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY] == OK"
+    alerts:
+      - type: ntfy
+
+  - name: fluxer-api
+    group: apps
+    url: "http://api.fluxer.svc.cluster.local:8080/_health"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY] == OK"
+    alerts:
+      - type: ntfy
+
+  - name: navidrome
+    group: apps
+    url: "http://navidrome.navidrome.svc.cluster.local:4533/ping"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: ntfy
+
+  - name: immich-machine-learning
+    group: media
+    url: "http://immich-machine-learning.immich.svc.cluster.local:3003/ping"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY] == pong"
+    alerts:
+      - type: ntfy

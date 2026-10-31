@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: gatus
+resources:
+  - configmap.yaml
+  - deployment.yaml
+  - httproute.yaml
+  - secret.yaml
+  - service.yaml
+  - serviceaccount.yaml
+configMapGenerator:
+  - name: gatus-config
+    files:
+      - config.yaml
+images:
+  - name: ghcr.io/twin/gatus
+    newTag: v5.38.0 # {"$imagepolicy": "flux-system:gatus:tag"}
+    digest: sha256:085ed63da963728965d00a3c78aa6167e3bf135218485b893201758e079e8415 # {"$imagepolicy": "flux-system:gatus:digest"}
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: gatus
+      app.kubernetes.io/version: v5.38.0 # {"$imagepolicy": "flux-system:gatus:tag"}
+
