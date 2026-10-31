@@ -6,6 +6,13 @@ storage:
 
 metrics: true
 
+ui:
+  title: "Health Dashboard"
+  custom-css: |
+    header, footer, #social {
+      display: none !important;
+    }
+
 alerting:
   ntfy:
     url: "http://ntfy-svc.ntfy.svc.cluster.local:8093"
