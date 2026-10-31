@@ -138,7 +138,7 @@
               }
             ]
           },
-          "unit": "sps"
+          "unit": "suffix: TPS"
         },
         "overrides": []
       },
@@ -450,7 +450,7 @@
               }
             ]
           },
-          "unit": "sps"
+          "unit": "suffix: TPS"
         },
         "overrides": [
           {
@@ -550,7 +550,9 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -803,7 +805,9 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -944,7 +948,9 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1008,7 +1014,9 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1030,7 +1038,7 @@
     },
     {
       "id": 15,
-      "title": "Process CPU Usage %",
+      "title": "Process CPU Usage (Cores)",
       "type": "timeseries",
       "datasource": {
         "type": "prometheus",
@@ -1048,8 +1056,8 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "rate(process_cpu_seconds_total{server=\"community\"}[1m]) * 100",
-          "legendFormat": "CPU Usage %",
+          "expr": "rate(process_cpu_seconds_total{server=\"community\"}[1m])",
+          "legendFormat": "CPU Cores",
           "refId": "A"
         }
       ],
@@ -1064,6 +1072,7 @@
             "lineInterpolation": "smooth",
             "lineWidth": 2
           },
+          "decimals": 2,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1073,15 +1082,15 @@
               },
               {
                 "color": "yellow",
-                "value": 75
+                "value": 3
               },
               {
                 "color": "red",
-                "value": 90
+                "value": 6
               }
             ]
           },
-          "unit": "percent"
+          "unit": "short"
         },
         "overrides": []
       },
@@ -1184,7 +1193,9 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1274,7 +1285,9 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1370,7 +1383,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "jvm_threads_deadlocked{server=\"community\"} or vector(0)",
+          "expr": "sum(jvm_threads_deadlocked{server=\"community\"}) or vector(0)",
           "instant": true,
           "legendFormat": "Deadlocks",
           "refId": "A"
