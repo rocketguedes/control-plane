@@ -10,12 +10,12 @@ resources:
   - statefulset.yaml
 images:
   - name: ghcr.io/fluxerapp/fluxer-gifs
-    newTag: 2026.1031.143427 # {"$imagepolicy": "flux-system:fluxer-gifs:tag"}
-    digest: sha256:6f03564549266d8506cbd5f65ecd596de5e6035a45b6d95f6cb32970e5315d9f # {"$imagepolicy": "flux-system:fluxer-gifs:digest"}
+    newTag: 2026.1031.154530 # {"$imagepolicy": "flux-system:fluxer-gifs:tag"}
+    digest: sha256:8390e09ec9751c5f48160f25ec663ad8df9f26982a5cb9014aaf37c7ed1f4897 # {"$imagepolicy": "flux-system:fluxer-gifs:digest"}
   - name: docker.io/library/busybox
     newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
     digest: sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2026.1031.143427 # {"$imagepolicy": "flux-system:fluxer-gifs:tag"}
+      app.kubernetes.io/version: 2026.1031.154530 # {"$imagepolicy": "flux-system:fluxer-gifs:tag"}
