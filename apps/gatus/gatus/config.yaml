@@ -1,6 +1,8 @@
 storage:
   type: postgres
   path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql-rw.postgresql.svc.cluster.local:5432/${POSTGRES_DB}?sslmode=disable"
+  maximum-number-of-results: 720
+  caching: true
 
 metrics: true
 
