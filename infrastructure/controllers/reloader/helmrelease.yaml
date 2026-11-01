@@ -22,3 +22,9 @@ spec:
   values:
     reloader:
       reloadStrategy: annotations
+      deployment:
+        pod:
+          annotations:
+            prometheus.io/path: /metrics
+            prometheus.io/port: "9090"
+            prometheus.io/scrape: "true"
