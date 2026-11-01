@@ -21,3 +21,4 @@ resources:
   - sharkord.yaml
   - soju.yaml
   - vaultwarden.yaml
+  - vector.yaml
