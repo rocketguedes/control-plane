@@ -10,12 +10,12 @@ resources:
   - statefulset.yaml
 images:
   - name: ghcr.io/fluxerapp/fluxer-snowflakes
-    newTag: 2026.1101.5233 # {"$imagepolicy": "flux-system:fluxer-snowflakes:tag"}
-    digest: sha256:3937c385920f17c65b9b331235e3aff8016a25615d4fbcf7105efbce9d6c969d # {"$imagepolicy": "flux-system:fluxer-snowflakes:digest"}
+    newTag: 2026.1101.20314 # {"$imagepolicy": "flux-system:fluxer-snowflakes:tag"}
+    digest: sha256:553b9a45d6e6bdf5bfe6b9ae3f6a030359a392c390bb79a79636aceebb128a39 # {"$imagepolicy": "flux-system:fluxer-snowflakes:digest"}
   - name: docker.io/library/busybox
     newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
     digest: sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2026.1101.5233 # {"$imagepolicy": "flux-system:fluxer-snowflakes:tag"}
+      app.kubernetes.io/version: 2026.1101.20314 # {"$imagepolicy": "flux-system:fluxer-snowflakes:tag"}
