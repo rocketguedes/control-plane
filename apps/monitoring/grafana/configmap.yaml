@@ -36,6 +36,7 @@ data:
   GF_DATABASE_USER: grafana
   GF_HELP_ENABLED: "false"
   GF_NEWS_NEWS_FEED_ENABLED: "false"
+  GF_PLUGINS_PREINSTALL: victoriametrics-logs-datasource
   GF_SECURITY_COOKIE_SECURE: "true"
   GF_SECURITY_DISABLE_GRAVATAR: "true"
   GF_SERVER_DOMAIN: monitoring.guedescloud.com.br
