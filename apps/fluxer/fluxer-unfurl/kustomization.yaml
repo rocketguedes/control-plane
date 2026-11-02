@@ -10,12 +10,12 @@ resources:
   - statefulset.yaml
 images:
   - name: ghcr.io/fluxerapp/fluxer-unfurl
-    newTag: 2026.1102.120349 # {"$imagepolicy": "flux-system:fluxer-unfurl:tag"}
-    digest: sha256:85bff7765c0f6b8f7dca8b927eafa0d59755b595d8eb2a6d65dbaf5a65f4f325 # {"$imagepolicy": "flux-system:fluxer-unfurl:digest"}
+    newTag: 2026.1102.161517 # {"$imagepolicy": "flux-system:fluxer-unfurl:tag"}
+    digest: sha256:520de7de4c13a7c1c087fa2f487c49f1723f28756ccbbff8da43a73741932fb8 # {"$imagepolicy": "flux-system:fluxer-unfurl:digest"}
   - name: docker.io/library/busybox
     newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
     digest: sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2026.1102.120349 # {"$imagepolicy": "flux-system:fluxer-unfurl:tag"}
+      app.kubernetes.io/version: 2026.1102.161517 # {"$imagepolicy": "flux-system:fluxer-unfurl:tag"}
