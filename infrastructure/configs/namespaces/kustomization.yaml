@@ -12,6 +12,7 @@ resources:
   - immich.yaml
   - livekit.yaml
   - lldap.yaml
+  - microbin.yaml
   - monitoring.yaml
   - navidrome.yaml
   - ntfy.yaml
