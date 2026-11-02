@@ -10,3 +10,14 @@ datasources:
     jsonData:
       httpMethod: POST
     editable: false
+  - name: VictoriaLogs
+    uid: victorialogs
+    type: victoriametrics-logs-datasource
+    access: proxy
+    url: http://victoria-logs.monitoring.svc.cluster.local:9428
+    basicAuth: false
+    jsonData:
+      multitenancyHeaders:
+        AccountID: "0"
+        ProjectID: "0"
+    editable: false
