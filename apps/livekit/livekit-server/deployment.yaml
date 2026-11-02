@@ -43,9 +43,13 @@ spec:
       containers:
         - name: livekit-server
           image: docker.io/livekit/livekit-server
+          env:
+            - name: LIVEKIT_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  name: livekit-server
+                  key: config.yaml
           envFrom:
-            - configMapRef:
-                name: livekit-server
             - secretRef:
                 name: livekit-server
           ports:
