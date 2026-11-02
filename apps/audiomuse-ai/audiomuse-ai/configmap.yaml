@@ -11,6 +11,7 @@ data:
   CLAP_OTHER_FEATURES_CACHE_DIR: /tmp
   ENABLE_PROXY_FIX: "true"
   FLASK_BUILTIN_HTTPS: "false"
+  HOME: /tmp
   IVF_DISK_CACHE_DIR: /tmp/ivf_cache
   LYRICS_ASR_ENABLE: "false"
   MEDIASERVER_TYPE: navidrome
