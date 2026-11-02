@@ -37,6 +37,7 @@ data:
   MICROBIN_PUBLIC_PATH: https://paste.guedescloud.com.br/
   MICROBIN_QR: "true"
   MICROBIN_READONLY: "false"
+  MICROBIN_SHORT_PATH: https://p.guedescloud.com.br/
   MICROBIN_SHOW_READ_STATS: "true"
   MICROBIN_THREADS: "1"
   MICROBIN_WIDE: "false"
