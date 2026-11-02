@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: monitoring
+resources:
+  - service.yaml
+  - serviceaccount.yaml
+  - statefulset.yaml
+images:
+  - name: docker.io/victoriametrics/victoria-logs
+    newTag: v1.53.0 # {"$imagepolicy": "flux-system:victoria-logs:tag"}
+    digest: sha256:251121fa882af99b95ba0c230a4a2f412ea602d2698c64a96c58dc9842bb755d # {"$imagepolicy": "flux-system:victoria-logs:digest"}
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: monitoring
+      app.kubernetes.io/version: v1.53.0 # {"$imagepolicy": "flux-system:victoria-logs:tag"}
