@@ -9,8 +9,8 @@ resources:
   - service.yaml
 images:
   - name: ghcr.io/fluxerapp/fluxer-api
-    newTag: 2026.1103.192058 # {"$imagepolicy": "flux-system:fluxer-api:tag"}
-    digest: sha256:90b122165dc23ab0e6d3e2c95d02320d941ab1bc1ad465e9e4e4b1289519ed1c # {"$imagepolicy": "flux-system:fluxer-api:digest"}
+    newTag: 2026.1103.211247 # {"$imagepolicy": "flux-system:fluxer-api:tag"}
+    digest: sha256:fe1f71397db116fc23be93c3c1730f7e35bae42e810c291f32f1199689bd33d3 # {"$imagepolicy": "flux-system:fluxer-api:digest"}
   - name: docker.io/library/busybox
     newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
     digest: sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e # {"$imagepolicy": "flux-system:busybox:digest"}
@@ -20,4 +20,4 @@ images:
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2026.1103.192058 # {"$imagepolicy": "flux-system:fluxer-api:tag"}
+      app.kubernetes.io/version: 2026.1103.211247 # {"$imagepolicy": "flux-system:fluxer-api:tag"}
