@@ -7,6 +7,9 @@ metadata:
     app.kubernetes.io/instance: feishin
 data:
   ANALYTICS_DISABLED: "true"
+  FS_AUTO_DJ_ENABLED: "true"
+  FS_AUTO_DJ_MODE: songs
+  FS_AUTO_DJ_SONG_STRATEGY: similar
   FS_GENERAL_EXTERNAL_LINKS: "false"
   FS_LYRICS_FETCH: "false"
   FS_LYRICS_SHOW_MATCH: "false"
