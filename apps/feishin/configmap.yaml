@@ -17,7 +17,7 @@ data:
   LEGACY_AUTHENTICATION: "false"
   PUBLIC_PATH: /
   SERVER_LOCK: "true"
-  SERVER_NAME: navidrome
+  SERVER_NAME: Guedes Cloud Music
   SERVER_TYPE: navidrome
   SERVER_URL: https://music.guedescloud.com.br
   TZ: America/Bahia
