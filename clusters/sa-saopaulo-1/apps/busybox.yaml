@@ -21,7 +21,8 @@ spec:
   filterTags:
     pattern: '^(?P<version>[0-9]+\.[0-9]+\.[0-9]+)$'
     extract: "$version"
-  digestReflectionPolicy: IfNotPresent
+  digestReflectionPolicy: Always
+  interval: 1h
   policy:
     semver:
       range: "1.37.x"

@@ -41,7 +41,8 @@ spec:
     name: fluxer-admin
   filterTags:
     pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
-  digestReflectionPolicy: IfNotPresent
+  digestReflectionPolicy: Always
+  interval: 1h
   policy:
     semver:
       range: ">=2026.0.0"

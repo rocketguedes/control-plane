@@ -43,7 +43,8 @@ spec:
   filterTags:
     pattern: '^(?P<version>[0-9]+\.[0-9]+\.[0-9]+)-slim$'
     extract: "$version"
-  digestReflectionPolicy: IfNotPresent
+  digestReflectionPolicy: Always
+  interval: 1h
   policy:
     semver:
       range: "13.x"

@@ -44,7 +44,8 @@ spec:
     name: authelia
   filterTags:
     pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
-  digestReflectionPolicy: IfNotPresent
+  digestReflectionPolicy: Always
+  interval: 1h
   policy:
     semver:
       range: "4.39.x"
