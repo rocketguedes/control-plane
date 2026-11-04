@@ -44,7 +44,7 @@ spec:
             - --httpListenAddr=:8428
             - --loggerFormat=json
             - --promscrape.config=/scrapeconfig/scrape.yml
-            - --retentionPeriod=1y
+            - --retentionPeriod=1M
             - --storageDataPath=/storage
           ports:
             - name: http
