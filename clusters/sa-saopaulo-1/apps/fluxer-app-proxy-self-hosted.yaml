@@ -27,7 +27,7 @@ metadata:
   namespace: flux-system
 spec:
   image: ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted
-  interval: 1h
+  interval: 168h
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
