@@ -84,7 +84,7 @@ spec:
 
               navidrome --nobanner plugin rescan
               navidrome --nobanner plugin enable apple-music
-              navidrome --nobanner plugin edit audiomuseai --config="{\"apiToken\": \"$AUDIOMUSE_API_TOKEN\", \"apiUrl\": \"$AUDIOMUSE_API_URL\"}"
+              navidrome --nobanner plugin edit audiomuseai --config="{\"apiToken\": \"$AUDIOMUSE_API_TOKEN\", \"apiUrl\": \"$AUDIOMUSE_API_URL\", \"instantMixSource\": \"dclap\"}"
               navidrome --nobanner plugin enable audiomuseai
           envFrom:
             - secretRef:
