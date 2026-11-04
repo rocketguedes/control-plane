@@ -28,6 +28,8 @@ metadata:
 spec:
   image: ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted
   interval: 168h
+  secretRef:
+    name: regcred
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy

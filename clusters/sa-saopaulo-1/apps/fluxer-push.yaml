@@ -28,6 +28,8 @@ metadata:
 spec:
   image: ghcr.io/fluxerapp/fluxer-push
   interval: 168h
+  secretRef:
+    name: regcred
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy

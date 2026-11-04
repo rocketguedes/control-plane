@@ -29,6 +29,8 @@ metadata:
 spec:
   image: docker.io/victoriametrics/victoria-metrics
   interval: 1h
+  secretRef:
+    name: regcred
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
