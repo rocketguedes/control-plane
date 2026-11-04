@@ -34,13 +34,7 @@ spec:
             value: /backgrounds
         - path:
             type: PathPrefix
-            value: /debug
-        - path:
-            type: PathPrefix
             value: /jellyfin
-        - path:
-            type: PathPrefix
-            value: /metrics
         - path:
             type: PathPrefix
             value: /rest
