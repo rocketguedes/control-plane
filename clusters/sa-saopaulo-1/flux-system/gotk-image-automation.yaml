@@ -18,27 +18,35 @@ spec:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
       messageTemplate: |
-        {{- $apps := list -}}
-        {{- $version := "" -}}
+        {{- $apps := dict -}}
         {{- range .Changed.Changes -}}
           {{- if or (hasSuffix ":tag" .Setter) (hasSuffix ":digest" .Setter) -}}
             {{- $appName := regexReplaceAll ".*:([^:]+):(tag|digest)" .Setter "$1" -}}
-            {{- if not (has $appName $apps) -}}
-              {{- $apps = append $apps $appName -}}
+            {{- if not (hasKey $apps $appName) -}}
+              {{- $_ := set $apps $appName "" -}}
             {{- end -}}
             {{- if hasSuffix ":tag" .Setter -}}
-              {{- $version = .NewValue -}}
+              {{- $_ := set $apps $appName .NewValue -}}
             {{- end -}}
           {{- end -}}
         {{- end -}}
         {{- if eq (len $apps) 1 -}}
-          {{- if eq $version "" -}}
-        chore({{ first $apps }}): update image digest
-          {{- else -}}
-        chore({{ first $apps }}): update version to {{ $version }}
+          {{- range $app, $ver := $apps -}}
+            {{- if eq $ver "" -}}
+        chore({{ $app }}): update image digest
+            {{- else -}}
+        chore({{ $app }}): update version to {{ $ver }}
+            {{- end -}}
           {{- end -}}
         {{- else -}}
         chore: update container images
+        {{ range $app, $ver := $apps }}
+        {{- if eq $ver "" }}
+        * chore({{ $app }}): update image digest
+        {{- else }}
+        * chore({{ $app }}): update version to {{ $ver }}
+        {{- end -}}
+        {{ end -}}
         {{- end -}}
     push:
       branch: master
