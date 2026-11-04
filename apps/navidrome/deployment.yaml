@@ -39,7 +39,7 @@ spec:
           type: RuntimeDefault
       initContainers:
         - name: navidrome-plugins-init
-          image: docker.io/deluan/navidrome
+          image: docker.io/navidrome/navidrome
           command:
             - /bin/sh
           args:
@@ -120,7 +120,7 @@ spec:
                 - ALL
       containers:
         - name: navidrome
-          image: docker.io/deluan/navidrome
+          image: docker.io/navidrome/navidrome
           envFrom:
             - secretRef:
                 name: navidrome
