@@ -5,3 +5,4 @@ resources:
 - gotk-image-automation.yaml
 - gotk-sync.yaml
 - notification
+- regcred.yaml
