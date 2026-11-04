@@ -12,9 +12,9 @@ configMapGenerator:
       - Caddyfile
 images:
   - name: docker.io/library/caddy
-    newTag: 2.11.7-alpine # {"$imagepolicy": "flux-system:caddy:tag"}
-    digest: sha256:eb4d35b7452d1ab6171fbdbe8d9275b2301dad6dad92115d91e19fb9b24d510f # {"$imagepolicy": "flux-system:caddy:digest"}
+    newTag: 2.11.8-alpine # {"$imagepolicy": "flux-system:caddy:tag"}
+    digest: sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb # {"$imagepolicy": "flux-system:caddy:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2.11.7-alpine # {"$imagepolicy": "flux-system:caddy:tag"}
+      app.kubernetes.io/version: 2.11.8-alpine # {"$imagepolicy": "flux-system:caddy:tag"}
