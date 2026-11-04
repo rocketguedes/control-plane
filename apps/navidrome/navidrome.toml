@@ -6,6 +6,7 @@ Agents = "audiomuseai,apple-music,deezer,lastfm,listenbrainz"
 BaseURL = "https://music.guedescloud.com.br"
 CoverArtPriority = "cover.*, folder.*, front.*, embedded"
 CoverArtQuality = 100
+DevAPIv1 = true
 EnableNaturalSorting = true
 EnableWebPEncoding = true
 EnforceNonRootUser = true
