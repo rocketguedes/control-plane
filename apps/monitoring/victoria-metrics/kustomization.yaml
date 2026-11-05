@@ -4,12 +4,15 @@ namespace: monitoring
 resources:
   - clusterrole.yaml
   - clusterrolebinding.yaml
-  - configmap.yaml
   - secret.yaml
   - service-prometheus.yaml
   - service-victoria-metrics.yaml
   - serviceaccount.yaml
   - statefulset.yaml
+configMapGenerator:
+  - name: victoria-metrics-single-server-scrapeconfig
+    files:
+      - prometheus.yml
 images:
   - name: docker.io/victoriametrics/victoria-metrics
     newTag: v1.155.0 # {"$imagepolicy": "flux-system:victoria-metrics:tag"}
