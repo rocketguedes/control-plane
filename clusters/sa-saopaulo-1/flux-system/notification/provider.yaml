@@ -1,0 +1,21 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Provider
+metadata:
+  name: fluxer
+  namespace: flux-system
+spec:
+  type: discord
+  secretRef:
+    name: fluxer-webhook
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Provider
+metadata:
+  name: ntfy
+  namespace: flux-system
+spec:
+  type: generic
+  address: https://notify.guedescloud.com.br/flux-alerts
+  secretRef:
+    name: ntfy-headers

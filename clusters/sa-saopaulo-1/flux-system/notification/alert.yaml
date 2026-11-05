@@ -1,18 +1,56 @@
-apiVersion: notification.toolkit.fluxcd.io/v1beta3
-kind: Provider
-metadata:
-  name: ntfy
-  namespace: flux-system
-spec:
-  type: generic
-  address: https://notify.guedescloud.com.br/flux-alerts
-  secretRef:
-    name: ntfy-headers
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Alert
 metadata:
-  name: flux-info
+  name: fluxer-info
+  namespace: flux-system
+spec:
+  providerRef:
+    name: fluxer
+  eventSeverity: info
+  eventSources:
+    - kind: ImageUpdateAutomation
+      name: flux-system
+    - kind: ImagePolicy
+      name: "*"
+    - kind: HelmRelease
+      name: "*"
+      namespace: cert-manager
+    - kind: OCIRepository
+      name: "*"
+      namespace: cert-manager
+    - kind: HelmRelease
+      name: "*"
+      namespace: kube-system
+    - kind: OCIRepository
+      name: "*"
+      namespace: kube-system
+    - kind: HelmRelease
+      name: "*"
+      namespace: reloader
+    - kind: OCIRepository
+      name: "*"
+      namespace: reloader
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: fluxer-error
+  namespace: flux-system
+spec:
+  providerRef:
+    name: fluxer
+  eventSeverity: error
+  eventSources:
+    - kind: GitRepository
+      name: "*"
+    - kind: Kustomization
+      name: "*"
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: ntfy-info
   namespace: flux-system
 spec:
   providerRef:
@@ -45,7 +83,7 @@ spec:
 apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Alert
 metadata:
-  name: flux-error
+  name: ntfy-error
   namespace: flux-system
 spec:
   providerRef:
