@@ -10,7 +10,7 @@ resources:
 images:
   - name: docker.io/library/nats
     newTag: 2.14.9-alpine # {"$imagepolicy": "flux-system:nats:tag"}
-    digest: sha256:9cf367643ce1f585a71620940c71bd82f3cb4c20aa59d114e112dbcb5a88121b # {"$imagepolicy": "flux-system:nats:digest"}
+    digest: sha256:c9706755679d8bcf05b4ce275fdd2ac8890058b1535881208a65b3cd613f00bd # {"$imagepolicy": "flux-system:nats:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
