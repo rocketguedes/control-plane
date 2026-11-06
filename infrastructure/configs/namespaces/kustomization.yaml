@@ -17,7 +17,6 @@ resources:
   - ntfy.yaml
   - postgresql.yaml
   - reloader.yaml
-  - sharkord.yaml
   - soju.yaml
   - vaultwarden.yaml
   - vector.yaml
