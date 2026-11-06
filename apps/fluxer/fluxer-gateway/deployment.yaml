@@ -30,6 +30,7 @@ spec:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
+      shareProcessNamespace: true
       terminationGracePeriodSeconds: 30
       initContainers:
         - name: wait-for-dependencies
