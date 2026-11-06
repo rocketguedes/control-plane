@@ -6,3 +6,40 @@ resources:
 - gotk-sync.yaml
 - notification
 - regcred.yaml
+patches:
+  - target:
+      kind: Deployment
+      name: "(kustomize-controller|helm-controller|notification-controller|image-automation-controller)"
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: 30m
+            memory: 64Mi
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+  - target:
+      kind: Deployment
+      name: "(kustomize-controller|helm-controller)"
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --concurrent=5
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --requeue-dependency=10s
+  - target:
+      kind: Deployment
+      name: image-reflector-controller
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: 50m
+            memory: 512Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
