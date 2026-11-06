@@ -10,12 +10,12 @@ resources:
   - statefulset.yaml
 images:
   - name: ghcr.io/fluxerapp/fluxer-users
-    newTag: 2026.1104.4653 # {"$imagepolicy": "flux-system:fluxer-users:tag"}
-    digest: sha256:235ef9663e91bc434546bcd078c6ae6234898b124a4f3e6336d08e980680973d # {"$imagepolicy": "flux-system:fluxer-users:digest"}
+    newTag: 2026.1105.225529 # {"$imagepolicy": "flux-system:fluxer-users:tag"}
+    digest: sha256:08ddc852226ebcaf222307a5ccebb55baeb462df9fe125bb7a5346dab53ff824 # {"$imagepolicy": "flux-system:fluxer-users:digest"}
   - name: docker.io/library/busybox
     newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
     digest: sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2026.1104.4653 # {"$imagepolicy": "flux-system:fluxer-users:tag"}
+      app.kubernetes.io/version: 2026.1105.225529 # {"$imagepolicy": "flux-system:fluxer-users:tag"}

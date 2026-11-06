@@ -8,9 +8,9 @@ resources:
   - service.yaml
 images:
   - name: ghcr.io/fluxerapp/fluxer-admin
-    newTag: 2026.1104.4716 # {"$imagepolicy": "flux-system:fluxer-admin:tag"}
-    digest: sha256:58df8b0c2d9f470497f2e0cce5ea2997aa19d8e558d6fcad99063a4434d19e58 # {"$imagepolicy": "flux-system:fluxer-admin:digest"}
+    newTag: 2026.1105.231650 # {"$imagepolicy": "flux-system:fluxer-admin:tag"}
+    digest: sha256:aecf1f2f35ae99c5c5655a79d4bbf41afa73612f563da9551f9390b498970019 # {"$imagepolicy": "flux-system:fluxer-admin:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2026.1104.4716 # {"$imagepolicy": "flux-system:fluxer-admin:tag"}
+      app.kubernetes.io/version: 2026.1105.231650 # {"$imagepolicy": "flux-system:fluxer-admin:tag"}
