@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: audiomuse-ai
     app.kubernetes.io/instance: audiomuse-ai
 data:
-  AI_MODEL_PROVIDER: OLLAMA
+  AI_MODEL_PROVIDER: NONE
   BACKUP_DIR: /tmp/backup
   CLAP_OTHER_FEATURES_CACHE_DIR: /tmp
   ENABLE_PROXY_FIX: "true"
@@ -18,8 +18,6 @@ data:
   NAVIDROME_URL: http://navidrome.navidrome.svc.cluster.local:4533
   NAVIDROME_USER: leandro
   NEURAL_FINGERPRINT_ENABLED: "true"
-  OLLAMA_MODEL_NAME: qwen3:1.7b
-  OLLAMA_SERVER_URL: http://ollama.ollama.svc.cluster.local:11434/api/generate
   POSTGRES_DB: audiomusedb
   POSTGRES_HOST: postgresql-rw.postgresql.svc.cluster.local
   POSTGRES_PORT: "5432"

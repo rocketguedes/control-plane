@@ -16,7 +16,6 @@ resources:
   - monitoring.yaml
   - navidrome.yaml
   - ntfy.yaml
-  - ollama.yaml
   - postgresql.yaml
   - reloader.yaml
   - sharkord.yaml
