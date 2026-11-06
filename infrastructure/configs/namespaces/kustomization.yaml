@@ -9,7 +9,6 @@ resources:
   - gatus.yaml
   - headlamp.yaml
   - headscale.yaml
-  - immich.yaml
   - livekit.yaml
   - lldap.yaml
   - microbin.yaml

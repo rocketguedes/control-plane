@@ -12,12 +12,6 @@ telemetry:
 identity_validation:
   reset_password:
     jwt_secret: '{{ secret "/secrets/AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET" }}'
-definitions:
-  user_attributes:
-    immich_role:
-      expression: '"admin" in groups ? "admin" : "user"'
-    immich_quota:
-      expression: '"admin" in groups ? 50 : 15'
 authentication_backend:
   password_reset:
     custom_url: "https://id.guedescloud.com.br"
@@ -78,17 +72,6 @@ identity_providers:
           - "preferred_username"
           - "groups"
           - "alt_emails"
-      immich_policy:
-        custom_claims:
-          immich_quota:
-            attribute: "immich_quota"
-          immich_role:
-            attribute: "immich_role"
-    scopes:
-      immich_scope:
-        claims:
-          - "immich_quota"
-          - "immich_role"
     clients:
       - client_id: "vaultwarden"
         client_name: "vaultwarden"
@@ -109,27 +92,6 @@ identity_providers:
           - "code"
         authorization_policy: "one_factor"
         consent_mode: "auto"
-      - client_id: "immich"
-        client_name: "immich"
-        client_secret: '{{ secret "/secrets/IDENTITY_PROVIDERS_OIDC_IMMICH_CLIENT_SECRET" }}'
-        public: false
-        redirect_uris:
-          - "https://photos.guedescloud.com.br/auth/login"
-          - "https://photos.guedescloud.com.br/user-settings"
-          - "app.immich:///oauth-callback"
-        scopes:
-          - "openid"
-          - "profile"
-          - "email"
-          - "immich_scope"
-        claims_policy: "immich_policy"
-        grant_types:
-          - "authorization_code"
-        response_types:
-          - "code"
-        authorization_policy: "one_factor"
-        consent_mode: "implicit"
-        token_endpoint_auth_method: "client_secret_post"
       - client_id: "headlamp"
         client_name: "headlamp"
         public: true
