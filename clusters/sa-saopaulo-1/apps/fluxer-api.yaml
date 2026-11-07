@@ -20,7 +20,7 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
-  interval: 5m0s
+  interval: 1h0m0s
   timeout: 5m0s
   path: ./apps/fluxer/fluxer-api
   sourceRef:

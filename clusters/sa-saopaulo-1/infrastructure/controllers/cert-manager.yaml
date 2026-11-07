@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: cilium
     - name: namespaces
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./infrastructure/controllers/cert-manager
   prune: true
   sourceRef:

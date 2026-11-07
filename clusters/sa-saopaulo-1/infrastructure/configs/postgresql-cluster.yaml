@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: cloudnative-pg
     - name: namespaces
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./infrastructure/configs/postgresql
   prune: true
   sourceRef:

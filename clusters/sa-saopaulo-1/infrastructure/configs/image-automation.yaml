@@ -5,7 +5,7 @@ metadata:
   name: image-automation
   namespace: flux-system
 spec:
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./infrastructure/configs/image-automation
   prune: true
   sourceRef:

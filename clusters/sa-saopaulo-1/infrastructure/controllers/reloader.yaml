@@ -7,7 +7,7 @@ metadata:
 spec:
   dependsOn:
     - name: namespaces
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./infrastructure/controllers/reloader
   prune: true
   sourceRef:

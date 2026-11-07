@@ -7,7 +7,7 @@ metadata:
 spec:
   dependsOn:
     - name: certificate-issuer
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./infrastructure/configs/gateway-api
   prune: true
   sourceRef:

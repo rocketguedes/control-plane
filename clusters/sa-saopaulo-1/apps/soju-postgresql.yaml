@@ -37,7 +37,7 @@ spec:
         status.observedGeneration == metadata.generation &&
         has(status.applied) &&
         status.applied == false
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./apps/soju/postgresql
   prune: true
   sourceRef:

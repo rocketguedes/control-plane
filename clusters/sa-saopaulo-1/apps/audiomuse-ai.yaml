@@ -13,7 +13,7 @@ spec:
     - name: audiomuse-ai-postgresql
     - name: keda
     - name: namespaces
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./apps/audiomuse-ai/audiomuse-ai
   prune: true
   sourceRef:

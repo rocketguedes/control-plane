@@ -12,7 +12,7 @@ spec:
   dependsOn:
     - name: namespaces
     - name: vaultwarden-postgresql
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./apps/vaultwarden/vaultwarden
   prune: true
   sourceRef:

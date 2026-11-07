@@ -12,7 +12,7 @@ spec:
   dependsOn:
     - name: namespaces
     - name: ntfy-postgresql
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./apps/ntfy/ntfy
   prune: true
   sourceRef:

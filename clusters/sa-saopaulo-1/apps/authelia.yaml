@@ -14,7 +14,7 @@ spec:
     - name: authelia-valkey
     - name: lldap
     - name: namespaces
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./apps/authelia/authelia
   prune: true
   sourceRef:

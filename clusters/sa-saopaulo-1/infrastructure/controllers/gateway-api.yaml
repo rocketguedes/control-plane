@@ -5,7 +5,7 @@ metadata:
   name: gateway-api
   namespace: flux-system
 spec:
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./infrastructure/controllers/gateway-api
   prune: true
   sourceRef:

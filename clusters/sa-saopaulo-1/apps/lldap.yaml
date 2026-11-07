@@ -12,7 +12,7 @@ spec:
   dependsOn:
     - name: lldap-postgresql
     - name: namespaces
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./apps/lldap/lldap
   prune: true
   sourceRef:

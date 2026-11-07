@@ -9,7 +9,7 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./infrastructure/configs/image-reflector
   prune: true
   sourceRef:

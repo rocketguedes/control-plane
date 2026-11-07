@@ -12,7 +12,7 @@ spec:
   dependsOn:
     - name: namespaces
     - name: victoria-logs
-  interval: 5m0s
+  interval: 1h0m0s
   path: ./apps/vector
   prune: true
   sourceRef:
