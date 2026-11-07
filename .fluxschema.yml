@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd/flux-schema/main/docs/config-v1beta1.json
+apiVersion: schema.plugin.fluxcd.io/v1beta1
+kind: Config
+validate:
+  schemaLocation:
+    - ecosystem
+  skipMissingSchemas: true
+  skipFile:
+    - ".*"
+    - "scripts"
+    - "k3s-auth-config.yaml"
+    - "Taskfile.yml"
+  skipKind:
+    - "apiserver.config.k8s.io/v1/AuthenticationConfiguration"
+  skipJSONPath:
+    - "Secret:/sops"
+explain:
+  schemaLocation:
+    - ecosystem
