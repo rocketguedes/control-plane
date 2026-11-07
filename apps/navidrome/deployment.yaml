@@ -99,9 +99,9 @@ spec:
             - name: PLUGINS_APPLE_MUSIC_SHA256
               value: 3682751e72caa5cc46b3f7ab70de70ea026f0a38a47f780b2d2b4922ed0ad154
             - name: PLUGINS_AUDIOMUSEAI_VERSION
-              value: v11
+              value: v12
             - name: PLUGINS_AUDIOMUSEAI_SHA256
-              value: 3be93eebfe573f195a3696c5e4f411a24fe22ae47999b41249ff3cbec9b19ba0
+              value: da8512c4f3b2d3a58fea611e3ab36c7ad53e7ddc7c9d9b16231101ae98809ed8
           volumeMounts:
             - name: navidrome
               mountPath: /data
