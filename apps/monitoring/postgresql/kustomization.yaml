@@ -3,7 +3,9 @@ kind: Kustomization
 namespace: postgresql
 resources:
   - database.yaml
+  - databaserole-grafanareader.yaml
   - databaserole.yaml
+  - secret-grafanareader.yaml
   - secret.yaml
 labels:
   - pairs:
