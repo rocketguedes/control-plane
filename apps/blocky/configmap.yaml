@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blocky
+  labels:
+    app.kubernetes.io/name: blocky
+    app.kubernetes.io/instance: blocky
+data:
+  TZ: America/Bahia

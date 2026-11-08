@@ -1,0 +1,48 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: blocky
+  namespace: flux-system
+spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  dependsOn:
+    - name: namespaces
+  interval: 1h0m0s
+  path: ./apps/blocky
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  timeout: 2m0s
+  wait: true
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: blocky
+  namespace: flux-system
+spec:
+  image: ghcr.io/0xerr0r/blocky
+  interval: 1h
+  secretRef:
+    name: regcred
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: blocky
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: blocky
+  filterTags:
+    pattern: '^v[0-9]+\.[0-9]+\.[0-9]+$'
+  digestReflectionPolicy: Always
+  interval: 1h
+  policy:
+    semver:
+      range: "0.x"

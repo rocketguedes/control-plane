@@ -1,0 +1,22 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: blocky
+  labels:
+    app.kubernetes.io/name: blocky
+    app.kubernetes.io/instance: blocky
+spec:
+  parentRefs:
+    - name: cilium-gateway-system
+      namespace: kube-system
+      port: 443
+  hostnames:
+    - shield.guedescloud.com.br
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: blocky
+          port: 4000
