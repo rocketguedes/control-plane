@@ -1,0 +1,15 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: blocky
+  labels:
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/instance: postgresql
+spec:
+  cluster:
+    name: postgresql
+  name: blocky
+  login: true
+  passwordSecret:
+    name: blocky
+  databaseRoleReclaimPolicy: retain
