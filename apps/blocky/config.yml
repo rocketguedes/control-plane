@@ -17,6 +17,10 @@ upstreams:
 
 connectIPVersion: dual
 
+conditional:
+  mapping:
+    cluster.local: 10.43.0.10,fd43::a
+
 blocking:
   denylists:
     ads:
