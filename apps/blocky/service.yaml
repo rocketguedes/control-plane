@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/instance: blocky
 spec:
   ipFamilyPolicy: PreferDualStack
+  clusterIP: 10.43.0.53
   clusterIPs:
     - 10.43.0.53
     - fd43::53
