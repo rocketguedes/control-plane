@@ -3,7 +3,7 @@ upstreams:
   init:
     strategy: fast
   strategy: parallel_best
-  timeout: 2s
+  timeout: 1s
   groups:
     default:
       - tcp-tls:1.1.1.1:853
@@ -36,9 +36,11 @@ blocking:
       cachePath: /app/cache
 
 caching:
-  minTime: 5m
-  maxTime: 30m
+  minTime: 15m
+  maxTime: 0
   prefetching: true
+  prefetchExpires: 4h
+  prefetchThreshold: 2
 
 prometheus:
   enable: true
