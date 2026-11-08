@@ -10,6 +10,7 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
+    - name: blocky-postgresql
     - name: namespaces
   interval: 1h0m0s
   path: ./apps/blocky

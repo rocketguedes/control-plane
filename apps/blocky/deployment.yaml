@@ -41,6 +41,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: blocky
+            - secretRef:
+                name: blocky
           ports:
             - name: dns-tcp
               containerPort: 53

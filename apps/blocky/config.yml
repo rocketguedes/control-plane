@@ -46,6 +46,11 @@ prometheus:
   enable: true
   path: /metrics
 
+queryLog:
+  type: postgresql
+  target: postgres://blocky@postgresql-rw.postgresql.svc.cluster.local:5432/blocky?sslmode=disable
+  logRetentionDays: 7
+
 ports:
   dns: 53
   http: 4000

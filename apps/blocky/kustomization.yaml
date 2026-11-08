@@ -5,6 +5,7 @@ resources:
   - configmap.yaml
   - deployment.yaml
   - httproute.yaml
+  - secret.yaml
   - service.yaml
   - serviceaccount.yaml
 configMapGenerator:
