@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - audiomuse-ai.yaml
   - authelia.yaml
+  - blocky.yaml
   - cert-manager.yaml
   - feishin.yaml
   - fluxer.yaml
