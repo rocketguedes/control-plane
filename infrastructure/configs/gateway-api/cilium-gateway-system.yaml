@@ -217,6 +217,20 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
+    - name: https-shield
+      protocol: HTTPS
+      port: 443
+      hostname: shield.guedescloud.com.br
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: wildcard-guedescloud-com-br-tls
+            namespace: kube-system
+
     - name: https-status
       protocol: HTTPS
       port: 443
