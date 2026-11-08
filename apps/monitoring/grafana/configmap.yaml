@@ -46,3 +46,7 @@ data:
   GF_SUPPORT_BUNDLES_ENABLED: "false"
   GF_USERS_ALLOW_ORG_CREATE: "false"
   GF_USERS_ALLOW_SIGN_UP: "false"
+  PG_DATABASE: blocky
+  PG_HOST: postgresql-rw.postgresql.svc.cluster.local
+  PG_PORT: "5432"
+  PG_USER: grafanareader

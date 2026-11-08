@@ -21,3 +21,20 @@ datasources:
         AccountID: "0"
         ProjectID: "0"
     editable: false
+  - name: Postgres
+    uid: postgres
+    type: postgres
+    url: $__env{PG_HOST}:$__env{PG_PORT}
+    user: $__env{PG_USER}
+    secureJsonData:
+      password: $__env{PG_PASSWORD}
+    jsonData:
+      database: $__env{PG_DATABASE}
+      sslmode: "disable"
+      maxOpenConns: 100
+      maxIdleConns: 100
+      maxIdleConnsAuto: true
+      connMaxLifetime: 14400
+      postgresVersion: 1800
+      timescaledb: false
+    editable: false
