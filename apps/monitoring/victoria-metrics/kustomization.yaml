@@ -15,9 +15,9 @@ configMapGenerator:
       - prometheus.yml
 images:
   - name: docker.io/victoriametrics/victoria-metrics
-    newTag: v1.155.0 # {"$imagepolicy": "flux-system:victoria-metrics:tag"}
-    digest: sha256:f60dc268b54ecf87f6e09d740c2b732838aa9193090cc741417c9f6386a130df # {"$imagepolicy": "flux-system:victoria-metrics:digest"}
+    newTag: v1.156.0 # {"$imagepolicy": "flux-system:victoria-metrics:tag"}
+    digest: sha256:da8a90ac0912f16589be2b96a6441a2fca4bca415c83783d972d92e3b5b66970 # {"$imagepolicy": "flux-system:victoria-metrics:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: monitoring
-      app.kubernetes.io/version: v1.155.0 # {"$imagepolicy": "flux-system:victoria-metrics:tag"}
+      app.kubernetes.io/version: v1.156.0 # {"$imagepolicy": "flux-system:victoria-metrics:tag"}
