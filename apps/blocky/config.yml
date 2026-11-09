@@ -37,7 +37,7 @@ blocking:
 
 caching:
   minTime: 15m
-  maxTime: 0
+  maxTime: 0m
   prefetching: true
   prefetchExpires: 4h
   prefetchThreshold: 2
