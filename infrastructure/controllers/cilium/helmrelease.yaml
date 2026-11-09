@@ -25,6 +25,8 @@ spec:
       lbExternalClusterIP: true
       masquerade: true
     envoy:
+      log:
+        accessLogBufferSize: 32768
       securityContext:
         capabilities:
           keepCapNetBindService: true
