@@ -13,9 +13,9 @@ configMapGenerator:
       - config.yml
 images:
   - name: ghcr.io/0xerr0r/blocky
-    newTag: v0.35.0 # {"$imagepolicy": "flux-system:blocky:tag"}
-    digest: sha256:4f165b63db0d76c96ecc47c7a8f57caeedc003a912bdce29abb0e283ce02e16b # {"$imagepolicy": "flux-system:blocky:digest"}
+    newTag: v0.36.0 # {"$imagepolicy": "flux-system:blocky:tag"}
+    digest: sha256:191c0f1e688aa37698297ef4059e11a2b080299a878f5b31d6d32ace9d0c54b2 # {"$imagepolicy": "flux-system:blocky:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: blocky
-      app.kubernetes.io/version: v0.35.0 # {"$imagepolicy": "flux-system:blocky:tag"}
+      app.kubernetes.io/version: v0.36.0 # {"$imagepolicy": "flux-system:blocky:tag"}
