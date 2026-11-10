@@ -57,6 +57,9 @@ prometheus:
   enable: true
   path: /metrics
 
+pprof:
+  enable: false
+
 ports:
   dns: 53
   http: 4000
