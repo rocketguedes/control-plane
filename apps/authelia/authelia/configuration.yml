@@ -168,7 +168,6 @@ identity_providers:
         claims_policy: "default"
         grant_types:
           - "authorization_code"
-          - "refresh_token"
         response_types:
           - "code"
         authorization_policy: "one_factor"
