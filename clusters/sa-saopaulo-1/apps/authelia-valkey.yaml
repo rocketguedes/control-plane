@@ -6,7 +6,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cilium
     - name: namespaces
   interval: 1h0m0s
   path: ./apps/authelia/valkey

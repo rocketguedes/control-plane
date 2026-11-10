@@ -10,7 +10,6 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
-    - name: cilium
     - name: lldap
     - name: namespaces
   interval: 1h0m0s
