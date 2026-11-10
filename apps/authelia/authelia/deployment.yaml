@@ -49,8 +49,6 @@ spec:
           env:
             - name: AUTHELIA_SERVER_DISABLE_HEALTHCHECK
               value: "true"
-            - name: X_AUTHELIA_CONFIG
-              value: /configuration.yaml
             - name: X_AUTHELIA_CONFIG_FILTERS
               value: template
           ports:
@@ -64,11 +62,8 @@ spec:
             - name: secrets
               mountPath: /app/secrets
               readOnly: true
-            - name: config-dir
-              mountPath: /config
             - name: config
-              mountPath: /configuration.yaml
-              subPath: configuration.yaml
+              mountPath: /config
               readOnly: true
             - name: tmp
               mountPath: /tmp
@@ -122,7 +117,5 @@ spec:
         - name: config
           configMap:
             name: authelia-config
-        - name: config-dir
-          emptyDir: {}
         - name: tmp
           emptyDir: {}

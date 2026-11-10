@@ -10,7 +10,7 @@ resources:
 configMapGenerator:
   - name: authelia-config
     files:
-      - configuration.yaml
+      - configuration.yml
 # RATIONALE: Automated image updates (Flux ImagePolicy setter markers) are intentionally omitted.
 # CONSTRAINT: Authelia is the central IdP (maximum blast radius). Upstream explicitly recommends against
 #   automated upgrades and warns that deprecations and breaking changes can occur across minor/patch releases.
