@@ -67,7 +67,7 @@ spec:
               cpu: 10m
               memory: 64Mi
             limits:
-              cpu: 100m
+              cpu: 500m
               memory: 256Mi
           securityContext:
             allowPrivilegeEscalation: false
@@ -84,7 +84,7 @@ spec:
                 - healthcheck
             initialDelaySeconds: 2
             periodSeconds: 5
-            failureThreshold: 12
+            failureThreshold: 30
           readinessProbe:
             exec:
               command:
