@@ -7,7 +7,7 @@ resources:
   - httproute.yaml
   - service.yaml
 configMapGenerator:
-  - name: edge-caddyfile
+  - name: caddyfile
     files:
       - Caddyfile
 images:

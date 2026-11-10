@@ -1,9 +1,9 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: fluxer
+  name: caddy
   labels:
-    app.kubernetes.io/name: edge
+    app.kubernetes.io/name: caddy
     app.kubernetes.io/instance: fluxer
     app.kubernetes.io/component: edge
 spec:
@@ -19,7 +19,7 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: edge
+        - name: caddy
           port: 8080
       timeouts:
         request: 0s
