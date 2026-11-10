@@ -43,9 +43,6 @@ spec:
           image: ghcr.io/authelia/authelia
           command:
             - authelia
-          envFrom:
-            - secretRef:
-                name: authelia
           env:
             - name: AUTHELIA_SERVER_DISABLE_HEALTHCHECK
               value: "true"

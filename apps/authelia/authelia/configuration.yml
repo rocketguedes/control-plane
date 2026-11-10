@@ -12,7 +12,7 @@ telemetry:
     address: "tcp://:9959/metrics"
 identity_validation:
   reset_password:
-    jwt_secret: '{{ secret "/app/secrets/AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET" }}'
+    jwt_secret: '{{ secret "/app/secrets/JWT_SECRET" }}'
 authentication_backend:
   password_reset:
     custom_url: "https://id.guedescloud.com.br"
@@ -26,13 +26,14 @@ authentication_backend:
     additional_users_dn: "ou=people"
     additional_groups_dn: "ou=groups"
     user: "uid=admin,ou=people,dc=guedescloud,dc=com,dc=br"
+    password: '{{ secret "/app/secrets/LDAP_PASSWORD" }}'
 access_control:
   default_policy: "deny"
   rules:
     - domain: "*.guedescloud.com.br"
       policy: "one_factor"
 session:
-  secret: '{{ secret "/app/secrets/AUTHELIA_SESSION_SECRET" }}'
+  secret: '{{ secret "/app/secrets/SESSION_SECRET" }}'
   cookies:
     - domain: "guedescloud.com.br"
       authelia_url: "https://accounts.guedescloud.com.br"
@@ -43,20 +44,21 @@ session:
     host: "valkey.authelia.svc.cluster.local"
     port: 6379
 storage:
+  encryption_key: '{{ secret "/app/secrets/STORAGE_ENCRYPTION_KEY" }}'
   postgres:
     address: "tcp://postgresql-rw.postgresql.svc.cluster.local:5432"
     database: "authelia"
     username: "authelia"
+    password: '{{ secret "/app/secrets/STORAGE_PASSWORD" }}'
 notifier:
   disable_startup_check: false
   filesystem:
     filename: "/tmp/notification.txt"
 identity_providers:
   oidc:
-    hmac_secret: '{{ secret "/app/secrets/AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET" }}'
+    hmac_secret: '{{ secret "/app/secrets/OIDC_HMAC_SECRET" }}'
     jwks:
-      - key: |
-          {{ secret "/app/secrets/IDENTITY_PROVIDERS_OIDC_JWKS_KEY" | mindent 10 "" }}
+      - key: {{ secret "/app/secrets/OIDC_JWKS_KEY" | mindent 10 "|" | msquote }}
     lifespans:
       refresh_token: "1 year"
     cors:
@@ -76,7 +78,7 @@ identity_providers:
     clients:
       - client_id: "vaultwarden"
         client_name: "vaultwarden"
-        client_secret: '{{ secret "/app/secrets/IDENTITY_PROVIDERS_OIDC_VAULTWARDEN_CLIENT_SECRET" }}'
+        client_secret: '{{ secret "/app/secrets/OIDC_VAULTWARDEN_CLIENT_SECRET" }}'
         public: false
         redirect_uris:
           - "https://wallet.guedescloud.com.br/identity/connect/oidc-signin"
@@ -114,7 +116,7 @@ identity_providers:
         token_endpoint_auth_method: "none"
       - client_id: "grafana"
         client_name: "grafana"
-        client_secret: '{{ secret "/app/secrets/IDENTITY_PROVIDERS_OIDC_GRAFANA_CLIENT_SECRET" }}'
+        client_secret: '{{ secret "/app/secrets/OIDC_GRAFANA_CLIENT_SECRET" }}'
         public: false
         redirect_uris:
           - "https://monitoring.guedescloud.com.br/login/generic_oauth"
@@ -134,7 +136,7 @@ identity_providers:
         token_endpoint_auth_method: "client_secret_basic"
       - client_id: "headscale"
         client_name: "headscale"
-        client_secret: '{{ secret "/app/secrets/IDENTITY_PROVIDERS_OIDC_HEADSCALE_CLIENT_SECRET" }}'
+        client_secret: '{{ secret "/app/secrets/OIDC_HEADSCALE_CLIENT_SECRET" }}'
         public: false
         redirect_uris:
           - "https://connect.guedescloud.com.br/oidc/callback"
@@ -153,7 +155,7 @@ identity_providers:
         token_endpoint_auth_method: "client_secret_basic"
       - client_id: "fluxer"
         client_name: "Fluxer Chat"
-        client_secret: '{{ secret "/app/secrets/IDENTITY_PROVIDERS_OIDC_FLUXER_CLIENT_SECRET" }}'
+        client_secret: '{{ secret "/app/secrets/OIDC_FLUXER_CLIENT_SECRET" }}'
         public: false
         redirect_uris:
           - "https://chat.guedescloud.com.br/auth/sso/callback"
