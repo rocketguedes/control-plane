@@ -61,8 +61,8 @@ spec:
               containerPort: 9959
               protocol: TCP
           volumeMounts:
-            - name: authelia
-              mountPath: /secrets
+            - name: secrets
+              mountPath: /app/secrets
               readOnly: true
             - name: config-dir
               mountPath: /config
@@ -116,7 +116,7 @@ spec:
             successThreshold: 1
             failureThreshold: 5
       volumes:
-        - name: authelia
+        - name: secrets
           secret:
             secretName: authelia
         - name: config

@@ -11,7 +11,7 @@ telemetry:
     address: "tcp://:9959/metrics"
 identity_validation:
   reset_password:
-    jwt_secret: '{{ secret "/secrets/AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET" }}'
+    jwt_secret: '{{ secret "/app/secrets/AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET" }}'
 authentication_backend:
   password_reset:
     custom_url: "https://id.guedescloud.com.br"
@@ -31,7 +31,7 @@ access_control:
     - domain: "*.guedescloud.com.br"
       policy: "one_factor"
 session:
-  secret: '{{ secret "/secrets/AUTHELIA_SESSION_SECRET" }}'
+  secret: '{{ secret "/app/secrets/AUTHELIA_SESSION_SECRET" }}'
   cookies:
     - domain: "guedescloud.com.br"
       authelia_url: "https://accounts.guedescloud.com.br"
@@ -52,10 +52,10 @@ notifier:
     filename: "/config/notification.txt"
 identity_providers:
   oidc:
-    hmac_secret: '{{ secret "/secrets/AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET" }}'
+    hmac_secret: '{{ secret "/app/secrets/AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET" }}'
     jwks:
       - key: |
-          {{ secret "/secrets/IDENTITY_PROVIDERS_OIDC_JWKS_KEY" | mindent 10 "" }}
+          {{ secret "/app/secrets/IDENTITY_PROVIDERS_OIDC_JWKS_KEY" | mindent 10 "" }}
     lifespans:
       refresh_token: "1 year"
     cors:
@@ -75,7 +75,7 @@ identity_providers:
     clients:
       - client_id: "vaultwarden"
         client_name: "vaultwarden"
-        client_secret: '{{ secret "/secrets/IDENTITY_PROVIDERS_OIDC_VAULTWARDEN_CLIENT_SECRET" }}'
+        client_secret: '{{ secret "/app/secrets/IDENTITY_PROVIDERS_OIDC_VAULTWARDEN_CLIENT_SECRET" }}'
         public: false
         redirect_uris:
           - "https://wallet.guedescloud.com.br/identity/connect/oidc-signin"
@@ -113,7 +113,7 @@ identity_providers:
         token_endpoint_auth_method: "none"
       - client_id: "grafana"
         client_name: "grafana"
-        client_secret: '{{ secret "/secrets/IDENTITY_PROVIDERS_OIDC_GRAFANA_CLIENT_SECRET" }}'
+        client_secret: '{{ secret "/app/secrets/IDENTITY_PROVIDERS_OIDC_GRAFANA_CLIENT_SECRET" }}'
         public: false
         redirect_uris:
           - "https://monitoring.guedescloud.com.br/login/generic_oauth"
@@ -133,7 +133,7 @@ identity_providers:
         token_endpoint_auth_method: "client_secret_basic"
       - client_id: "headscale"
         client_name: "headscale"
-        client_secret: '{{ secret "/secrets/IDENTITY_PROVIDERS_OIDC_HEADSCALE_CLIENT_SECRET" }}'
+        client_secret: '{{ secret "/app/secrets/IDENTITY_PROVIDERS_OIDC_HEADSCALE_CLIENT_SECRET" }}'
         public: false
         redirect_uris:
           - "https://connect.guedescloud.com.br/oidc/callback"
@@ -152,7 +152,7 @@ identity_providers:
         token_endpoint_auth_method: "client_secret_basic"
       - client_id: "fluxer"
         client_name: "Fluxer Chat"
-        client_secret: '{{ secret "/secrets/IDENTITY_PROVIDERS_OIDC_FLUXER_CLIENT_SECRET" }}'
+        client_secret: '{{ secret "/app/secrets/IDENTITY_PROVIDERS_OIDC_FLUXER_CLIENT_SECRET" }}'
         public: false
         redirect_uris:
           - "https://chat.guedescloud.com.br/auth/sso/callback"
