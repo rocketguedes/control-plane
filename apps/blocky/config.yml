@@ -6,6 +6,7 @@ upstreams:
   timeout: 1s
   groups:
     default:
+      - quic:dns.quad9.net:853
       - tcp-tls:149.112.112.112:853
       - tcp-tls:[2620:fe::fe]:853
       - tcp-tls:1.0.0.1:853
