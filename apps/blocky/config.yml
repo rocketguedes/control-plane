@@ -47,6 +47,7 @@ blocking:
     refreshPeriod: 4h
     strategy: fast
     downloads:
+      timeout: 60s
       cachePath: /app/cache
 
 caching:
