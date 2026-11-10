@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://www.authelia.com/schemas/v4.39/json-schema/configuration.json
 ---
 theme: "auto"
 server:
@@ -172,5 +173,4 @@ identity_providers:
         consent_mode: "implicit"
         require_pkce: true
         token_endpoint_auth_method: "client_secret_post"
-
 ...
