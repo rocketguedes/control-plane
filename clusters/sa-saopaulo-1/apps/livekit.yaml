@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: livekit-server
+  name: livekit
   namespace: flux-system
 spec:
   decryption:
@@ -12,7 +12,7 @@ spec:
   dependsOn:
     - name: namespaces
   interval: 1h0m0s
-  path: ./apps/livekit/livekit-server
+  path: ./apps/livekit
   prune: true
   sourceRef:
     kind: GitRepository
@@ -23,7 +23,7 @@ spec:
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
-  name: livekit-server
+  name: livekit
   namespace: flux-system
 spec:
   image: docker.io/livekit/livekit-server
@@ -34,11 +34,11 @@ spec:
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
-  name: livekit-server
+  name: livekit
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: livekit-server
+    name: livekit
   filterTags:
     pattern: '^v[0-9]+\.[0-9]+\.[0-9]+$'
   digestReflectionPolicy: Always

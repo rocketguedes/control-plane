@@ -15,7 +15,7 @@ spec:
     - name: fluxer-unfurl
     - name: fluxer-users
     - name: fluxer-valkey
-    - name: livekit-server
+    - name: livekit
   decryption:
     provider: sops
     secretRef:

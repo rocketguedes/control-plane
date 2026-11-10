@@ -24,7 +24,7 @@ data:
   FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
   FLUXER_LIVEKIT_DEFAULT_REGION: "{\"id\":\"default\",\"name\":\"Default\",\"emoji\":\"\U0001F30D\",\"latitude\":0,\"longitude\":0}"
   FLUXER_LIVEKIT_ENABLED: "true"
-  FLUXER_LIVEKIT_INTERNAL_URL: http://livekit-server.livekit.svc.cluster.local:80
+  FLUXER_LIVEKIT_INTERNAL_URL: http://livekit.livekit.svc.cluster.local:80
   FLUXER_LIVEKIT_URL: wss://livekit.guedescloud.com.br
   FLUXER_MEDIA_ENDPOINT: https://chat.guedescloud.com.br/media
   FLUXER_NATS_JETSTREAM_URL: nats://nats:4222

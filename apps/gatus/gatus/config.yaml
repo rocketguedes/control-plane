@@ -75,7 +75,7 @@ endpoints:
 
   - name: livekit
     group: core
-    url: "http://livekit-server.livekit.svc.cluster.local/"
+    url: "http://livekit.livekit.svc.cluster.local/"
     interval: 30s
     conditions:
       - "[STATUS] == 200"

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: livekit-server
+  name: livekit
   labels:
     app.kubernetes.io/name: livekit
     app.kubernetes.io/instance: livekit
@@ -29,7 +29,7 @@ spec:
         prometheus.io/port: "6789"
         prometheus.io/scrape: "true"
     spec:
-      serviceAccountName: livekit-server
+      serviceAccountName: livekit
       automountServiceAccountToken: false
       enableServiceLinks: false
       securityContext:
@@ -41,17 +41,17 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       containers:
-        - name: livekit-server
+        - name: livekit
           image: docker.io/livekit/livekit-server
           env:
             - name: LIVEKIT_CONFIG
               valueFrom:
                 configMapKeyRef:
-                  name: livekit-server
+                  name: livekit
                   key: config.yaml
           envFrom:
             - secretRef:
-                name: livekit-server
+                name: livekit
           ports:
             - name: http
               containerPort: 7880
