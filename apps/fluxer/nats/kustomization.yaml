@@ -9,9 +9,9 @@ resources:
   - statefulset.yaml
 images:
   - name: docker.io/library/nats
-    newTag: 2.14.9-alpine # {"$imagepolicy": "flux-system:nats:tag"}
-    digest: sha256:c9706755679d8bcf05b4ce275fdd2ac8890058b1535881208a65b3cd613f00bd # {"$imagepolicy": "flux-system:nats:digest"}
+    newTag: 2.14.10-alpine # {"$imagepolicy": "flux-system:nats:tag"}
+    digest: sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb # {"$imagepolicy": "flux-system:nats:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2.14.9-alpine # {"$imagepolicy": "flux-system:nats:tag"}
+      app.kubernetes.io/version: 2.14.10-alpine # {"$imagepolicy": "flux-system:nats:tag"}
