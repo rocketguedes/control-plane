@@ -134,7 +134,7 @@ spec:
               subPath: data
             - name: navidrome
               mountPath: /music
-              subPath: library/apple-music
+              subPath: library/aac
               readOnly: true
             - name: navidrome
               mountPath: /backup
