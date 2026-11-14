@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/name: victoria-logs
     app.kubernetes.io/instance: victoria-logs
     app.kubernetes.io/component: server
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   serviceName: victoria-logs
