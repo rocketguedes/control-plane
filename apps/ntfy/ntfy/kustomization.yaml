@@ -15,9 +15,9 @@ configMapGenerator:
       - templates/flux.yml
 images:
   - name: docker.io/binwiederhier/ntfy
-    newTag: v2.37.2 # {"$imagepolicy": "flux-system:ntfy:tag"}
-    digest: sha256:1875ddcf815c8a3c981d6d78c67a93452d0abba79b1ab9520b1f5f5238902bd7 # {"$imagepolicy": "flux-system:ntfy:digest"}
+    newTag: v2.38.0 # {"$imagepolicy": "flux-system:ntfy:tag"}
+    digest: sha256:771309aecfce18d8fe2bfb8069994ddd6be6ca6ccdd7badace3d791a0045ff0d # {"$imagepolicy": "flux-system:ntfy:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: ntfy
-      app.kubernetes.io/version: v2.37.2 # {"$imagepolicy": "flux-system:ntfy:tag"}
+      app.kubernetes.io/version: v2.38.0 # {"$imagepolicy": "flux-system:ntfy:tag"}
