@@ -11,7 +11,7 @@ data:
   DISCOVERY_UPSTREAM_URL: http://api:8080/.well-known/fluxer
   FLUXER_APP_PRODUCT_NAME: Guedes Cloud
   FLUXER_APP_PROXY_PORT: '8080'
-  FLUXER_LIVEKIT_URL: wss://livekit.guedescloud.com.br
+  FLUXER_LIVEKIT_URL: wss://rtc.guedescloud.com.br
   FLUXER_MEDIA_ENDPOINT: https://chat.guedescloud.com.br/media
   FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
   FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
