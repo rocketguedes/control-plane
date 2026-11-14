@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/name: valkey
     app.kubernetes.io/instance: fluxer
     app.kubernetes.io/component: cache
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:

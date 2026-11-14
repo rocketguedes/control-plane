@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/name: snowflakes
     app.kubernetes.io/instance: fluxer
     app.kubernetes.io/component: svc
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   revisionHistoryLimit: 0
