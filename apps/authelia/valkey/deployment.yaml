@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/name: valkey
     app.kubernetes.io/instance: valkey
     app.kubernetes.io/component: valkey
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   revisionHistoryLimit: 0
