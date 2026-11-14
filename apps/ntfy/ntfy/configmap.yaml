@@ -10,7 +10,7 @@ data:
   NTFY_ATTACHMENT_CACHE_DIR: /var/cache/ntfy/attachments
   NTFY_ATTACHMENT_TOTAL_SIZE_LIMIT: 3G
   NTFY_AUTH_DEFAULT_ACCESS: deny-all
-  NTFY_BASE_URL: https://notify.guedescloud.com.br
+  NTFY_BASE_URL: https://push.guedescloud.com.br
   NTFY_BEHIND_PROXY: "true"
   NTFY_ENABLE_METRICS: "true"
   NTFY_LISTEN_HTTP: :8093
