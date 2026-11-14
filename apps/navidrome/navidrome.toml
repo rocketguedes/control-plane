@@ -41,11 +41,12 @@ ArtistJoiner = ", "
 ArtistParticipations = true
 
 [Tags]
-"cnid.Aliases" = [ "cnid" ]
-"Composer.Split" = [ ]
-"Genre.Split" = [ ";", "," ]
-"plid.Album" = true
-"plid.Aliases" = [ "plid" ]
+cnid.Aliases = [ "cnid" ]
+composer.Split = [ ]
+genre.Split = [ ";", "," ]
+key.Aliases = [ "tkey", "key", "initialkey", "----:com.apple.itunes:initialkey", "wm/initialkey" ]
+plid.Album = true
+plid.Aliases = [ "plid" ]
 
 [Transcoding]
 EnableCancellation = true
