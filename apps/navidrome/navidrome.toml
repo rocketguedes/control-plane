@@ -36,6 +36,7 @@ Enabled = true
 
 [Scanner]
 ArtistJoiner = ", "
+ArtistSplitExceptions = [ "Utopia (Dan Bâlan/O-Zone)" ]
 
 [Subsonic]
 ArtistParticipations = true
