@@ -12,9 +12,9 @@ configMapGenerator:
       - vector.yaml
 images:
   - name: docker.io/timberio/vector
-    newTag: 0.61.0-distroless-libc # {"$imagepolicy": "flux-system:vector:tag"}
-    digest: sha256:1a3451978644d5cd4b99a0b28c990791e2f7e1efbea4184122f1c59a56448143 # {"$imagepolicy": "flux-system:vector:digest"}
+    newTag: 0.62.0-distroless-libc # {"$imagepolicy": "flux-system:vector:tag"}
+    digest: sha256:22100806cedabab3768edd6ac919be1a3a026b1020c5b280174a54573572db9d # {"$imagepolicy": "flux-system:vector:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: vector
-      app.kubernetes.io/version: 0.61.0-distroless-libc # {"$imagepolicy": "flux-system:vector:tag"}
+      app.kubernetes.io/version: 0.62.0-distroless-libc # {"$imagepolicy": "flux-system:vector:tag"}
