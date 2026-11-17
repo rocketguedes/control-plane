@@ -2,7 +2,7 @@
 # Generated on 2026-08-25T12:19:05.418Z
 
 Address = "[::]"
-Agents = "audiomuseai,apple-music,deezer,lastfm,listenbrainz"
+Agents = "audiomuseai,apple-music"
 BaseURL = "https://music.guedescloud.com.br"
 CoverArtPriority = "cover.*, folder.*, front.*, embedded"
 CoverArtQuality = 85
