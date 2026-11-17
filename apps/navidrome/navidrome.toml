@@ -9,7 +9,7 @@ CoverArtQuality = 85
 EnableNaturalSorting = true
 EnableWebPEncoding = true
 EnforceNonRootUser = true
-ImageCacheSize = "6GB"
+ImageCacheSize = "1GB"
 
 [Backup]
 Count = 7
