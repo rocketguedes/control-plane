@@ -10,8 +10,6 @@ EnableNaturalSorting = true
 EnableWebPEncoding = true
 EnforceNonRootUser = true
 ImageCacheSize = "6GB"
-MaxImageSize = "100MB"
-TranscodingCacheSize = "6GB"
 
 [Backup]
 Count = 7
