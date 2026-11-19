@@ -18,6 +18,9 @@ configMapGenerator:
       - dashboards/gatus.json
       - dashboards/hytale-community.json
       - dashboards/ntfy-grafana.json
+    options:
+      labels:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
   - name: provisioning-alerting
     files:
       - contact-points.yaml
