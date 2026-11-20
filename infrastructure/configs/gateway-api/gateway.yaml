@@ -1,7 +1,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: cilium-gateway-system
+  name: gateway
 spec:
   gatewayClassName: cilium
   listeners:
@@ -36,7 +36,7 @@ spec:
     #   >  wantReason: gatewayv1.ListenerReasonProtocolConflict,
     #   >  wantOK:     true,
     #   > },
-    - name: passthrough
+    - name: connect-tls
       protocol: TLS
       port: 443
       hostname: connect.guedescloud.com.br
@@ -49,7 +49,7 @@ spec:
       tls:
         mode: Passthrough
 
-    - name: https-accounts
+    - name: accounts-https
       protocol: HTTPS
       port: 443
       hostname: accounts.guedescloud.com.br
@@ -63,7 +63,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-bnc
+    - name: bnc-https
       protocol: HTTPS
       port: 443
       hostname: bnc.guedescloud.com.br
@@ -77,7 +77,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-chat
+    - name: chat-https
       protocol: HTTPS
       port: 443
       hostname: chat.guedescloud.com.br
@@ -91,7 +91,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-console
+    - name: console-https
       protocol: HTTPS
       port: 443
       hostname: console.guedescloud.com.br
@@ -105,7 +105,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-discover
+    - name: discover-https
       protocol: HTTPS
       port: 443
       hostname: discover.guedescloud.com.br
@@ -119,7 +119,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-id
+    - name: id-https
       protocol: HTTPS
       port: 443
       hostname: id.guedescloud.com.br
@@ -133,7 +133,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-monitoring
+    - name: monitoring-https
       protocol: HTTPS
       port: 443
       hostname: monitoring.guedescloud.com.br
@@ -147,7 +147,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-music
+    - name: music-https
       protocol: HTTPS
       port: 443
       hostname: music.guedescloud.com.br
@@ -161,7 +161,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-p
+    - name: p-https
       protocol: HTTPS
       port: 443
       hostname: p.guedescloud.com.br
@@ -175,7 +175,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-paste
+    - name: paste-https
       protocol: HTTPS
       port: 443
       hostname: paste.guedescloud.com.br
@@ -189,7 +189,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-push
+    - name: push-https
       protocol: HTTPS
       port: 443
       hostname: push.guedescloud.com.br
@@ -203,7 +203,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-rtc
+    - name: rtc-https
       protocol: HTTPS
       port: 443
       hostname: rtc.guedescloud.com.br
@@ -217,7 +217,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-shield
+    - name: shield-https
       protocol: HTTPS
       port: 443
       hostname: shield.guedescloud.com.br
@@ -231,7 +231,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-status
+    - name: status-https
       protocol: HTTPS
       port: 443
       hostname: status.guedescloud.com.br
@@ -245,7 +245,7 @@ spec:
             name: wildcard-guedescloud-com-br-tls
             namespace: kube-system
 
-    - name: https-wallet
+    - name: wallet-https
       protocol: HTTPS
       port: 443
       hostname: wallet.guedescloud.com.br

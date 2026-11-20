@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/instance: navidrome
 spec:
   parentRefs:
-    - name: cilium-gateway-system
+    - name: gateway
       namespace: kube-system
       port: 443
   hostnames:

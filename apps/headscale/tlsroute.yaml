@@ -7,9 +7,9 @@ metadata:
     app.kubernetes.io/instance: headscale
 spec:
   parentRefs:
-    - name: cilium-gateway-system
+    - name: gateway
       namespace: kube-system
-      sectionName: passthrough
+      sectionName: connect-tls
   hostnames:
     - connect.guedescloud.com.br
   rules:
