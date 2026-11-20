@@ -53,7 +53,6 @@ tasks:
       - ssh {{.SSH_TARGET}} "sudo chmod 600 /var/lib/rancher/k3s/agent/etc/kubelet.conf.d/10-custom.conf"
 
   k3s:sysctl:
-    internal: true
     desc: Deploy and apply K3s sysctl parameters on remote host
     requires:
       vars:
@@ -202,7 +201,6 @@ tasks:
       - rm -f ~/.kube/config
 
   flux:secret:
-    internal: true
     desc: Create sops-age secret in flux-system namespace
     requires:
       vars:
@@ -220,7 +218,6 @@ tasks:
         --dry-run=client -o yaml | kubectl apply --server-side -f -
 
   flux:bootstrap:
-    internal: true
     desc: Bootstrap Flux CD with GitHub repository
     requires:
       vars:
