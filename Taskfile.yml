@@ -21,7 +21,7 @@ tasks:
   bootstrap:
     desc: Run full cluster bootstrap (k3s, cilium, flux)
     cmds:
-      - task: k3s:prereq
+      - task: k3s:sysctl
       - task: k3s:server-config
       - task: k3s:install
       - task: k3s:start
@@ -52,20 +52,19 @@ tasks:
       - cat scripts/k3s-kubelet-config.yaml | ssh {{.SSH_TARGET}} "sudo tee /var/lib/rancher/k3s/agent/etc/kubelet.conf.d/10-custom.conf > /dev/null"
       - ssh {{.SSH_TARGET}} "sudo chmod 600 /var/lib/rancher/k3s/agent/etc/kubelet.conf.d/10-custom.conf"
 
-  k3s:prereq:
+  k3s:sysctl:
     internal: true
-    desc: Configure host prerequisites (enable IPv4/IPv6 forwarding)
+    desc: Deploy and apply K3s sysctl parameters on remote host
     requires:
       vars:
         - SSH_HOST
     preconditions:
       - sh: 'command -v ssh'
         msg: 'ssh is required (pacman -S openssh)'
-    status:
-      - ssh {{.SSH_TARGET}} "sysctl -n net.ipv4.ip_forward | grep -q '^1$'"
-      - ssh {{.SSH_TARGET}} "sysctl -n net.ipv6.conf.all.forwarding | grep -q '^1$'"
     cmds:
-      - cat scripts/k3s-prereq.sh | ssh {{.SSH_TARGET}} "sudo bash"
+      - cat scripts/k3s-sysctl.conf | ssh {{.SSH_TARGET}} "sudo tee /etc/sysctl.d/99-k3s.conf > /dev/null"
+      - ssh {{.SSH_TARGET}} "sudo modprobe tcp_bbr || true"
+      - ssh {{.SSH_TARGET}} "sudo sysctl --system"
 
   k3s:install:
     internal: true
