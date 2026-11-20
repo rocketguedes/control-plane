@@ -9,9 +9,11 @@ validate:
     - ".*"
     - "scripts"
     - "k3s-auth-config.yaml"
+    - "k3s-kubelet-config.yaml"
     - "Taskfile.yml"
   skipKind:
     - "apiserver.config.k8s.io/v1/AuthenticationConfiguration"
+    - "kubelet.config.k8s.io/v1beta1/KubeletConfiguration"
   skipJSONPath:
     - "Secret:/sops"
 explain:

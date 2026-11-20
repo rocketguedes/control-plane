@@ -1,0 +1,17 @@
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+evictionHard:
+  memory.available: "500Mi"
+  nodefs.available: "10%"
+  imagefs.available: "10%"
+kubeReserved:
+  cpu: "300m"
+  memory: "2Gi"
+systemReserved:
+  cpu: "200m"
+  memory: "768Mi"
+imageGCHighThresholdPercent: 75
+imageGCLowThresholdPercent: 60
+imageMaximumGCAge: "168h"
+shutdownGracePeriod: "60s"
+shutdownGracePeriodCriticalPods: "15s"

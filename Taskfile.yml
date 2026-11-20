@@ -34,7 +34,7 @@ tasks:
 
   k3s:server-config:
     internal: true
-    desc: Generate and deploy /etc/rancher/k3s/config.yaml to remote host
+    desc: Generate and deploy K3s server and kubelet configs to remote host
     requires:
       vars:
         - K3S_ADVERTISE_ADDRESS
@@ -48,6 +48,9 @@ tasks:
     cmds:
       - cat scripts/k3s-auth-config.yaml | ssh {{.SSH_TARGET}} "sudo mkdir -p /etc/rancher/k3s && sudo tee /etc/rancher/k3s/auth-config.yaml > /dev/null"
       - bash scripts/k3s-server-config.sh | ssh {{.SSH_TARGET}} "sudo tee /etc/rancher/k3s/config.yaml > /dev/null"
+      - ssh {{.SSH_TARGET}} "sudo install -d -m 700 /var/lib/rancher/k3s/agent/etc/kubelet.conf.d"
+      - cat scripts/k3s-kubelet-config.yaml | ssh {{.SSH_TARGET}} "sudo tee /var/lib/rancher/k3s/agent/etc/kubelet.conf.d/10-custom.conf > /dev/null"
+      - ssh {{.SSH_TARGET}} "sudo chmod 600 /var/lib/rancher/k3s/agent/etc/kubelet.conf.d/10-custom.conf"
 
   k3s:prereq:
     internal: true
