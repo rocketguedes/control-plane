@@ -7,9 +7,9 @@ resources:
   - service.yaml
 images:
   - name: ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted
-    newTag: 2026.1114.52902 # {"$imagepolicy": "flux-system:fluxer-app-proxy-self-hosted:tag"}
-    digest: sha256:1fa0450cd26cca3a6a444fa891c0d6bc88fbec785add7b4507bee53e8469d264 # {"$imagepolicy": "flux-system:fluxer-app-proxy-self-hosted:digest"}
+    newTag: 2026.1118.154009 # {"$imagepolicy": "flux-system:fluxer-app-proxy-self-hosted:tag"}
+    digest: sha256:1138d995b1e2bb06636562355e5d6169ab5d7e9251adffa60775d02733b340c0 # {"$imagepolicy": "flux-system:fluxer-app-proxy-self-hosted:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2026.1114.52902 # {"$imagepolicy": "flux-system:fluxer-app-proxy-self-hosted:tag"}
+      app.kubernetes.io/version: 2026.1118.154009 # {"$imagepolicy": "flux-system:fluxer-app-proxy-self-hosted:tag"}
