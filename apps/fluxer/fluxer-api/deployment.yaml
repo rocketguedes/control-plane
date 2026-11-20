@@ -44,7 +44,6 @@ spec:
               cpu: 10m
               memory: 16Mi
             limits:
-              cpu: 50m
               memory: 32Mi
           securityContext:
             allowPrivilegeEscalation: false
@@ -64,7 +63,6 @@ spec:
               cpu: 10m
               memory: 32Mi
             limits:
-              cpu: 100m
               memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
@@ -105,7 +103,6 @@ spec:
               cpu: 100m
               memory: 768Mi
             limits:
-              cpu: 1000m
               memory: 2560Mi
           securityContext:
             allowPrivilegeEscalation: false
