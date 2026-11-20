@@ -6,16 +6,40 @@ resources:
 patches:
   - target:
       kind: Deployment
-      name: "(kustomize-controller|helm-controller|notification-controller|image-automation-controller)"
+      name: "(helm-controller|notification-controller|image-automation-controller)"
     patch: |-
       - op: replace
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
             cpu: 30m
-            memory: 64Mi
+            memory: 96Mi
+          limits:
+            memory: 256Mi
+  - target:
+      kind: Deployment
+      name: kustomize-controller
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: 30m
+            memory: 256Mi
           limits:
             memory: 512Mi
+  - target:
+      kind: Deployment
+      name: source-controller
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: 50m
+            memory: 96Mi
+          limits:
+            memory: 256Mi
   - target:
       kind: Deployment
       name: "(kustomize-controller|helm-controller)"
@@ -35,6 +59,6 @@ patches:
         value:
           requests:
             cpu: 50m
-            memory: 512Mi
+            memory: 128Mi
           limits:
-            memory: 1Gi
+            memory: 384Mi

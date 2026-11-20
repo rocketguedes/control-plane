@@ -3,3 +3,15 @@ kind: Kustomization
 resources:
   - crd.yaml
   - system-upgrade-controller.yaml
+patches:
+  - target:
+      kind: Deployment
+      name: system-upgrade-controller
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            memory: 64Mi
+          limits:
+            memory: 192Mi

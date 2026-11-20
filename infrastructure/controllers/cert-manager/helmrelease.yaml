@@ -24,3 +24,20 @@ spec:
     crds:
       enabled: true
       keep: true
+    resources:
+      requests:
+        memory: 96Mi
+      limits:
+        memory: 256Mi
+    cainjector:
+      resources:
+        requests:
+          memory: 64Mi
+        limits:
+          memory: 192Mi
+    webhook:
+      resources:
+        requests:
+          memory: 64Mi
+        limits:
+          memory: 192Mi

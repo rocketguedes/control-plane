@@ -25,6 +25,11 @@ spec:
     reloader:
       reloadStrategy: annotations
       deployment:
+        resources:
+          requests:
+            memory: 64Mi
+          limits:
+            memory: 192Mi
         pod:
           annotations:
             prometheus.io/path: /metrics
