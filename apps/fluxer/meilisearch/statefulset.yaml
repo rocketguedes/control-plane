@@ -56,7 +56,7 @@ spec:
               mountPath: /tmp
           resources:
             requests:
-              cpu: 50m
+              cpu: 15m
               memory: 64Mi
             limits:
               memory: 512Mi

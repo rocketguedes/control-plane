@@ -58,7 +58,7 @@ spec:
               mountPath: /storage
           resources:
             requests:
-              cpu: 50m
+              cpu: 25m
               memory: 256Mi
             limits:
               memory: 512Mi

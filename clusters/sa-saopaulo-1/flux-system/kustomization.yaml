@@ -12,7 +12,7 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: 30m
+            cpu: 15m
             memory: 96Mi
           limits:
             memory: 256Mi
@@ -24,7 +24,7 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: 30m
+            cpu: 75m
             memory: 256Mi
           limits:
             memory: 512Mi
@@ -36,7 +36,7 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: 50m
+            cpu: 20m
             memory: 96Mi
           limits:
             memory: 256Mi
@@ -58,7 +58,7 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: 50m
+            cpu: 20m
             memory: 128Mi
           limits:
             memory: 384Mi

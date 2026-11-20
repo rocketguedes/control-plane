@@ -7,5 +7,8 @@ patches:
       kind: Deployment
       name: cnpg-controller-manager
     patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/requests/cpu
+        value: 20m
       - op: remove
         path: /spec/template/spec/containers/0/resources/limits/cpu
