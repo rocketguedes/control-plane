@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  require-bin:
+    internal: true
+    run: when_changed
+    silent: true
+    requires:
+      vars: [BIN]
+    preconditions:
+      - sh: command -v {{.BIN | q}} >/dev/null 2>&1
+        msg: "Required binary not found in PATH: {{.BIN}}"
+
+  ssh-install:
+    internal: true
+    label: "ssh-install:{{.DEST}}"
+    requires:
+      vars: [SSH_HOST, SRC, DEST]
+    vars:
+      OWNER: '{{.OWNER | default "root"}}'
+      GROUP: '{{.GROUP | default "root"}}'
+      MODE: '{{.MODE | default "0600"}}'
+      DIR_MODE: '{{.DIR_MODE | default "0755"}}'
+      SOPS: '{{.SOPS | default "false"}}'
+    preconditions:
+      - sh: test -f {{.SRC | q}}
+        msg: "{{.SRC}} not found"
+    cmds:
+      - cmd: >-
+          {{if eq .SOPS "true"}}sops -d{{else}}cat{{end}} {{.SRC | q}}
+          | ssh {{.SSH_HOST | q}}
+          'sudo install -d -m {{.DIR_MODE}} "$(dirname "{{.DEST}}")"
+          && sudo install -m {{.MODE}} -o {{.OWNER}} -g {{.GROUP}} /dev/null "{{.DEST}}"
+          && sudo tee "{{.DEST}}" >/dev/null'
+        timeout: 1m

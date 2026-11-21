@@ -1,0 +1,217 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  require-ssh:
+    internal: true
+    run: once
+    silent: true
+    deps:
+      - task: :common:require-bin
+        vars: { BIN: ssh }
+    preconditions:
+      - sh: test -n {{.SSH_HOST | q}}
+        msg: "SSH_HOST must not be empty"
+
+  sysctl:
+    desc: Deploy and apply kernel sysctl parameters on remote host
+    summary: |
+      Deploys bootstrap/k3s/k8s.conf to /etc/sysctl.d/k8s.conf on SSH_HOST,
+      loads tcp_bbr, and reloads sysctl settings only when changed.
+    deps: [require-ssh]
+    vars:
+      _SHA:
+        sh: sha256sum bootstrap/k3s/k8s.conf | cut -d' ' -f1
+    preconditions:
+      - sh: test -f bootstrap/k3s/k8s.conf
+        msg: "bootstrap/k3s/k8s.conf not found"
+    status:
+      - echo "{{._SHA}}  /etc/sysctl.d/k8s.conf" | ssh {{.SSH_HOST | q}} 'sha256sum -c --status 2>/dev/null'
+      - test "$(ssh {{.SSH_HOST | q}} 'sysctl -n net.ipv4.tcp_congestion_control 2>/dev/null')" = "bbr"
+    cmds:
+      - task: :common:ssh-install
+        vars:
+          SRC: bootstrap/k3s/k8s.conf
+          DEST: /etc/sysctl.d/k8s.conf
+          MODE: "0644"
+      - cmd: ssh {{.SSH_HOST | q}} 'sudo modprobe tcp_bbr'
+        ignore_error: true
+        timeout: 1m
+      - cmd: ssh {{.SSH_HOST | q}} 'sudo sysctl --system'
+        timeout: 1m
+
+  config:
+    desc: Deploy K3s server, node drop-in, auth, and kubelet configs to remote host
+    summary: |
+      Deploys K3s configuration files to SSH_HOST:
+        - /etc/rancher/k3s/config.yaml
+        - /etc/rancher/k3s/config.yaml.d/10-node.yaml (decrypted with SOPS)
+        - /etc/rancher/k3s/auth-config.yaml
+        - /var/lib/rancher/k3s/agent/etc/kubelet.conf.d/10-custom.conf
+
+      Skips automatically when all remote checksums and permissions match.
+      Restarts k3s if any file changed and the service is already active.
+    deps:
+      - require-ssh
+      - task: :common:require-bin
+        vars: { BIN: sops }
+    vars:
+      _CONFIG_SHA:
+        sh: sha256sum bootstrap/k3s/config.yaml | cut -d' ' -f1
+      _NODE_SHA:
+        sh: sops -d bootstrap/k3s/config.yaml.d/10-node.yaml | sha256sum | cut -d' ' -f1
+      _AUTH_SHA:
+        sh: sha256sum bootstrap/k3s/auth-config.yaml | cut -d' ' -f1
+      _KUBELET_SHA:
+        sh: sha256sum bootstrap/k3s/kubelet-config.yaml | cut -d' ' -f1
+    preconditions:
+      - sh: test -f bootstrap/k3s/config.yaml
+        msg: "bootstrap/k3s/config.yaml not found"
+      - sh: test -f bootstrap/k3s/config.yaml.d/10-node.yaml
+        msg: "bootstrap/k3s/config.yaml.d/10-node.yaml not found"
+      - sh: test -f bootstrap/k3s/auth-config.yaml
+        msg: "bootstrap/k3s/auth-config.yaml not found"
+      - sh: test -f bootstrap/k3s/kubelet-config.yaml
+        msg: "bootstrap/k3s/kubelet-config.yaml not found"
+    status:
+      - >-
+        printf '%s  %s\n'
+        "{{._CONFIG_SHA}}" /etc/rancher/k3s/config.yaml
+        "{{._NODE_SHA}}" /etc/rancher/k3s/config.yaml.d/10-node.yaml
+        "{{._AUTH_SHA}}" /etc/rancher/k3s/auth-config.yaml
+        "{{._KUBELET_SHA}}" /var/lib/rancher/k3s/agent/etc/kubelet.conf.d/10-custom.conf
+        | ssh {{.SSH_HOST | q}} 'sudo sha256sum -c --status 2>/dev/null'
+      - >-
+        test "$(ssh {{.SSH_HOST | q}} 'sudo stat -c "%a:%G" /etc/rancher/k3s/config.yaml /etc/rancher/k3s/config.yaml.d/10-node.yaml 2>/dev/null' | xargs)"
+        = "640:sudo 640:sudo"
+    cmds:
+      - task: :common:ssh-install
+        vars:
+          SRC: bootstrap/k3s/config.yaml
+          DEST: /etc/rancher/k3s/config.yaml
+          GROUP: sudo
+          MODE: "0640"
+      - task: :common:ssh-install
+        vars:
+          SRC: bootstrap/k3s/config.yaml.d/10-node.yaml
+          DEST: /etc/rancher/k3s/config.yaml.d/10-node.yaml
+          GROUP: sudo
+          MODE: "0640"
+          SOPS: "true"
+      - task: :common:ssh-install
+        vars:
+          SRC: bootstrap/k3s/auth-config.yaml
+          DEST: /etc/rancher/k3s/auth-config.yaml
+      - task: :common:ssh-install
+        vars:
+          SRC: bootstrap/k3s/kubelet-config.yaml
+          DEST: /var/lib/rancher/k3s/agent/etc/kubelet.conf.d/10-custom.conf
+          DIR_MODE: "0700"
+      - cmd: ssh {{.SSH_HOST | q}} 'sudo systemctl restart k3s'
+        if: ssh {{.SSH_HOST | q}} 'systemctl is-active --quiet k3s'
+        timeout: 3m
+
+  install:
+    desc: Install K3s binary and systemd service on remote host
+    summary: |
+      Downloads and installs K3s on SSH_HOST with INSTALL_K3S_SKIP_START=true.
+      Defaults INSTALL_K3S_VERSION to the version declared in
+      infrastructure/configs/k3s-upgrade/server-plan.yaml.
+    deps:
+      - require-ssh
+      - task: :common:require-bin
+        vars: { BIN: yq }
+    vars:
+      _PLAN_VERSION:
+        sh: yq -r '.spec.version' infrastructure/configs/k3s-upgrade/server-plan.yaml | sed 's/-k3s/+k3s/'
+      INSTALL_K3S_VERSION: "{{.INSTALL_K3S_VERSION | default ._PLAN_VERSION}}"
+    preconditions:
+      - sh: test -n {{.INSTALL_K3S_VERSION | q}}
+        msg: "INSTALL_K3S_VERSION could not be resolved"
+      - sh: ssh {{.SSH_HOST | q}} 'command -v curl >/dev/null 2>&1'
+        msg: "curl is required on the remote host"
+    status:
+      - ssh {{.SSH_HOST | q}} 'command -v k3s >/dev/null 2>&1'
+    cmds:
+      - cmd: >-
+          ssh {{.SSH_HOST | q}}
+          "curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION='{{.INSTALL_K3S_VERSION}}' INSTALL_K3S_SKIP_START=true sh -"
+        timeout: 5m
+
+  start:
+    desc: Enable and start K3s systemd service on remote host
+    summary: |
+      Enables and starts k3s.service on SSH_HOST. Because k3s.service uses
+      Type=notify, returning 0 guarantees etcd, kube-apiserver, and
+      /etc/rancher/k3s/k3s.yaml are ready.
+    deps: [require-ssh]
+    status:
+      - ssh {{.SSH_HOST | q}} 'systemctl is-active --quiet k3s'
+      - ssh {{.SSH_HOST | q}} 'systemctl is-enabled --quiet k3s'
+    cmds:
+      - cmd: ssh {{.SSH_HOST | q}} 'sudo systemctl enable --now k3s'
+        timeout: 3m
+
+  kubeconfig:
+    desc: Fetch kubeconfig from remote host and configure local kubectl access
+    summary: |
+      Atomically fetches /etc/rancher/k3s/k3s.yaml from SSH_HOST into KUBECONFIG
+      (default: ~/.kube/config) and points the server URL to K3S_API_ENDPOINT:K3S_API_PORT.
+      K3S_API_ENDPOINT defaults to the HostName resolved by OpenSSH for SSH_HOST.
+    deps:
+      - require-ssh
+      - task: :common:require-bin
+        vars: { BIN: kubectl }
+    vars:
+      _SSH_HOSTNAME:
+        sh: ssh -TG {{.SSH_HOST | q}} | awk '$1 == "hostname" {print $2}'
+      K3S_API_ENDPOINT: "{{.K3S_API_ENDPOINT | default ._SSH_HOSTNAME}}"
+      KUBECONFIG_PATH: '{{.KUBECONFIG | default (joinPath .HOME ".kube" "config")}}'
+      _TMP_KUBECONFIG: "{{.KUBECONFIG_PATH}}.tmp"
+    preconditions:
+      - sh: test -n {{.K3S_API_ENDPOINT | q}}
+        msg: "K3S_API_ENDPOINT could not be resolved"
+    status:
+      - >-
+        kubectl --kubeconfig {{.KUBECONFIG_PATH | q}} config view --minify
+        -o jsonpath='{.clusters[0].cluster.server}' 2>/dev/null
+        | grep -qF "https://{{.K3S_API_ENDPOINT}}:{{.K3S_API_PORT}}"
+      - kubectl --kubeconfig {{.KUBECONFIG_PATH | q}} --request-timeout=5s get --raw /readyz >/dev/null 2>&1
+    cmds:
+      - mkdir -p "$(dirname {{.KUBECONFIG_PATH | q}})"
+      - defer: rm -f {{._TMP_KUBECONFIG | q}}
+      - cmd: ssh {{.SSH_HOST | q}} 'cat /etc/rancher/k3s/k3s.yaml' > {{._TMP_KUBECONFIG | q}}
+        timeout: 1m
+      - chmod 0600 {{._TMP_KUBECONFIG | q}}
+      - >-
+        kubectl --kubeconfig {{._TMP_KUBECONFIG | q}} config set-cluster default
+        --server="https://{{.K3S_API_ENDPOINT}}:{{.K3S_API_PORT}}"
+      - mv -f {{._TMP_KUBECONFIG | q}} {{.KUBECONFIG_PATH | q}}
+      - kubectl --kubeconfig {{.KUBECONFIG_PATH | q}} cluster-info
+
+  reset:
+    desc: Uninstall K3s, clean Cilium interfaces and iptables, and remove local kubeconfig
+    summary: |
+      Destructively removes Cilium host interfaces and iptables rules, executes
+      K3s's official /usr/local/bin/k3s-uninstall.sh, removes /etc/sysctl.d/k8s.conf,
+      and deletes the local kubeconfig file.
+    prompt: Are you sure you want to reset K3s on {{.SSH_HOST}}? This is destructive.
+    deps: [require-ssh]
+    vars:
+      KUBECONFIG_PATH: '{{.KUBECONFIG | default (joinPath .HOME ".kube" "config")}}'
+    cmds:
+      - for: [cilium_host, cilium_net, cilium_vxlan]
+        cmd: ssh {{.SSH_HOST | q}} 'sudo ip link delete {{.ITEM}}'
+        ignore_error: true
+        timeout: 30s
+      - for: [iptables, ip6tables]
+        cmd: ssh {{.SSH_HOST | q}} 'sudo {{.ITEM}}-save | grep -iv cilium | sudo {{.ITEM}}-restore'
+        ignore_error: true
+        timeout: 30s
+      - cmd: ssh {{.SSH_HOST | q}} 'sudo /usr/local/bin/k3s-uninstall.sh'
+        if: ssh {{.SSH_HOST | q}} 'test -x /usr/local/bin/k3s-uninstall.sh'
+        timeout: 5m
+      - cmd: ssh {{.SSH_HOST | q}} 'sudo rm -f /etc/sysctl.d/k8s.conf'
+        timeout: 1m
+      - rm -f {{.KUBECONFIG_PATH | q}}

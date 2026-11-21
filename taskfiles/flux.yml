@@ -1,0 +1,83 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  secret:
+    desc: Create or update sops-age secret in flux-system namespace
+    summary: |
+      Applies the flux-system namespace and sops-age secret using Server-Side Apply.
+      Reads the key from SOPS_AGE_KEY_FILE (defaults to the SOPS canonical path:
+      ${XDG_CONFIG_HOME:-$HOME/.config}/sops/age/keys.txt).
+    deps:
+      - task: :common:require-bin
+        vars: { BIN: kubectl }
+    vars:
+      _XDG_CONFIG_HOME: '{{.XDG_CONFIG_HOME | default (joinPath .HOME ".config")}}'
+      SOPS_AGE_KEY_FILE: '{{.SOPS_AGE_KEY_FILE | default (joinPath ._XDG_CONFIG_HOME "sops" "age" "keys.txt")}}'
+      _KEY_SHA:
+        sh: sha256sum {{.SOPS_AGE_KEY_FILE | q}} | cut -d' ' -f1
+    preconditions:
+      - sh: test -f {{.SOPS_AGE_KEY_FILE | q}}
+        msg: "SOPS age key file not found at {{.SOPS_AGE_KEY_FILE}}"
+    status:
+      - >-
+        test "$(kubectl get secret sops-age --namespace flux-system
+        -o jsonpath='{.data.age\.agekey}' 2>/dev/null
+        | base64 -d 2>/dev/null | sha256sum | cut -d' ' -f1)" = "{{._KEY_SHA}}"
+    cmds:
+      - kubectl create namespace flux-system --dry-run=client -o yaml | kubectl apply --server-side -f -
+      - >-
+        kubectl create secret generic sops-age
+        --namespace=flux-system
+        --from-file=age.agekey={{.SOPS_AGE_KEY_FILE | q}}
+        --dry-run=client -o yaml | kubectl apply --server-side -f -
+
+  bootstrap:
+    desc: Bootstrap Flux CD with GitHub repository
+    summary: |
+      Bootstraps Flux CD against GITHUB_OWNER/GITHUB_REPO (branch GITHUB_BRANCH,
+      path CLUSTER_PATH). Reads Git author identity from GIT_AUTHOR_NAME /
+      GIT_AUTHOR_EMAIL (falling back to git config).
+
+      Provide GITHUB_TOKEN via environment for non-interactive execution;
+      otherwise Flux will prompt for it interactively.
+    interactive: true
+    deps:
+      - for: [flux, git]
+        task: :common:require-bin
+        vars: { BIN: "{{.ITEM}}" }
+    vars:
+      _GIT_AUTHOR_NAME:
+        sh: git config user.name
+      _GIT_AUTHOR_EMAIL:
+        sh: git config user.email
+      GIT_AUTHOR_NAME: "{{.GIT_AUTHOR_NAME | default ._GIT_AUTHOR_NAME}}"
+      GIT_AUTHOR_EMAIL: "{{.GIT_AUTHOR_EMAIL | default ._GIT_AUTHOR_EMAIL}}"
+      FLUX_COMPONENTS_EXTRA: '{{.FLUX_COMPONENTS_EXTRA | default "image-reflector-controller,image-automation-controller"}}'
+    requires:
+      vars:
+        - GITHUB_OWNER
+        - GITHUB_REPO
+        - GITHUB_BRANCH
+        - CLUSTER_PATH
+        - GIT_AUTHOR_NAME
+        - GIT_AUTHOR_EMAIL
+    env:
+      GITHUB_TOKEN: "{{.GITHUB_TOKEN}}"
+    status:
+      - flux get kustomization flux-system >/dev/null 2>&1
+    cmds:
+      - cmd: >-
+          flux bootstrap github
+          --token-auth
+          --owner={{.GITHUB_OWNER | q}}
+          --repository={{.GITHUB_REPO | q}}
+          --branch={{.GITHUB_BRANCH | q}}
+          --path={{.CLUSTER_PATH | q}}
+          --author-name={{.GIT_AUTHOR_NAME | q}}
+          --author-email={{.GIT_AUTHOR_EMAIL | q}}
+          --components-extra={{.FLUX_COMPONENTS_EXTRA | q}}
+          --personal=true
+          --private=false
+        timeout: 5m

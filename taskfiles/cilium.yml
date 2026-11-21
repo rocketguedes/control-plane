@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  gateway-api:
+    desc: Apply Gateway API CRDs from infrastructure manifests
+    deps:
+      - task: :common:require-bin
+        vars: { BIN: kubectl }
+    preconditions:
+      - sh: test -d infrastructure/controllers/gateway-api
+        msg: "infrastructure/controllers/gateway-api directory not found"
+    status:
+      - kubectl get -k infrastructure/controllers/gateway-api >/dev/null 2>&1
+    cmds:
+      - kubectl apply -k infrastructure/controllers/gateway-api --server-side
+
+  install:
+    desc: Install Cilium CNI using chart and values from infrastructure manifests
+    summary: |
+      Installs Cilium via Helm using the OCI repository URL and semver constraint
+      from infrastructure/controllers/cilium/ocirepository.yaml and spec.values
+      from infrastructure/controllers/cilium/helmrelease.yaml.
+
+      Skips if a Cilium Helm release is already present in kube-system so re-runs
+      of bootstrap do not fight Flux. Use --force to reinstall.
+    deps:
+      - for: [helm, cilium-cli, yq]
+        task: :common:require-bin
+        vars: { BIN: "{{.ITEM}}" }
+    vars:
+      _OCI_URL:
+        sh: yq -r '.spec.url' infrastructure/controllers/cilium/ocirepository.yaml
+      _OCI_VERSION:
+        sh: yq -r '.spec.ref.semver' infrastructure/controllers/cilium/ocirepository.yaml
+      CILIUM_VERSION: "{{.CILIUM_VERSION | default ._OCI_VERSION}}"
+    preconditions:
+      - sh: test -f infrastructure/controllers/cilium/ocirepository.yaml
+        msg: "infrastructure/controllers/cilium/ocirepository.yaml not found"
+      - sh: test -f infrastructure/controllers/cilium/helmrelease.yaml
+        msg: "infrastructure/controllers/cilium/helmrelease.yaml not found"
+    status:
+      - helm status cilium --namespace kube-system >/dev/null 2>&1
+    cmds:
+      - cmd: >-
+          yq '.spec.values' infrastructure/controllers/cilium/helmrelease.yaml
+          | helm upgrade --install cilium {{._OCI_URL | q}}
+          --version {{.CILIUM_VERSION | q}}
+          --namespace kube-system
+          --values -
+        timeout: 5m
+      - cmd: cilium-cli status --wait
+        timeout: 5m
+
+  status:
+    desc: Check Cilium CNI status
+    deps:
+      - task: :common:require-bin
+        vars: { BIN: cilium-cli }
+    cmds:
+      - cilium-cli status
