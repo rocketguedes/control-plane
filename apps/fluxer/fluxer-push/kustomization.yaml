@@ -8,12 +8,12 @@ resources:
   - service.yaml
 images:
   - name: ghcr.io/fluxerapp/fluxer-push
-    newTag: 2026.1118.154025 # {"$imagepolicy": "flux-system:fluxer-push:tag"}
-    digest: sha256:bcc98b724fb25174a2f1759c7603cd66ddcda01eda8ecbb2470bd385989280e2 # {"$imagepolicy": "flux-system:fluxer-push:digest"}
+    newTag: 2026.1120.155458 # {"$imagepolicy": "flux-system:fluxer-push:tag"}
+    digest: sha256:baf89506917806e90205d14e3da23fe20da450d424f5c004f815f603eaf828dc # {"$imagepolicy": "flux-system:fluxer-push:digest"}
   - name: docker.io/library/busybox
     newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
     digest: sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: fluxer
-      app.kubernetes.io/version: 2026.1118.154025 # {"$imagepolicy": "flux-system:fluxer-push:tag"}
+      app.kubernetes.io/version: 2026.1120.155458 # {"$imagepolicy": "flux-system:fluxer-push:tag"}
