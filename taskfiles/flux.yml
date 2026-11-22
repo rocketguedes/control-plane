@@ -37,23 +37,18 @@ tasks:
     desc: Bootstrap Flux CD with GitHub repository
     summary: |
       Bootstraps Flux CD against GITHUB_OWNER/GITHUB_REPO (branch GITHUB_BRANCH,
-      path CLUSTER_PATH). Reads Git author identity from GIT_AUTHOR_NAME /
-      GIT_AUTHOR_EMAIL (falling back to git config).
+      path CLUSTER_PATH). Defaults Git author identity to fluxcdbot
+      (overridable via GIT_AUTHOR_NAME / GIT_AUTHOR_EMAIL).
 
       Provide GITHUB_TOKEN via environment for non-interactive execution;
       otherwise Flux will prompt for it interactively.
     interactive: true
     deps:
-      - for: [flux, git]
-        task: :common:require-bin
-        vars: { BIN: "{{.ITEM}}" }
+      - task: :common:require-bin
+        vars: { BIN: flux }
     vars:
-      _GIT_AUTHOR_NAME:
-        sh: git config user.name
-      _GIT_AUTHOR_EMAIL:
-        sh: git config user.email
-      GIT_AUTHOR_NAME: "{{.GIT_AUTHOR_NAME | default ._GIT_AUTHOR_NAME}}"
-      GIT_AUTHOR_EMAIL: "{{.GIT_AUTHOR_EMAIL | default ._GIT_AUTHOR_EMAIL}}"
+      GIT_AUTHOR_NAME: '{{.GIT_AUTHOR_NAME | default "fluxcdbot"}}'
+      GIT_AUTHOR_EMAIL: '{{.GIT_AUTHOR_EMAIL | default "fluxcdbot@users.noreply.github.com"}}'
       FLUX_COMPONENTS_EXTRA: '{{.FLUX_COMPONENTS_EXTRA | default "image-reflector-controller,image-automation-controller"}}'
     requires:
       vars:
