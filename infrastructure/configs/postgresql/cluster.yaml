@@ -16,6 +16,8 @@ spec:
     size: 10Gi
   imageName: ghcr.io/cloudnative-pg/postgresql
   postgresql:
+    parameters:
+      ssl_groups: X25519MLKEM768:X25519:prime256v1
     shared_preload_libraries:
       - vchord.so
     extensions:
