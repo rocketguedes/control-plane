@@ -22,7 +22,7 @@ spec:
         dbName: audiomusedb
         host: postgresql-rw.postgresql.svc.cluster.local
         port: "5432"
-        query: SELECT COUNT(*) FROM task_status WHERE status = 'NEW' AND queue_name = 'default';
+        query: SELECT COUNT(*) FROM task_status WHERE status IN ('NEW', 'RUNNING') AND queue_name = 'default';
         sslmode: disable
         targetQueryValue: "5"
         userName: audiomuse
@@ -33,7 +33,7 @@ spec:
         dbName: audiomusedb
         host: postgresql-rw.postgresql.svc.cluster.local
         port: "5432"
-        query: SELECT COUNT(*) FROM task_status WHERE status = 'NEW' AND queue_name = 'high';
+        query: SELECT COUNT(*) FROM task_status WHERE status IN ('NEW', 'RUNNING') AND queue_name = 'high';
         sslmode: disable
         targetQueryValue: "2"
         userName: audiomuse
