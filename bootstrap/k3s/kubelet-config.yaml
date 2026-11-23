@@ -13,5 +13,5 @@ systemReserved:
 imageGCHighThresholdPercent: 75
 imageGCLowThresholdPercent: 60
 imageMaximumGCAge: "168h"
-shutdownGracePeriod: "60s"
-shutdownGracePeriodCriticalPods: "15s"
+shutdownGracePeriod: "30s"
+shutdownGracePeriodCriticalPods: "10s"
