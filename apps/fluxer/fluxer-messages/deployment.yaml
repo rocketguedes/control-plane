@@ -39,7 +39,7 @@ spec:
           command:
             - sh
             - -c
-            - for t in nats:4222; do until nc -z -w 2 ${t%:*} ${t##*:}; do echo waiting for $t; sleep 2; done; done
+            - for t in postgresql-rw.postgresql.svc.cluster.local:5432 nats:4222; do until nc -z -w 2 ${t%:*} ${t##*:}; do echo waiting for $t; sleep 2; done; done
           resources:
             requests:
               cpu: 10m

@@ -13,6 +13,9 @@ images:
   - name: docker.io/vaultwarden/server
     newTag: 1.37.5-alpine # {"$imagepolicy": "flux-system:vaultwarden:tag"}
     digest: sha256:bbe684a02d6b0db54256ff88eac9754f4519284a7b26314afc241fd7d0918191 # {"$imagepolicy": "flux-system:vaultwarden:digest"}
+  - name: docker.io/library/busybox
+    newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
+    digest: sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: vaultwarden

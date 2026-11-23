@@ -12,6 +12,9 @@ images:
   - name: codeberg.org/emersion/soju
     newTag: v0.11.1 # {"$imagepolicy": "flux-system:soju:tag"}
     digest: sha256:c695fb996dce168fb39449415c7523b17189ed81b48c107d4728fc93fb30e799 # {"$imagepolicy": "flux-system:soju:digest"}
+  - name: docker.io/library/busybox
+    newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
+    digest: sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: soju

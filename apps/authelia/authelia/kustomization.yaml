@@ -20,6 +20,9 @@ images:
   - name: ghcr.io/authelia/authelia
     newTag: 4.39.28
     digest: sha256:bd97cff4fcbf715b5ff1f9ae286afbe6033afce385302520b0368122d43a6f54
+  - name: docker.io/library/busybox
+    newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
+    digest: sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: authelia

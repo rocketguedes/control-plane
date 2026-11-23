@@ -15,6 +15,9 @@ images:
   - name: docker.io/livekit/livekit-server
     newTag: v1.13.11 # {"$imagepolicy": "flux-system:livekit:tag"}
     digest: sha256:25cd902de7cacbd5f1f779f6a6ac1eae20ba8f56b0935934ce6b0ab80d1e3d20 # {"$imagepolicy": "flux-system:livekit:digest"}
+  - name: docker.io/library/busybox
+    newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
+    digest: sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: livekit

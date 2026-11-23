@@ -34,6 +34,9 @@ images:
   - name: docker.io/grafana/grafana
     newTag: 13.3.1-slim # {"$imagepolicy": "flux-system:grafana:tag"}
     digest: sha256:49221b454a407632e47e6d4bbc2bb1585c462bf68c6fb9ebed4aa072b027595a # {"$imagepolicy": "flux-system:grafana:digest"}
+  - name: docker.io/library/busybox
+    newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
+    digest: sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: monitoring

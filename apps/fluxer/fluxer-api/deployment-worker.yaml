@@ -38,7 +38,7 @@ spec:
           command:
             - sh
             - -c
-            - for t in nats:4222 seaweedfs:8333 valkey:6379 gifs:8090 gifs-shard:8090 messages:8090 messages-shard:8090 snowflakes:8090 snowflakes-shard:8090 unfurl:8090 unfurl-shard:8090 users:8090 users-shard:8090; do until nc -z -w 2 ${t%:*} ${t##*:}; do echo waiting for $t; sleep 2; done; done
+            - for t in postgresql-rw.postgresql.svc.cluster.local:5432 meilisearch:7700 nats:4222 seaweedfs:8333 valkey:6379 gifs:8090 gifs-shard:8090 messages:8090 messages-shard:8090 snowflakes:8090 snowflakes-shard:8090 unfurl:8090 unfurl-shard:8090 users:8090 users-shard:8090; do until nc -z -w 2 ${t%:*} ${t##*:}; do echo waiting for $t; sleep 2; done; done
           resources:
             requests:
               cpu: 10m

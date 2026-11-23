@@ -34,6 +34,25 @@ spec:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
+      initContainers:
+        - name: wait-for-dependencies
+          image: docker.io/library/busybox
+          command:
+            - sh
+            - -c
+            - for t in postgresql-rw.postgresql.svc.cluster.local:5432; do until nc -z -w 2 ${t%:*} ${t##*:}; do echo waiting for $t; sleep 2; done; done
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              memory: 32Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
       containers:
         - name: vaultwarden
           image: docker.io/vaultwarden/server
