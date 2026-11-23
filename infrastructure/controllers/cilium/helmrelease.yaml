@@ -21,6 +21,13 @@ spec:
   driftDetection:
     mode: enabled
   values:
+    # NOTE: Disable auto-adjust for endpoint-create to avoid 429 rate-limit
+    # storms on cold boot. Until a release includes upstream commit 3cff4dd9b6,
+    # the initial bpf_lxc template compilation skews the limiter's moving mean
+    # and throttles endpoint creation down to ~0.1/s. Remove once upgraded to a
+    # Cilium release containing that fix.
+    # Ref: https://github.com/cilium/cilium/commit/3cff4dd9b66b4f238bc2e40af1f7d360e2249f1e
+    apiRateLimit: "endpoint-create=auto-adjust:false"
     bpf:
       lbExternalClusterIP: true
       masquerade: true
