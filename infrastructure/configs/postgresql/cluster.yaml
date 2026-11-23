@@ -12,6 +12,12 @@ spec:
       prometheus.io/port: "9187"
       prometheus.io/scrape: "true"
   instances: 1
+  # NOTE: Skip the smart shutdown phase and issue a fast shutdown (preceded by
+  # CHECKPOINT) immediately on pod termination. Long-lived client connection
+  # pools keep smart shutdown waiting the full 180s default; existing clusters
+  # retain the persisted 180s value even after CNPG 1.31 defaults to 0.
+  # Ref: https://github.com/cloudnative-pg/cloudnative-pg/commit/78a018f45c7df68852ca4fe879cc68924c867fd6
+  smartShutdownTimeout: 0
   storage:
     size: 10Gi
   imageName: ghcr.io/cloudnative-pg/postgresql
