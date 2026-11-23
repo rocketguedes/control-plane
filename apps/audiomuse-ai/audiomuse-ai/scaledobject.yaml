@@ -24,7 +24,7 @@ spec:
         port: "5432"
         query: SELECT COUNT(*) FROM task_status WHERE status IN ('NEW', 'RUNNING') AND queue_name = 'default';
         sslmode: disable
-        targetQueryValue: "5"
+        targetQueryValue: "2"
         userName: audiomuse
       authenticationRef:
         name: audiomuse-ai-postgres-auth
