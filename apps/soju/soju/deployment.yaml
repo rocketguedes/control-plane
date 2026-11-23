@@ -92,6 +92,7 @@ spec:
           persistentVolumeClaim:
             claimName: soju
         - name: tmp
-          emptyDir: {}
+          emptyDir:
+            medium: Memory
   strategy:
     type: Recreate
