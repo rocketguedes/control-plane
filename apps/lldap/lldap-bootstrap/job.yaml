@@ -18,6 +18,7 @@ spec:
     spec:
       serviceAccountName: lldap
       automountServiceAccountToken: false
+      enableServiceLinks: false
       restartPolicy: OnFailure
       securityContext:
         runAsUser: 1001
