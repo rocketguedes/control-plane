@@ -12,6 +12,9 @@ configMapGenerator:
   - name: gatus-config
     files:
       - config.yaml
+    options:
+      labels:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
 images:
   - name: ghcr.io/twin/gatus
     newTag: v5.38.0 # {"$imagepolicy": "flux-system:gatus:tag"}
@@ -23,4 +26,3 @@ labels:
   - pairs:
       app.kubernetes.io/part-of: gatus
       app.kubernetes.io/version: v5.38.0 # {"$imagepolicy": "flux-system:gatus:tag"}
-
