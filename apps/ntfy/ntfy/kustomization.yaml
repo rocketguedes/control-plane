@@ -15,12 +15,12 @@ configMapGenerator:
       - templates/flux.yml
 images:
   - name: docker.io/binwiederhier/ntfy
-    newTag: v2.38.1 # {"$imagepolicy": "flux-system:ntfy:tag"}
-    digest: sha256:038da2be5e668fee6d36a62884eea48975e1b71c29a56964e5298c1b9165a573 # {"$imagepolicy": "flux-system:ntfy:digest"}
+    newTag: v2.38.2 # {"$imagepolicy": "flux-system:ntfy:tag"}
+    digest: sha256:ca35419d29a834824db2440fa9320897fbe40b026c5fc2360c76ed3501b5e716 # {"$imagepolicy": "flux-system:ntfy:digest"}
   - name: docker.io/library/busybox
     newTag: 1.37.0 # {"$imagepolicy": "flux-system:busybox:tag"}
     digest: sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec # {"$imagepolicy": "flux-system:busybox:digest"}
 labels:
   - pairs:
       app.kubernetes.io/part-of: ntfy
-      app.kubernetes.io/version: v2.38.1 # {"$imagepolicy": "flux-system:ntfy:tag"}
+      app.kubernetes.io/version: v2.38.2 # {"$imagepolicy": "flux-system:ntfy:tag"}
