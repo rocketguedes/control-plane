@@ -28,6 +28,7 @@ spec:
         prometheus.io/scrape: "true"
     spec:
       serviceAccountName: vector
+      enableServiceLinks: false
       securityContext:
         seccompProfile:
           type: RuntimeDefault
