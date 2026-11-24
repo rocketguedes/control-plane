@@ -28,7 +28,7 @@ spec:
         prometheus.io/scrape: "true"
     spec:
       serviceAccountName: victoria-logs
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       securityContext:
         runAsUser: 65534
         runAsGroup: 65534
