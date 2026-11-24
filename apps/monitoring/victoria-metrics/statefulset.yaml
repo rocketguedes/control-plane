@@ -26,6 +26,7 @@ spec:
     spec:
       serviceAccountName: victoria-metrics-single-server
       automountServiceAccountToken: true
+      enableServiceLinks: false
       terminationGracePeriodSeconds: 60
       securityContext:
         runAsUser: 65534
