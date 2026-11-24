@@ -29,6 +29,7 @@ spec:
     spec:
       serviceAccountName: victoria-logs
       automountServiceAccountToken: false
+      enableServiceLinks: false
       securityContext:
         runAsUser: 65534
         runAsGroup: 65534
